@@ -14,17 +14,17 @@
     const fec = fecha.value;
     const hor = document.getElementById("hora").value;
 
-    if (nom.length < 2) return window.Toast?.("⚠️ Ingresa tu nombre");
-    if (!fec) return window.Toast?.("⚠️ Elige la fecha");
-    if (!hor) return window.Toast?.("⚠️ Elige la hora");
+    if (nom.length < 2) return window.Toast?.("Ingresa tu nombre");
+    if (!fec) return window.Toast?.("Elige la fecha");
+    if (!hor) return window.Toast?.("Elige la hora");
     const hoy = new Date(); hoy.setHours(0, 0, 0, 0);
-    if (new Date(fec + "T00:00:00") < hoy) return window.Toast?.("⚠️ La fecha no puede ser pasada");
-    if (hor < "11:00" || hor > "23:00") return window.Toast?.("⚠️ Atendemos de 11:00 a 23:00");
+    if (new Date(fec + "T00:00:00") < hoy) return window.Toast?.("La fecha no puede ser pasada");
+    if (hor < "11:00" || hor > "23:00") return window.Toast?.("Atendemos de 11:00 a 23:00");
 
-    msg.textContent = `🎉 ¡Reserva confirmada para ${nom}! ${per} persona(s) · ${fec} · ${hor} en El Mesón (Giráldez 157). ¡Te esperamos!`;
+    msg.textContent = `Reserva confirmada para ${nom}: ${per} persona(s) · ${fec} · ${hor} en El Mesón (Giráldez 157). ¡Te esperamos!`;
     msg.classList.remove("hidden");
     form.reset();
     document.getElementById("personas").value = 2;
-    window.Toast?.("✅ Reserva confirmada");
+    window.Toast?.("Reserva confirmada");
   });
 })();

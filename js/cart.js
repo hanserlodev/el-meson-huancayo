@@ -19,7 +19,7 @@ window.Cart = (function () {
     if (it) it.cant++;
     else items.push({ nombre, precio: Number(precio), cant: 1 });
     guardar(); refreshBadges(); renderActual();
-    window.Toast?.(`✅ ${nombre} agregado`);
+    window.Toast?.(`${nombre} agregado al carrito`);
   }
   function cambiar(pos, n) {
     if (!items[pos]) return;
@@ -30,26 +30,26 @@ window.Cart = (function () {
   function eliminar(pos) {
     const [q] = items.splice(pos, 1);
     guardar(); refreshBadges(); renderActual();
-    if (q) window.Toast?.(`🗑️ ${q.nombre} eliminado`);
+    if (q) window.Toast?.(`${q.nombre} eliminado`);
   }
   function vaciar() {
     if (!items.length) return window.Toast?.("El carrito ya está vacío");
     items = []; guardar(); refreshBadges(); renderActual();
-    window.Toast?.("🧹 Carrito vaciado");
+    window.Toast?.("Carrito vaciado");
   }
   function finalizar() {
-    if (!items.length) return window.Toast?.("⚠️ El carrito está vacío");
+    if (!items.length) return window.Toast?.("El carrito está vacío");
     const t = soles(total()), n = unidades();
-    window.Toast?.(`🎉 ¡Pedido de ${n} plato(s) por S/ ${t}!`);
+    window.Toast?.(`Pedido registrado: ${n} plato(s) por S/ ${t}`);
     alert(`¡Pedido realizado en Pollos y Parrillas El Mesón!\n${n} plato(s) · Total: S/ ${t}`);
     items = []; guardar(); refreshBadges(); renderActual();
   }
 
   // Arma el mensaje para pedir por el WhatsApp real del local.
   function pedirPorWhatsApp() {
-    if (!items.length) return window.Toast?.("⚠️ El carrito está vacío");
+    if (!items.length) return window.Toast?.("El carrito está vacío");
     const lineas = items.map(i => `• ${i.cant}x ${i.nombre} — S/ ${soles(i.precio * i.cant)}`);
-    const msg = `Hola El Mesón 🍗, quiero pedir:\n${lineas.join("\n")}\nTotal: S/ ${soles(total())}`;
+    const msg = `Hola El Mesón, quiero pedir:\n${lineas.join("\n")}\nTotal: S/ ${soles(total())}`;
     window.open(`https://wa.me/${window.Meson.WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
   }
 
@@ -72,10 +72,9 @@ window.Cart = (function () {
     const enCarta = document.body.dataset.page === "carta";
     return `
       <div class="text-center py-8">
-        <p class="text-5xl mb-2">🍗</p>
         <p class="text-slate-500 italic font-medium">Carrito vacío… ¡la brasa te espera!</p>
         ${enCarta
-          ? `<p class="mt-3 text-sm font-bold text-brand-700">Agrega algo rico de la carta 👆</p>`
+          ? `<p class="mt-3 text-sm font-bold text-brand-700">Agrega algo rico de la carta</p>`
           : `<a href="carta.html" class="inline-block mt-3 text-sm font-bold text-brand-700 hover:underline">Ver carta →</a>`}
       </div>`;
   }

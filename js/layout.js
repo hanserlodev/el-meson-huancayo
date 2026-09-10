@@ -8,7 +8,7 @@
 
   document.getElementById("site-header").innerHTML = `
     <div class="bg-ink text-slate-200 text-xs text-center px-4 py-2">
-      🔥 Martes de brasa: 1/4 de pollo a S/ 13.90 · Delivery: 939 399 946 · Lun–Dom 11:00–23:00
+      Martes de brasa: 1/4 de pollo a S/ 13.90 · Delivery: 939 399 946 · Lun–Dom 11:00–23:00
     </div>
     <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
       <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
@@ -27,7 +27,7 @@
         </div>
         <div class="flex items-center gap-2">
           <a href="carrito.html" class="inline-flex items-center gap-2 bg-ink text-white pl-4 pr-3 py-2 rounded-full text-sm font-semibold hover:bg-brand-700 transition-colors" aria-label="Ver carrito">
-            🛒 <span data-cart-count class="grid place-items-center min-w-[1.5rem] h-6 px-1 rounded-full bg-amber-400 text-ink text-xs font-bold">0</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.3 4.6a1 1 0 00.9 1.4H19M9 22a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z"/></svg> <span data-cart-count class="grid place-items-center min-w-[1.5rem] h-6 px-1 rounded-full bg-amber-400 text-ink text-xs font-bold">0</span>
           </a>
           <a href="reserva.html" class="hidden sm:inline-flex bg-brand-600 text-white text-sm font-semibold px-4 py-2 rounded-full hover:bg-brand-700 shadow-card transition-colors">Reservar</a>
           <button id="menu-btn" class="md:hidden w-10 h-10 grid place-items-center rounded-lg ring-1 ring-slate-200 text-xl" aria-label="Abrir menú" aria-expanded="false">☰</button>
@@ -62,7 +62,7 @@
         </nav>
         <div>
           <p class="font-bold text-white mb-2 text-xs uppercase tracking-widest">Horario</p>
-          <p>Lun – Dom · 11:00 – 23:00<br /><a class="footer-link" href="${maps}" target="_blank" rel="noopener">📍 Av. Giráldez 157, Huancayo</a></p>
+          <p>Lun – Dom · 11:00 – 23:00<br /><a class="footer-link" href="${maps}" target="_blank" rel="noopener">Av. Giráldez 157, Huancayo</a></p>
         </div>
         <div>
           <p class="font-bold text-white mb-2 text-xs uppercase tracking-widest">Contacto</p>
