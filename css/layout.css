@@ -1,0 +1,35 @@
+/* capa 2/3 — LAYOUT: header/nav/hero/footer/toast (estilo Tailwind Docs:
+   barra oscura fina, nav blanco con blur, contenedor max-w-6xl, anillos sutiles). */
+.nav-link { position: relative; }
+.nav-link::after {
+  content: ""; position: absolute; left: 0; bottom: -4px;
+  width: 0; height: 2px; border-radius: 2px; background: #ea580c;
+  transition: width .25s ease;
+}
+.nav-link:hover::after, .nav-link[aria-current="page"]::after { width: 100%; }
+.nav-link[aria-current="page"] { color: #c2410c; }
+
+.hero-docs {
+  background:
+    radial-gradient(700px 320px at 12% 8%, rgba(234,88,12,.13), transparent 60%),
+    radial-gradient(600px 300px at 88% 12%, rgba(245,158,11,.12), transparent 60%);
+}
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(15,23,42,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,23,42,.05) 1px, transparent 1px);
+  background-size: 36px 36px;
+  /* Fundido recto solo en el borde inferior: transición limpia hacia Favoritos */
+  -webkit-mask-image: linear-gradient(to bottom, black 88%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 88%, transparent 100%);
+}
+
+#toast {
+  position: fixed; bottom: 1.5rem; left: 50%;
+  transform: translate(-50%, 6rem); opacity: 0;
+  transition: transform .3s ease, opacity .3s ease;
+  z-index: 60; pointer-events: none;
+}
+#toast.show { transform: translate(-50%, 0); opacity: 1; }
+
+.footer-link:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
