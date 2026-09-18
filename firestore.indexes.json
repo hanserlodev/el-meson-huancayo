@@ -1,0 +1,20 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "platos",
+      "queryScope": "COLLECTION",
+      "fields": [{ "fieldPath": "cat", "order": "ASCENDING" }, { "fieldPath": "precio", "order": "ASCENDING" }]
+    },
+    {
+      "collectionGroup": "reservas",
+      "queryScope": "COLLECTION",
+      "fields": [{ "fieldPath": "fecha", "order": "ASCENDING" }, { "fieldPath": "hora", "order": "ASCENDING" }]
+    },
+    {
+      "collectionGroup": "pedidos",
+      "queryScope": "COLLECTION",
+      "fields": [{ "fieldPath": "createdAt", "order": "DESCENDING" }]
+    }
+  ],
+  "fieldOverrides": []
+}
