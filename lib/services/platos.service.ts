@@ -1,4 +1,4 @@
-import { collection, getDocs, onSnapshot, query, where } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, query, updateDoc, where } from "firebase/firestore";
 import { db } from "@/lib/firebase/client";
 import { PLATOS as PLATOS_LOCAL, type Plato } from "@/lib/data";
 
@@ -30,4 +30,28 @@ export function subscribePlatos(cb: (platos: Plato[]) => void, cat?: string) {
     cb(PLATOS_LOCAL);
     return () => {};
   }
+}
+
+export async function createPlato(plato: Plato) {
+  return addDoc(collection(db, "platos"), { ...plato, createdAt: new Date().toISOString() });
+}
+
+export async function updatePlato(id: string, data: Partial<Plato>) {
+  return updateDoc(doc(db, "platos", id), data as Record<string, unknown>);
+}
+
+export async function deletePlato(id: string) {
+  return deleteDoc(doc(db, "platos", id));
+}
+
+export async function toggleActivoPlato(id: string, activo: boolean) {
+  return updateDoc(doc(db, "platos", id), { activo });
+}
+
+export async function uploadPlatoFoto(file: File, platoId: string) {
+  const { ref, uploadBytes, getDownloadURL } = await import("firebase/storage");
+  const { storage } = await import("@/lib/firebase/client");
+  const r = ref(storage, `platos/${platoId}/${file.name}`);
+  await uploadBytes(r, file);
+  return getDownloadURL(r);
 }

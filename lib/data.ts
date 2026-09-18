@@ -10,6 +10,7 @@ export interface Plato {
   tag: string;
   rating: string;
   votos: number;
+  activo?: boolean;
 }
 
 export const PLATOS: Plato[] = [
