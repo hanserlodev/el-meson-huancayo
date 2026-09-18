@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Sora:wght@700;800&amp;family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "primary-container": "#cc4900",
+          "on-surface": "#0b1c30",
+          "background": "#f8f9ff",
+          "secondary-fixed": "#dae2fd",
+          "brasa-deep": "#9a3412",
+          "on-tertiary-fixed": "#2a1700",
+          "surface-dim": "#cbdbf5",
+          "surface-container-highest": "#d3e4fe",
+          "border-subtle": "#f1f5f9",
+          "on-tertiary-fixed-variant": "#653e00",
+          "surface": "#f8f9ff",
+          "inverse-primary": "#ffb599",
+          "outline": "#8e7166",
+          "on-tertiary-container": "#fffbff",
+          "inverse-surface": "#213145",
+          "error": "#ba1a1a",
+          "tertiary-container": "#a36700",
+          "surface-container-low": "#eff4ff",
+          "brasa-charcoal": "#431407",
+          "primary-fixed-dim": "#ffb599",
+          "on-surface-variant": "#5a4138",
+          "surface-bright": "#f8f9ff",
+          "tertiary": "#825100",
+          "on-secondary-fixed-variant": "#3f465c",
+          "border-default": "#e2e8f0",
+          "on-error-container": "#93000a",
+          "tertiary-fixed-dim": "#ffb95f",
+          "on-secondary-container": "#5c647a",
+          "secondary-fixed-dim": "#bec6e0",
+          "surface-container-high": "#dce9ff",
+          "primary": "#a33900",
+          "on-tertiary": "#ffffff",
+          "outline-variant": "#e2bfb2",
+          "on-error": "#ffffff",
+          "surface-container-lowest": "#ffffff",
+          "secondary-container": "#dae2fd",
+          "surface-tint": "#a73a00",
+          "on-primary-fixed": "#370e00",
+          "on-primary-container": "#fffbff",
+          "bg-canvas": "#f8fafc",
+          "inverse-on-surface": "#eaf1ff",
+          "on-primary": "#ffffff",
+          "tertiary-fixed": "#ffddb8",
+          "primary-fixed": "#ffdbce",
+          "amber-badge": "#fbbf24",
+          "on-primary-fixed-variant": "#7f2b00",
+          "secondary": "#565e74",
+          "on-background": "#0b1c30",
+          "brasa-hover": "#c2410c",
+          "surface-container": "#e5eeff",
+          "error-container": "#ffdad6",
+          "on-secondary-fixed": "#131b2e",
+          "on-secondary": "#ffffff",
+          "surface-variant": "#d3e4fe"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-xs": "0.25rem",
+          "space-lg": "1.5rem",
+          "gutter": "1.5rem",
+          "margin": "2rem",
+          "space-xl": "2.5rem",
+          "space-sm": "0.5rem",
+          "margin-mobile": "1rem",
+          "space-md": "1rem",
+          "gutter-mobile": "1rem"
+        },
+        "fontFamily": {
+          "display-lg-mobile": [
+            "Sora"
+          ],
+          "headline-lg": [
+            "Sora"
+          ],
+          "label-md": [
+            "Inter"
+          ],
+          "headline-md": [
+            "Sora"
+          ],
+          "body-lg": [
+            "Inter"
+          ],
+          "headline-xl": [
+            "Sora"
+          ],
+          "label-sm": [
+            "Inter"
+          ],
+          "body-md": [
+            "Inter"
+          ],
+          "body-sm": [
+            "Inter"
+          ],
+          "display-lg": [
+            "Sora"
+          ],
+          "label-lg": [
+            "Inter"
+          ],
+          "price-tag": [
+            "Sora"
+          ]
+        },
+        "fontSize": {
+          "display-lg-mobile": [
+            "36px",
+            {
+              "lineHeight": "44px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "800"
+            }
+          ],
+          "headline-lg": [
+            "24px",
+            {
+              "lineHeight": "32px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "700"
+            }
+          ],
+          "label-md": [
+            "14px",
+            {
+              "lineHeight": "18px",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-md": [
+            "20px",
+            {
+              "lineHeight": "28px",
+              "fontWeight": "700"
+            }
+          ],
+          "body-lg": [
+            "18px",
+            {
+              "lineHeight": "28px",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-xl": [
+            "32px",
+            {
+              "lineHeight": "40px",
+              "letterSpacing": "-0.015em",
+              "fontWeight": "700"
+            }
+          ],
+          "label-sm": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "fontWeight": "500"
+            }
+          ],
+          "body-md": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "fontWeight": "400"
+            }
+          ],
+          "body-sm": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "400"
+            }
+          ],
+          "display-lg": [
+            "48px",
+            {
+              "lineHeight": "56px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "800"
+            }
+          ],
+          "label-lg": [
+            "16px",
+            {
+              "lineHeight": "20px",
+              "fontWeight": "600"
+            }
+          ],
+          "price-tag": [
+            "22px",
+            {
+              "lineHeight": "26px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "800"
+            }
+          ]
+        }
+      }
+    }
+  }</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 right-0 w-full z-50 shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="bg-brasa-charcoal text-amber-badge px-margin-mobile md:px-margin py-space-xs text-center font-label-sm text-label-sm flex items-center justify-center gap-space-sm tracking-wide"><span class="material-symbols-outlined text-[16px] text-amber-badge">local_fire_department</span><span>Martes de brasa: 1/4 de pollo a S/ 13.90 · Delivery: 939 399 946 · Lun–Dom 11:00–23:00</span></div><div class="h-20 bg-surface-container-lowest/90 backdrop-blur-xl"><div class="max-w-7xl mx-auto px-margin-mobile md:px-margin h-full flex items-center justify-between gap-space-md"><a class="flex items-center gap-space-sm text-left group" data-path="inicio" href="#"><div class="w-10 h-10 rounded-xl bg-primary-container text-on-primary-container flex items-center justify-center shadow-md"><span class="material-symbols-outlined text-[24px]">local_fire_department</span></div><div class="flex flex-col"><span class="font-headline-md text-headline-md tracking-tight text-brasa-charcoal leading-none">El Mesón</span><span class="font-label-sm text-label-sm text-on-surface-variant font-medium tracking-normal">Pollos y Parrillas · Desde 1985</span></div></a><nav class="hidden lg:flex items-center gap-space-sm" data-active-classes="bg-primary-container text-on-primary-container font-label-md rounded-lg"><a aria-current="page" class="px-space-md py-space-sm transition-colors bg-primary-container text-on-primary-container font-label-md rounded-lg" data-path="inicio" href="#">Inicio</a><a class="px-space-md py-space-sm text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" data-path="carta" href="#">Carta</a><a class="relative px-space-md py-space-sm text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors flex items-center gap-space-xs" data-path="carrito" href="#"><span>Carrito</span><span class="px-2 py-0.5 rounded-full bg-amber-badge text-on-tertiary-fixed font-label-sm text-label-sm font-bold leading-none">3</span></a><a class="px-space-md py-space-sm text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" data-path="reserva-de-mesa" href="#">Reserva de mesa</a></nav><div class="flex items-center gap-space-md"><a class="hidden sm:inline-flex items-center justify-center h-11 px-space-lg rounded-xl bg-primary hover:bg-brasa-hover text-on-primary font-label-md text-label-md transition-all shadow-[0_12px_40px_-12px_rgba(234,88,12,0.35)]" data-path="reserva-de-mesa" href="#">Reservar mesa</a><a class="lg:hidden relative p-space-sm rounded-lg hover:bg-surface-container-high transition-colors" data-path="carrito" href="#"><span class="material-symbols-outlined text-on-surface text-[24px]">shopping_bag</span><span class="absolute top-1 right-1 w-4 h-4 rounded-full bg-amber-badge text-on-tertiary-fixed font-label-sm text-[10px] flex items-center justify-center font-bold">3</span></a><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="w-full pt-28 bg-surface"><div class="flex flex-col w-full">
+<!-- Subtle decorative ambient background elements -->
+<div class="relative w-full overflow-hidden">
+<div class="absolute -top-32 right-[-10%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary-fixed/30 to-amber-badge/10 blur-3xl pointer-events-none -z-10"></div>
+<div class="absolute top-[35rem] left-[-8%] w-[500px] h-[500px] rounded-full bg-secondary-fixed/40 blur-3xl pointer-events-none -z-10"></div>
+<!-- HERO SECTION -->
+<section class="max-w-7xl mx-auto px-margin-mobile md:px-margin pt-6 md:pt-10 pb-16 md:pb-24">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12 items-center">
+<!-- Hero Copy / Left Col -->
+<div class="lg:col-span-6 flex flex-col items-start">
+<!-- Eyebrow Pill -->
+<div class="inline-flex items-center gap-space-xs px-3.5 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm shadow-sm mb-6">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span>Empresa familiar huancaína · Desde 1985</span>
+</div>
+<!-- Main H1 with Warm Glow Accent -->
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight leading-[1.1] mb-6">
+            El pollo a la brasa <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary-container to-brasa-deep">que Huancayo ama.</span>
+</h1>
+<!-- Body Description -->
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-8 leading-relaxed">
+            Receta de la casa al carbón, papas crocantes, cremas concentradas y la famosa ensalada dulce. En pleno centro: <span class="font-semibold text-on-surface">Av. Giráldez 157</span>.
+          </p>
+<!-- CTAs -->
+<div class="flex flex-wrap items-center gap-space-md w-full sm:w-auto mb-12">
+<a class="inline-flex items-center justify-center h-12 px-space-lg rounded-xl bg-inverse-surface hover:bg-brasa-charcoal text-inverse-on-surface font-label-lg text-label-lg shadow-md hover:shadow-lg transition-all" data-path="carta" href="#">
+              Ver carta
+            </a>
+<a class="inline-flex items-center justify-center h-12 px-space-lg rounded-xl bg-primary hover:bg-brasa-hover text-on-primary font-label-lg text-label-lg shadow-[0_12px_40px_-12px_rgba(234,88,12,0.45)] hover:-translate-y-0.5 transition-all" data-path="reserva-de-mesa" href="#">
+              Reservar mesa
+            </a>
+</div>
+<!-- Trust Badges / Stats Lockup -->
+<div class="w-full pt-8 grid grid-cols-3 gap-4 border-t-0 bg-surface-container-lowest/80 backdrop-blur-sm p-4 rounded-2xl shadow-sm">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider">Desde</span>
+<span class="font-headline-lg text-headline-lg text-on-surface font-extrabold mt-0.5">1985</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider">1/4 de pollo</span>
+<span class="font-price-tag text-price-tag text-primary font-extrabold mt-0.5">S/ 10.90</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider">Delivery</span>
+<span class="font-headline-md text-headline-md text-on-surface font-bold mt-0.5 truncate">939 399 946</span>
+</div>
+</div>
+</div>
+<!-- Hero Image Showcase / Right Col -->
+<div class="lg:col-span-6 relative w-full flex justify-center">
+<div class="relative w-full max-w-lg lg:max-w-none rounded-3xl overflow-hidden shadow-2xl bg-surface-container-high group">
+<!-- Hero Photo -->
+<img class="w-full h-[380px] sm:h-[480px] object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Appetizing Peruvian rotisserie pollo a la brasa close-up with glistening golden brown roasted skin, herbs and cracked pepper on a bed of fresh thick-cut crispy hand-cut french fries and ají sauce ramekin, warm atmospheric firelight and charcoal ambiance" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfeZVdxTEZ3O1ZQ7ZhXDuhRu3Rhl84YItHBAfw0Hvp_eVzrFTsOI7lzietnvi9XNURz1Cj67Hk3w1V8a09MYdSmcYihFveF29ZJimqklW-jFI0G7sEjf1vcCnCUORUS8rRgNVAQwce3993KsfTrRnwfKAkQxJ6p8ysdFmgwTT7Z5NZb6Z6r4w4aHJYqgy7euvTetPr2gnIGet0DcLPzezkRK6lBhCgTZvvISr5r6RbihpyTAy-iaL3Dg"/>
+<!-- Dark Gradient Vignette for text contrast -->
+<div class="absolute inset-0 bg-gradient-to-t from-brasa-charcoal/70 via-transparent to-black/20 pointer-events-none"></div>
+<!-- Floating Pill 1: Top Left -->
+<div class="absolute top-4 left-4 sm:top-6 sm:left-6 px-4 py-2 rounded-full bg-surface-container-lowest/95 backdrop-blur-md shadow-lg flex items-center gap-2 text-on-surface">
+<span class="w-2.5 h-2.5 rounded-full bg-primary animate-ping"></span>
+<span class="font-label-md text-label-md font-bold text-on-surface">Más pedido</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">· 1/4 a S/ 10.90</span>
+</div>
+<!-- Floating Pill 2: Bottom Right -->
+<div class="absolute bottom-5 right-5 sm:bottom-6 sm:right-6 px-4 py-2.5 rounded-full bg-brasa-charcoal/90 backdrop-blur-md text-surface-container-lowest shadow-xl flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-amber-badge">local_shipping</span>
+<span class="font-label-md text-label-md font-medium text-amber-badge">Delivery gratis</span>
+<span class="font-label-sm text-label-sm text-surface-dim">desde S/ 35</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- FAVORITOS / FOOD GRID SECTION -->
+<section class="w-full bg-surface-container-low py-16 md:py-24">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin">
+<!-- Section Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase font-bold tracking-widest block mb-2">Los favoritos</span>
+<h2 class="font-headline-xl text-headline-xl text-on-surface font-extrabold tracking-tight">Lo más pedido de la casa</h2>
+</div>
+<a class="group inline-flex items-center gap-1 font-label-md text-label-md text-primary font-bold hover:text-brasa-deep transition-colors" data-path="carta" href="#">
+<span>Ver carta completa</span>
+<span class="material-symbols-outlined text-[18px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+</a>
+</div>
+<!-- 3-Column Card Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-lg">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-[0_4px_20px_-2px_rgba(15,23,42,0.06)] hover:shadow-xl transition-all duration-300 flex flex-col group">
+<div class="relative h-56 overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A quarter portion of Peruvian roasted chicken leg quarter, glistening amber-brown crispy skin with a mountain of thick crispy french fries and vibrant creamy yellow huancaina and green aji dipping sauces on side" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtNWkL9aH0O9vzcSKgFa7eTnru8QYYF1CJxI7d0fZBTPbiLAUF2k2Xu2nM01ec1g7A5Yr1D8DKs-4bwuy78RgDRcEjW0_5b1LPKf3k_w8wND26Izj4v_QojnHPVWwWS_B6c8SmL8Z9-Y2i5kaXSEUR7qBPte264CHhwzNr6kj8-ox_DZMWGaefB_0FvooirmvIVPWPhnt65G1oaXWaq92csW1yrdfptedczxTTWFVC5nBylWOJuztlDg"/>
+<div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-amber-badge text-on-tertiary-fixed font-label-sm text-label-sm font-bold shadow-md">
+              Top #1
+            </div>
+</div>
+<div class="p-6 flex flex-col flex-grow justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold mb-1">1/4 Pollo a la Brasa</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Papas crocantes · ensalada dulce</p>
+</div>
+<div class="pt-4 flex items-center justify-between">
+<span class="font-price-tag text-price-tag text-on-surface font-extrabold">S/ 10.90</span>
+<button class="inline-flex items-center gap-1.5 h-10 px-5 rounded-xl bg-primary hover:bg-brasa-hover text-on-primary font-label-md text-label-md font-semibold transition-colors shadow-md" onclick="addToCart('1/4 Pollo a la Brasa', 10.90)">
+<span>Agregar</span>
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-[0_4px_20px_-2px_rgba(15,23,42,0.06)] hover:shadow-xl transition-all duration-300 flex flex-col group">
+<div class="relative h-56 overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Juicy Peruvian anticuchos skewers of beef heart sizzling on outdoor grill grates with golden char marks, served with grilled golden potato slice and rocoto cream, rustic warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlB9CkAmoaZeInYV1rkOFqxVvJmKBHCoHZF150LXuyo3WDgTA2VJ0ZgphTHK0LpdSqw54SttJtn9D8GWWvqi4dQWKvXb3wkK33pCutKDeoDWauL1CbMnTqZmqyYvHkmG9O6-0EfvvHxmLvrWqS4gEyDgsDYq-EtF0EH2ePWTZmAd22iBMc-KJH5WWKOQ3PYtEyHrwXDRmBS7cUFDLo2opEopP_Lslk3fGukunMJ-SPtgomekWaGEkWlQ"/>
+<div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-brasa-deep font-label-sm text-label-sm font-bold shadow-md">
+              Parrilla
+            </div>
+</div>
+<div class="p-6 flex flex-col flex-grow justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold mb-1">Anticuchos de Corazón</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Al carbón · papa dorada</p>
+</div>
+<div class="pt-4 flex items-center justify-between">
+<span class="font-price-tag text-price-tag text-on-surface font-extrabold">S/ 21.90</span>
+<button class="inline-flex items-center gap-1.5 h-10 px-5 rounded-xl bg-primary hover:bg-brasa-hover text-on-primary font-label-md text-label-md font-semibold transition-colors shadow-md" onclick="addToCart('Anticuchos de Corazón', 21.90)">
+<span>Agregar</span>
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-3xl overflow-hidden shadow-[0_4px_20px_-2px_rgba(15,23,42,0.06)] hover:shadow-xl transition-all duration-300 flex flex-col group">
+<div class="relative h-56 overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Whole Peruvian rotisserie chicken golden roasted and steaming on a wooden carving board surrounded by lime wedges, french fries, and house dressings, rich appetizing food photography" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDiImyqM1l-fUsZr3hFm0T5BdMQBI4Wkow81qJlEnU0ARS316dHpM40JwjcU444obtIt_XKkq3Ik2ebv2IBu0L1W2ll78rLua28G09-8-sKpUtsG_Sb7TbCUkVSaVqD4H05e-Dz_qSNHx_S_urBP7Mh7Rg54FV0O-mq2VN4LHblAZ9fus-aPhNzb60ok3DvQhT9PxkJSMQMMYzk3nenHgt_TAAbkNYEDp3HvAHEUY2_0XDgX6ghufM7w"/>
+<div class="absolute top-3 right-3 px-3 py-1 rounded-full bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm font-bold shadow-md">
+              Familiar
+            </div>
+</div>
+<div class="p-6 flex flex-col flex-grow justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold mb-1">Pollo Entero a la Brasa</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Para compartir con la familia</p>
+</div>
+<div class="pt-4 flex items-center justify-between">
+<span class="font-price-tag text-price-tag text-on-surface font-extrabold">S/ 43.60</span>
+<button class="inline-flex items-center gap-1.5 h-10 px-5 rounded-xl bg-primary hover:bg-brasa-hover text-on-primary font-label-md text-label-md font-semibold transition-colors shadow-md" onclick="addToCart('Pollo Entero a la Brasa', 43.60)">
+<span>Agregar</span>
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- DIFERENCIALES / BRAND PILLARS -->
+<section class="max-w-7xl mx-auto px-margin-mobile md:px-margin py-16 md:py-24">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg">
+<!-- Pillar 1 -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-sm hover:shadow-md transition-shadow flex flex-col">
+<div class="w-14 h-14 rounded-2xl bg-primary-fixed flex items-center justify-center text-primary mb-6 shadow-inner">
+<span class="material-symbols-outlined text-[28px]">local_fire_department</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold mb-3">Leña y carbón de verdad</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          Pollo jugoso por dentro y crocante por fuera, con ese sabor ahumado que nos distingue desde 1985.
+        </p>
+</div>
+<!-- Pillar 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-sm hover:shadow-md transition-shadow flex flex-col">
+<div class="w-14 h-14 rounded-2xl bg-tertiary-fixed flex items-center justify-center text-tertiary mb-6 shadow-inner">
+<span class="material-symbols-outlined text-[28px]">star</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold mb-3">Ensalada dulce + cremas</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          La exquisita ensalada dulce y cremas bien concentradas que los clientes siempre destacan.
+        </p>
+</div>
+<!-- Pillar 3 -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-sm hover:shadow-md transition-shadow flex flex-col">
+<div class="w-14 h-14 rounded-2xl bg-secondary-fixed flex items-center justify-center text-secondary mb-6 shadow-inner">
+<span class="material-symbols-outlined text-[28px]">location_on</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold mb-3">En pleno centro</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+          Av. Giráldez 157, frente al parque. También en Calle Real 919, Jauja y Lima. Revisa tu pedido en el <a class="font-bold text-primary hover:underline" data-path="carrito" href="#">carrito</a>.
+        </p>
+</div>
+</div>
+</section>
+<!-- BANNER CTA: RESERVA / MESA PARA HOY -->
+<section class="max-w-7xl mx-auto px-margin-mobile md:px-margin pb-20 md:pb-28">
+<div class="relative bg-inverse-surface rounded-3xl overflow-hidden p-8 sm:p-12 lg:p-16 shadow-2xl text-inverse-on-surface flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+<!-- Subtle warm charcoal glow inside dark banner -->
+<div class="absolute -right-16 -bottom-16 w-80 h-80 rounded-full bg-primary/20 blur-3xl pointer-events-none"></div>
+<div class="absolute left-1/4 -top-20 w-60 h-60 rounded-full bg-amber-badge/10 blur-2xl pointer-events-none"></div>
+<!-- Content -->
+<div class="relative z-10 max-w-2xl">
+<span class="inline-flex items-center gap-1 text-amber-badge font-label-sm text-label-sm font-semibold uppercase tracking-wider mb-3">
+<span class="material-symbols-outlined text-[16px]">restaurant</span>
+<span>Atención de primera</span>
+</span>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg font-extrabold text-surface-container-lowest tracking-tight mb-4">
+          ¿Mesa para hoy?
+        </h2>
+<p class="font-body-lg text-body-lg text-surface-dim leading-relaxed">
+          Reserva en Giráldez 157 en menos de un minuto, o pide por WhatsApp al <span class="text-surface-container-lowest font-bold">939 399 946</span>.
+        </p>
+</div>
+<!-- CTA Action Button in Amber Warmth -->
+<div class="relative z-10 flex-shrink-0 w-full sm:w-auto">
+<a class="w-full sm:w-auto inline-flex items-center justify-center h-14 px-8 rounded-2xl bg-amber-badge hover:bg-yellow-400 text-on-tertiary-fixed font-label-lg text-label-lg font-bold shadow-[0_12px_36px_-8px_rgba(251,191,36,0.4)] transition-all hover:scale-[1.02]" data-path="reserva-de-mesa" href="#">
+<span>Reservar ahora</span>
+<span class="material-symbols-outlined ml-2 text-[20px]">calendar_month</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Interactive Toast Notification Helper Script -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 bg-brasa-charcoal text-surface-container-lowest px-5 py-3.5 rounded-2xl shadow-2xl" id="toast">
+<div class="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md font-bold" id="toast-title">Plato agregado</span>
+<span class="font-label-sm text-label-sm text-outline-variant">Añadido al carrito con éxito</span>
+</div>
+</div>
+<script>
+    function addToCart(itemName, price) {
+      const toast = document.getElementById('toast');
+      const toastTitle = document.getElementById('toast-title');
+      if (toast && toastTitle) {
+        toastTitle.textContent = `${itemName} agregado`;
+        toast.classList.remove('translate-y-24', 'opacity-0');
+        toast.classList.add('translate-y-0', 'opacity-100');
+        
+        setTimeout(() => {
+          toast.classList.remove('translate-y-0', 'opacity-100');
+          toast.classList.add('translate-y-24', 'opacity-0');
+        }, 2500);
+      }
+    }
+  </script>
+</div></main><footer class="w-full bg-brasa-charcoal text-inverse-on-surface"><div class="max-w-7xl mx-auto px-margin-mobile md:px-margin py-space-xl"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-xl"><div class="space-y-space-md"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-xl bg-primary text-on-primary flex items-center justify-center"><span class="material-symbols-outlined text-[22px]">local_fire_department</span></div><div class="flex flex-col"><span class="font-headline-md text-headline-md text-surface-container-lowest leading-none">El Mesón</span><span class="font-label-sm text-label-sm text-outline-variant">Huancayo · Tradición de Brasa</span></div></div><p class="font-body-sm text-body-sm text-surface-dim">Más de 40 años sirviendo el sabor inconfundible del auténtico pollo a la brasa y selectos cortes a la parrilla con sazón del Valle del Mantaro.</p></div><div class="space-y-space-md"><h3 class="font-headline-md text-headline-md text-surface-container-lowest">Nuestras Sedes</h3><ul class="space-y-space-sm font-body-sm text-body-sm text-surface-dim"><li><p class="text-surface-container-lowest font-medium">Sede Principal Giráldez</p><p>Av. Giráldez 157, Huancayo Centro</p></li><li><p class="text-surface-container-lowest font-medium">Sede Tradicional Real</p><p>Calle Real 919, Huancayo</p></li><li><p class="text-amber-badge font-medium">Delivery Directo: 939 399 946</p></li></ul></div><div class="space-y-space-md"><h3 class="font-headline-md text-headline-md text-surface-container-lowest">Horarios de Atención</h3><ul class="space-y-space-sm font-body-sm text-body-sm text-surface-dim"><li>Lunes a Domingo: 11:00 AM – 11:00 PM</li><li>Salón &amp; Terraza: 11:30 AM – 10:30 PM</li><li>Reparto a Domicilio: 11:00 AM – 10:45 PM</li><li class="pt-space-xs text-outline-variant font-label-sm text-label-sm">Atención ininterrumpida feriados y domingos</li></ul></div><div class="space-y-space-md"><h3 class="font-headline-md text-headline-md text-surface-container-lowest">Enlaces Rápidos</h3><ul class="space-y-space-sm font-body-sm text-body-sm text-surface-dim"><li><a class="hover:text-primary-fixed-dim transition-colors" data-path="inicio" href="#">Inicio</a></li><li><a class="hover:text-primary-fixed-dim transition-colors" data-path="carta" href="#">Nuestra Carta &amp; Combos</a></li><li><a class="hover:text-primary-fixed-dim transition-colors" data-path="reserva-de-mesa" href="#">Reservar una Mesa</a></li><li><a class="hover:text-primary-fixed-dim transition-colors" data-path="carrito" href="#">Ver Carrito de Compras</a></li></ul></div></div><div class="mt-space-xl pt-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md font-body-sm text-body-sm text-surface-dim"><p>© 2026 Pollería y Parrillas El Mesón EIRL. Todos los derechos reservados. Huancayo, Junín.</p><div class="flex items-center gap-space-lg"><a class="hover:text-surface-container-lowest transition-colors" href="#">Libro de Reclamaciones</a><a class="hover:text-surface-container-lowest transition-colors" href="#">Términos &amp; Condiciones</a></div></div></div></footer></body></html>

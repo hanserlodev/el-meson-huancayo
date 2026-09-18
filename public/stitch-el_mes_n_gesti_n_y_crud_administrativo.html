@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Sora:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "surface-tint": "#a73a00", "on-background": "#0b1c30", "bg-canvas": "#f8fafc", "on-secondary-fixed-variant": "#3f465c", "surface-container-low": "#eff4ff", "background": "#f8f9ff", "border-subtle": "#f1f5f9", "inverse-primary": "#ffb599", "secondary": "#565e74", "tertiary-container": "#a36700", "on-error": "#ffffff", "tertiary": "#825100", "surface-container-lowest": "#ffffff", "on-secondary": "#ffffff", "on-tertiary": "#ffffff", "brasa-charcoal": "#431407", "on-tertiary-fixed": "#2a1700", "surface-container-high": "#dce9ff", "primary-container": "#cc4900", "error": "#ba1a1a", "on-tertiary-fixed-variant": "#653e00", "surface-variant": "#d3e4fe", "primary-fixed-dim": "#ffb599", "on-primary": "#ffffff", "brasa-hover": "#c2410c", "brasa-deep": "#9a3412", "on-tertiary-container": "#fffbff", "secondary-fixed": "#dae2fd", "amber-badge": "#fbbf24", "surface-container-highest": "#d3e4fe", "border-default": "#e2e8f0", "on-primary-container": "#fffbff", "secondary-fixed-dim": "#bec6e0", "surface-dim": "#cbdbf5", "inverse-on-surface": "#eaf1ff", "surface": "#f8f9ff", "primary-fixed": "#ffdbce", "tertiary-fixed": "#ffddb8", "outline-variant": "#e2bfb2", "on-primary-fixed-variant": "#7f2b00", "on-secondary-container": "#5c647a", "primary": "#a33900", "outline": "#8e7166", "secondary-container": "#dae2fd", "on-error-container": "#93000a", "tertiary-fixed-dim": "#ffb95f", "on-primary-fixed": "#370e00", "on-surface": "#0b1c30", "inverse-surface": "#213145", "surface-container": "#e5eeff", "on-secondary-fixed": "#131b2e", "surface-bright": "#f8f9ff", "error-container": "#ffdad6", "on-surface-variant": "#5a4138" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "margin-mobile": "1rem", "margin": "2rem", "gutter": "1.5rem", "gutter-mobile": "1rem", "space-sm": "0.5rem", "space-md": "1rem", "space-xs": "0.25rem", "space-lg": "1.5rem", "space-xl": "2.5rem" }, fontFamily: { "headline-md": ["Sora"], "label-md": ["Inter"], "body-lg": ["Inter"], "headline-xl": ["Sora"], "label-sm": ["Inter"], "display-lg": ["Sora"], "headline-lg": ["Sora"], "label-lg": ["Inter"], "display-lg-mobile": ["Sora"], "body-sm": ["Inter"], "body-md": ["Inter"], "price-tag": ["Sora"] }, fontSize: { "headline-md": ["20px", { lineHeight: "28px", fontWeight: "700" }], "label-md": ["14px", { lineHeight: "18px", fontWeight: "600" }], "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }], "headline-xl": ["32px", { lineHeight: "40px", letterSpacing: "-0.015em", fontWeight: "700" }], "label-sm": ["12px", { lineHeight: "16px", fontWeight: "500" }], "display-lg": ["48px", { lineHeight: "56px", letterSpacing: "-0.02em", fontWeight: "800" }], "headline-lg": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "700" }], "label-lg": ["16px", { lineHeight: "20px", fontWeight: "600" }], "display-lg-mobile": ["36px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "800" }], "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }], "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }], "price-tag": ["22px", { lineHeight: "26px", letterSpacing: "-0.02em", fontWeight: "800" }] } } } };</script></head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased min-h-screen"><aside class="fixed left-0 top-0 h-full w-64 bg-on-background text-surface z-50 flex flex-col justify-between shadow-[0_4px_20px_-2px_rgba(15,23,42,0.08)]"><div class="flex flex-col"><div class="h-20 px-6 flex items-center gap-3 border-b border-border-default/10"><div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-on-primary"><span class="material-symbols-outlined text-[22px]">local_fire_department</span></div><div class="flex flex-col"><span class="font-headline-md text-headline-md text-surface leading-tight">El Mesón</span><span class="font-label-sm text-label-sm text-primary-fixed uppercase tracking-wider">Panel de Control</span></div></div><div class="p-4"><p class="px-3 mb-2 font-label-sm text-label-sm uppercase tracking-wider text-secondary-fixed-dim">Gestión Operativa</p><nav class="flex flex-col gap-1" data-active-classes="bg-primary text-on-primary font-label-md rounded-lg shadow-sm"><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary-fixed-dim hover:text-surface hover:bg-surface-variant/10 font-label-md text-label-md transition-all" data-path="gestion-admin-crud" href="#"><span class="material-symbols-outlined text-[20px]">restaurant_menu</span>Gestión Platos / CRUD</a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary-fixed-dim hover:text-surface hover:bg-surface-variant/10 font-label-md text-label-md transition-all" data-path="admin-pedidos" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span>Pedidos Delivery</a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary-fixed-dim hover:text-surface hover:bg-surface-variant/10 font-label-md text-label-md transition-all" data-path="admin-reservas" href="#"><span class="material-symbols-outlined text-[20px]">event_seat</span>Control Reservas</a><a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary-fixed-dim hover:text-surface hover:bg-surface-variant/10 font-label-md text-label-md transition-all" data-path="admin-reportes" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span>Ventas &amp; Métricas</a></nav></div></div><div class="p-4 border-t border-border-default/10 flex flex-col gap-2"><a class="flex items-center gap-2 px-3 py-2 text-secondary-fixed-dim hover:text-surface font-label-md text-label-md transition-colors" data-path="inicio" href="#"><span class="material-symbols-outlined text-[18px]">storefront</span>Volver a la Tienda</a><div class="px-3 py-2 flex items-center gap-3 bg-surface-variant/10 rounded-lg"><div class="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-on-primary text-xs font-bold">A</div><div class="flex flex-col"><span class="font-label-md text-label-md text-surface leading-tight">Admin Mesón</span><span class="font-label-sm text-label-sm text-secondary-fixed-dim leading-none">Huancayo Centro</span></div></div></div></aside><div class="pl-64 w-full"><header class="fixed top-0 left-64 right-0 h-16 bg-surface/90 backdrop-blur-xl border-b border-border-default z-40 flex items-center justify-between px-margin shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex items-center gap-3"><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>Sede Activa: Giráldez 157</span></div><div class="flex items-center gap-4"><div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm"><span class="material-symbols-outlined text-[18px]">wifi_calling_3</span><span>Central: 939 399 946</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="w-full pt-16 bg-bg-canvas min-h-[calc(100vh)] px-margin py-8"><div class="flex flex-col w-full">
+<!-- Status & Quick KPI Overview -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-gutter mb-8">
+<!-- Stat 1: Platos Activos -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex items-center justify-between relative overflow-hidden">
+<div class="flex flex-col gap-1 z-10">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Platos en Carta</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl text-on-surface">24</span>
+<span class="font-label-sm text-label-sm text-primary font-semibold">100% disponibles</span>
+</div>
+<span class="font-body-sm text-body-sm text-secondary">3 categorías activas</span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary z-10">
+<span class="material-symbols-outlined text-[26px]">restaurant_menu</span>
+</div>
+<div class="absolute -right-4 -bottom-4 w-24 h-24 rounded-full bg-primary/5 pointer-events-none"></div>
+</div>
+<!-- Stat 2: Pedidos Delivery -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex items-center justify-between relative overflow-hidden">
+<div class="flex flex-col gap-1 z-10">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Delivery Hoy</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl text-on-surface">48</span>
+<span class="font-label-sm text-label-sm text-surface-tint font-bold">+18% vs ayer</span>
+</div>
+<span class="font-body-sm text-body-sm text-secondary">S/ 2,840.00 facturados</span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-primary z-10">
+<span class="material-symbols-outlined text-[26px]">moped</span>
+</div>
+<div class="absolute -right-4 -bottom-4 w-24 h-24 rounded-full bg-surface-tint/5 pointer-events-none"></div>
+</div>
+<!-- Stat 3: Reservas de Salón -->
+<div class="bg-surface-container-lowest p-space-lg rounded-xl shadow-sm flex items-center justify-between relative overflow-hidden">
+<div class="flex flex-col gap-1 z-10">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">Mesas Reservadas</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl text-on-surface">16</span>
+<span class="font-label-sm text-label-sm text-tertiary font-bold">Turno Noche</span>
+</div>
+<span class="font-body-sm text-body-sm text-secondary">64 comensales confirmados</span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-tertiary z-10">
+<span class="material-symbols-outlined text-[26px]">table_restaurant</span>
+</div>
+<div class="absolute -right-4 -bottom-4 w-24 h-24 rounded-full bg-tertiary/5 pointer-events-none"></div>
+</div>
+<!-- Stat 4: Estado del Horno de Brasas -->
+<div class="bg-on-background text-surface p-space-lg rounded-xl shadow-sm flex items-center justify-between relative overflow-hidden">
+<div class="flex flex-col gap-1 z-10">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary-fixed">Horno a la Brasa</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-xl text-headline-xl text-surface">220°C</span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-primary-fixed">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span> Operativo
+          </span>
+</div>
+<span class="font-body-sm text-body-sm text-secondary-fixed-dim">Carbón y leña al 100%</span>
+</div>
+<div class="w-12 h-12 rounded-xl bg-surface-variant/20 flex items-center justify-center text-primary-fixed z-10">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<div class="absolute -right-6 -bottom-6 w-28 h-28 rounded-full bg-primary-container/20 blur-xl pointer-events-none"></div>
+</div>
+</div>
+<!-- Main Section: Management Tabs & CRUD Center -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col mb-10">
+<!-- Upper Navigation Tabs -->
+<div class="flex flex-wrap items-center justify-between px-space-lg pt-space-lg pb-space-sm bg-surface-container-lowest">
+<div class="flex items-center gap-2">
+<button class="px-4 py-2.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center gap-2 transition-colors" id="tab-menu" onclick="switchMainTab('menu')">
+<span class="material-symbols-outlined text-[18px]">restaurant_menu</span>
+<span>Catálogo de Carta &amp; Platos</span>
+</button>
+<button class="px-4 py-2.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-variant/40 flex items-center gap-2 transition-colors" id="tab-reservas" onclick="switchMainTab('reservas')">
+<span class="material-symbols-outlined text-[18px]">event_seat</span>
+<span>Reservas del Día (16)</span>
+</button>
+<button class="px-4 py-2.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-variant/40 flex items-center gap-2 transition-colors" id="tab-delivery" onclick="switchMainTab('delivery')">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+<span>Comandas WhatsApp (8)</span>
+</button>
+</div>
+<div class="flex items-center gap-3 mt-3 sm:mt-0">
+<span class="font-label-sm text-label-sm text-secondary flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span> Sincronizado en tiempo real
+        </span>
+</div>
+</div>
+<!-- VIEW 1: CRUD Platos de la Carta -->
+<div class="flex flex-col p-space-lg" id="view-menu">
+<!-- CRUD Actions Bar -->
+<div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4 mb-6">
+<!-- Search and Filters -->
+<div class="flex flex-wrap items-center gap-3 flex-1">
+<div class="relative min-w-[260px] flex-1 max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-[20px]">search</span>
+<input class="w-full h-11 pl-10 pr-4 bg-surface-container text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-secondary" id="search-input" onkeyup="filterPlatos()" placeholder="Buscar por nombre de plato o insumo..." type="text"/>
+</div>
+<div class="flex items-center gap-1 bg-surface-container p-1 rounded-lg">
+<button class="cat-pill px-3 py-1.5 rounded-md font-label-sm text-label-sm bg-surface-container-lowest text-on-surface font-semibold shadow-xs" onclick="setCategoryFilter('todas', this)">Todas</button>
+<button class="cat-pill px-3 py-1.5 rounded-md font-label-sm text-label-sm text-secondary hover:text-on-surface" onclick="setCategoryFilter('Brasas', this)">Brasas</button>
+<button class="cat-pill px-3 py-1.5 rounded-md font-label-sm text-label-sm text-secondary hover:text-on-surface" onclick="setCategoryFilter('Parrillas', this)">Parrillas</button>
+<button class="cat-pill px-3 py-1.5 rounded-md font-label-sm text-label-sm text-secondary hover:text-on-surface" onclick="setCategoryFilter('Bebidas', this)">Bebidas</button>
+</div>
+</div>
+<!-- Primary Action Button: Create -->
+<button class="h-11 px-5 rounded-lg bg-primary hover:bg-brasa-hover text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 transition-transform active:scale-95 shadow-md" onclick="toggleDishForm()">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>+ Nuevo Plato / Crear (Create)</span>
+</button>
+</div>
+<!-- Collapsible Inline Form (Create / Edit Plato) -->
+<div class="hidden mb-8 p-space-lg rounded-xl bg-surface-container" id="dish-form-container">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-6 bg-primary rounded-full"></span>
+<h3 class="font-headline-md text-headline-md text-on-surface" id="dish-form-title">Agregar Nuevo Plato a la Carta</h3>
+</div>
+<button class="w-8 h-8 rounded-lg bg-surface-container-lowest text-secondary hover:text-on-surface flex items-center justify-center transition-colors" onclick="toggleDishForm()">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="dish-form" onsubmit="handleDishSubmit(event)">
+<input id="edit-dish-id" type="hidden" value=""/>
+<!-- Nombre del plato -->
+<div class="lg:col-span-2 flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Nombre del Plato *</label>
+<input class="h-11 px-3.5 bg-surface-container-lowest text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary" id="form-name" placeholder="Ej: 1/4 Pollo a la Brasa Tradicional" required="" type="text"/>
+</div>
+<!-- Categoría -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Categoría *</label>
+<select class="h-11 px-3 bg-surface-container-lowest text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary" id="form-category" required="">
+<option value="Brasas">Brasas Tradicionales</option>
+<option value="Parrillas">Parrillas &amp; Cortes</option>
+<option value="Bebidas">Bebidas &amp; Refrescos</option>
+<option value="Guarniciones">Guarniciones</option>
+</select>
+</div>
+<!-- Precio en Soles -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Precio de Venta (S/.) *</label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 font-label-md text-label-md text-secondary">S/</span>
+<input class="w-full h-11 pl-9 pr-3 bg-surface-container-lowest text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary" id="form-price" placeholder="10.90" required="" step="0.10" type="number"/>
+</div>
+</div>
+<!-- Tiempo de cocción -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Tiempo Horno / Preparación</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-[18px]">timer</span>
+<input class="w-full h-11 pl-9 pr-3 bg-surface-container-lowest text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary" id="form-time" placeholder="15 - 20 min" type="text"/>
+</div>
+</div>
+<!-- Disponibilidad / Stock -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Disponibilidad</label>
+<select class="h-11 px-3 bg-surface-container-lowest text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary" id="form-stock">
+<option value="Activo">Stock Activo (Disponible)</option>
+<option value="Bajo">Stock Bajo (&lt; 10 und)</option>
+<option value="Agotado">Agotado (Pausado)</option>
+</select>
+</div>
+<!-- URL / Nombre Foto -->
+<div class="lg:col-span-2 flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Imagen del Plato</label>
+<div class="h-11 px-3 bg-surface-container-lowest rounded-lg flex items-center justify-between text-secondary font-body-sm text-body-sm">
+<span class="truncate" id="form-photo-label">plato-brasa-canonico.jpg</span>
+<span class="px-2.5 py-1 bg-surface-container rounded font-label-sm text-label-sm text-on-surface">Subir</span>
+</div>
+</div>
+<!-- Descripción -->
+<div class="lg:col-span-3 flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Descripción del Plato</label>
+<input class="h-11 px-3.5 bg-surface-container-lowest text-on-surface rounded-lg font-body-sm text-body-sm focus:outline-none focus:ring-2 focus:ring-primary" id="form-desc" placeholder="Incluye papas nativas fritas crocantes, ensalada clásica y ají de la casa." type="text"/>
+</div>
+<!-- Botón de Envío -->
+<div class="flex items-end gap-2">
+<button class="w-full h-11 bg-primary hover:bg-brasa-hover text-on-primary font-label-md text-label-md rounded-lg flex items-center justify-center gap-2 transition-colors" type="submit">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Guardar Cambios</span>
+</button>
+</div>
+</form>
+</div>
+<!-- Interactive CRUD Table -->
+<div class="overflow-x-auto rounded-xl">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container font-label-sm text-label-sm uppercase tracking-wider text-secondary">
+<th class="py-3 px-4">Plato &amp; Detalle</th>
+<th class="py-3 px-4">Categoría</th>
+<th class="py-3 px-4">Precio (S/.)</th>
+<th class="py-3 px-4">Estado Stock</th>
+<th class="py-3 px-4 text-center">Ventas Mes</th>
+<th class="py-3 px-4 text-right">Acciones CRUD</th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-body-sm" id="dishes-tbody">
+<!-- Row 1: 1/4 Pollo -->
+<tr class="dish-row bg-surface-container-lowest hover:bg-surface-container-low transition-colors" id="row-1">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-surface-variant flex-shrink-0 overflow-hidden relative shadow-xs">
+<img class="w-full h-full object-cover" data-alt="A quarter rotisserie chicken with golden crispy skin, accompanied by crispy native yellow Peruvian fries and a side salad, served on rustic ceramic tableware with ember lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCayfb0dpIR59mDZroFsJukMq8lgfEA_W34890Q-smAwROfbYAutE7Kk8c2izooYdu9K0sn3AvvDSrXziWNa_XSN_mhUtj2FuxB9knGPm0qTMKhv0ZvVyeu-c1N8uTS13l2JL7UvFY3bmBAVSl2tQgZGgWO3r5oMAnnBjix6xagb85Q9Ro794e_Yjw7KJrZpEfqHwCgox6wRO4HhXZtqOwr4MfYwaMYvAU_eOvBOqb5AooEl1N14m6r-w"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate dish-title">1/4 Pollo a la Brasa</span>
+<span class="font-body-sm text-body-sm text-secondary truncate">Papas nativas + cremas artesanales</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="dish-cat inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-surface-container text-on-surface">Brasas</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="font-headline-md text-headline-md text-on-surface dish-price">S/ 10.90</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="stock-badge inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">
+<span class="w-2 h-2 rounded-full bg-primary"></span> Activo
+                </span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="font-label-md text-label-md text-on-surface font-bold">142</span>
+<span class="text-xs text-secondary block">pedidos</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="inline-flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-lg bg-surface-container text-on-surface hover:bg-surface-variant flex items-center justify-center transition-colors" onclick="editDish(1, '1/4 Pollo a la Brasa', 'Brasas', 10.90, 'Activo')" title="Editar plato (Update)">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container text-on-surface hover:bg-surface-variant flex items-center justify-center transition-colors" onclick="toggleStockStatus(1)" title="Alternar disponibilidad">
+<span class="material-symbols-outlined text-[16px]">sync_alt</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-error-container text-on-error-container hover:bg-error/20 flex items-center justify-center transition-colors" onclick="deleteDish(1)" title="Eliminar de carta (Delete)">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Pollo Entero -->
+<tr class="dish-row bg-surface-container-lowest hover:bg-surface-container-low transition-colors" id="row-2">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-surface-variant flex-shrink-0 overflow-hidden relative shadow-xs">
+<img class="w-full h-full object-cover" data-alt="A whole roasted Peruvian rotisserie chicken glistening with aromatic herbs, served on a warm dark slate platter with a golden glowing hearth in the background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJlpj8JcwPPbdzZLfmCuNMaGdX3kK-Ab9rtG12JRzDkq-zVmRqkK45ws9i_YSfi6JyD_v9BtWcrkEAl7EMsvBxIzfQdNm4PW8oqDYlW1nAySwM7i_XBrpQx4yqAEHUmQAstwfD4VBRm9x7oqZs5-0q8Vr4CJnn0Qq6CMKm6xRru3xQEfwIy1rmpZ3ETkXadngIjMjwLL6iqlW4Lmg3VNzY1lvCwFDqWNJqZ1KCUTYxoyDY6VLMOsAjXQ"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate dish-title">Pollo Entero a la Brasa</span>
+<span class="font-body-sm text-body-sm text-secondary truncate">Porción familiar de papas + ensalada</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="dish-cat inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-surface-container text-on-surface">Brasas</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="font-headline-md text-headline-md text-on-surface dish-price">S/ 43.60</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="stock-badge inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">
+<span class="w-2 h-2 rounded-full bg-primary"></span> Activo
+                </span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="font-label-md text-label-md text-on-surface font-bold">89</span>
+<span class="text-xs text-secondary block">pedidos</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="inline-flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-lg bg-surface-container text-on-surface hover:bg-surface-variant flex items-center justify-center transition-colors" onclick="editDish(2, 'Pollo Entero a la Brasa', 'Brasas', 43.60, 'Activo')" title="Editar plato (Update)">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container text-on-surface hover:bg-surface-variant flex items-center justify-center transition-colors" onclick="toggleStockStatus(2)" title="Alternar disponibilidad">
+<span class="material-symbols-outlined text-[16px]">sync_alt</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-error-container text-on-error-container hover:bg-error/20 flex items-center justify-center transition-colors" onclick="deleteDish(2)" title="Eliminar de carta (Delete)">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Anticuchos de Corazón -->
+<tr class="dish-row bg-surface-container-lowest hover:bg-surface-container-low transition-colors" id="row-3">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-surface-variant flex-shrink-0 overflow-hidden relative shadow-xs">
+<img class="w-full h-full object-cover" data-alt="Traditional Peruvian anticuchos skewers grilled over fiery charcoal embers with roasted baby potatoes and Andean choclo corn, professional food photograph" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBT0DN-rNKwmkMlIIMWpluatc-JKS8UECd4w-Yup8i8Gy5zQIcv8qO1Pw0hlj4o0VapnFaiyfq_RCf9VYMe65lp3mTVKgAufOpcEV6E-AXwlDjYqh5qvmXkGmwFt_gl8evqrr3yR129ndMumUOi8e0vO9aV2O_t04SnB_Zp_dkrXaSoqD2xyFuK6zHifNQhNSLzG7e1v9cF5DsWRgsU5aehAHonbAabumFjIfrhbg6rx-tvr8T0fjuE-Q"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate dish-title">Anticuchos de Corazón</span>
+<span class="font-body-sm text-body-sm text-secondary truncate">2 palos + choclo desgranado + papa dorada</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="dish-cat inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-surface-container text-on-surface">Parrillas</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="font-headline-md text-headline-md text-on-surface dish-price">S/ 21.90</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="stock-badge inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">
+<span class="w-2 h-2 rounded-full bg-primary"></span> Activo
+                </span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="font-label-md text-label-md text-on-surface font-bold">64</span>
+<span class="text-xs text-secondary block">pedidos</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="inline-flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-lg bg-surface-container text-on-surface hover:bg-surface-variant flex items-center justify-center transition-colors" onclick="editDish(3, 'Anticuchos de Corazón', 'Parrillas', 21.90, 'Activo')" title="Editar plato (Update)">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container text-on-surface hover:bg-surface-variant flex items-center justify-center transition-colors" onclick="toggleStockStatus(3)" title="Alternar disponibilidad">
+<span class="material-symbols-outlined text-[16px]">sync_alt</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-error-container text-on-error-container hover:bg-error/20 flex items-center justify-center transition-colors" onclick="deleteDish(3)" title="Eliminar de carta (Delete)">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Combo Familiar Martes -->
+<tr class="dish-row bg-surface-container-lowest hover:bg-surface-container-low transition-colors" id="row-4">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-surface-variant flex-shrink-0 overflow-hidden relative shadow-xs">
+<img class="w-full h-full object-cover" data-alt="Abundant Peruvian family combo feast featuring whole roasted chicken, large bowl of golden hand-cut fries, purple chicha drink, and multiple vibrant chili sauce cups" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJYcf9zvTQKeqqTpvqJfiBe_uWw7MBNyXIZ4hA3dYp1hRCTX0RtOrcnKvNOuVB3CsTzWseWtNQnrxU99dk-FWomCD5sIfqhBsmTns71by8JVdU8ANfU5-EiiHhMjMy6n7ICzdW8cdE_h_bcvFclqq6pZjNxl3fLPHH61qkSD6n-PcMi7dW-7Ud-gnvWizsFcRPHcNWlbOaiQzF_M3VqqAOI5NvkwMKl4MoFNdBnwSPebtMypWZtJzu-w"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate dish-title">Combo Familiar Martes</span>
+<span class="font-body-sm text-body-sm text-secondary truncate">1 Pollo + Papas XXL + Jarra Chicha 1L</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="dish-cat inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-surface-container text-on-surface">Brasas</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="font-headline-md text-headline-md text-on-surface dish-price">S/ 46.90</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="stock-badge inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">
+<span class="w-2 h-2 rounded-full bg-primary"></span> Activo
+                </span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="font-label-md text-label-md text-on-surface font-bold">38</span>
+<span class="text-xs text-secondary block">pedidos</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="inline-flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-lg bg-surface-container text-on-surface hover:bg-surface-variant flex items-center justify-center transition-colors" onclick="editDish(4, 'Combo Familiar Martes', 'Brasas', 46.90, 'Activo')" title="Editar plato (Update)">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container text-on-surface hover:bg-surface-variant flex items-center justify-center transition-colors" onclick="toggleStockStatus(4)" title="Alternar disponibilidad">
+<span class="material-symbols-outlined text-[16px]">sync_alt</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-error-container text-on-error-container hover:bg-error/20 flex items-center justify-center transition-colors" onclick="deleteDish(4)" title="Eliminar de carta (Delete)">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: Jarra de Chicha Morada -->
+<tr class="dish-row bg-surface-container-lowest hover:bg-surface-container-low transition-colors" id="row-5">
+<td class="py-3.5 px-4">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-surface-variant flex-shrink-0 overflow-hidden relative shadow-xs">
+<img class="w-full h-full object-cover" data-alt="Traditional Peruvian Chicha Morada beverage in a condensation-covered glass pitcher with cut limes, fresh apples and cinnamon sticks nearby" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6X33pz9pHERIp6RKKjIf_Fmeml9r9nyTCBVdisImi0BmjijZEGmWWXrbCRlzpOg0r2waHqm3JjEKGa_qSTxQ1DYRu9ysJI_Wy5CMObIReqJ2mPfkMDr4odi-2JxKZHZJ-h_XxLWbL0QqoBD6apTgLW9ZIWNcFDG0e0Bw_8tR9O8aQ4RxuRCZGU1sj_CotLi5JggEM9lmgXrF7BzVUE-TQHjrVAHjAwEuJqkDTn805SIWIMNcZwJRLkg"/>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-md text-label-md text-on-surface font-semibold truncate dish-title">Jarra de Chicha Morada 1L</span>
+<span class="font-body-sm text-body-sm text-secondary truncate">Preparada con maíz morado, piña y canela</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-4">
+<span class="dish-cat inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-surface-container text-on-surface">Bebidas</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="font-headline-md text-headline-md text-on-surface dish-price">S/ 9.00</span>
+</td>
+<td class="py-3.5 px-4">
+<span class="stock-badge inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">
+<span class="w-2 h-2 rounded-full bg-primary"></span> Activo
+                </span>
+</td>
+<td class="py-3.5 px-4 text-center">
+<span class="font-label-md text-label-md text-on-surface font-bold">110</span>
+<span class="text-xs text-secondary block">pedidos</span>
+</td>
+<td class="py-3.5 px-4 text-right">
+<div class="inline-flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-lg bg-surface-container text-on-surface hover:bg-surface-variant flex items-center justify-center transition-colors" onclick="editDish(5, 'Jarra de Chicha Morada 1L', 'Bebidas', 9.00, 'Activo')" title="Editar plato (Update)">
+<span class="material-symbols-outlined text-[16px]">edit</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-surface-container text-on-surface hover:bg-surface-variant flex items-center justify-center transition-colors" onclick="toggleStockStatus(5)" title="Alternar disponibilidad">
+<span class="material-symbols-outlined text-[16px]">sync_alt</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-error-container text-on-error-container hover:bg-error/20 flex items-center justify-center transition-colors" onclick="deleteDish(5)" title="Eliminar de carta (Delete)">
+<span class="material-symbols-outlined text-[16px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination stats -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 px-2">
+<span class="font-body-sm text-body-sm text-secondary">Mostrando 5 de 24 platos registrados en la carta actual</span>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container text-secondary text-xs font-semibold hover:bg-surface-variant transition-colors disabled:opacity-50" disabled="">Anterior</button>
+<span class="px-3 py-1 rounded-lg bg-primary text-on-primary text-xs font-bold">1</span>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container text-on-surface text-xs font-semibold hover:bg-surface-variant transition-colors">2</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container text-on-surface text-xs font-semibold hover:bg-surface-variant transition-colors">3</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container text-on-surface text-xs font-semibold hover:bg-surface-variant transition-colors">Siguiente</button>
+</div>
+</div>
+</div>
+<!-- VIEW 2: Reservas del Día -->
+<div class="hidden flex-col p-space-lg" id="view-reservas">
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-6">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Control de Reservas de Salón</h3>
+<p class="font-body-sm text-body-sm text-secondary">Sede Giráldez 157, Huancayo • Gestión del servicio de almuerzo y cena</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-secondary">Filtro Estado:</span>
+<select class="h-9 px-3 bg-surface-container rounded-lg font-label-sm text-label-sm text-on-surface focus:outline-none">
+<option>Todas las reservas (16)</option>
+<option>Confirmadas</option>
+<option>Pendientes</option>
+<option>Sentadas</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+<!-- Reserva 1 -->
+<div class="p-4 rounded-xl bg-surface-container-low flex flex-col justify-between gap-3 shadow-sm">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-bold">Carlos Palacios</span>
+<span class="font-body-sm text-body-sm text-secondary">954 112 880 • 4 Personas</span>
+</div>
+<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-primary/10 text-primary">Confirmada</span>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-[18px] text-primary">schedule</span>
+<span class="font-label-md text-label-md">01:30 PM • Mesa 04</span>
+</div>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-xs font-semibold text-on-surface hover:bg-primary hover:text-on-primary transition-colors">Marcar Sentada</button>
+</div>
+</div>
+<!-- Reserva 2 -->
+<div class="p-4 rounded-xl bg-surface-container-low flex flex-col justify-between gap-3 shadow-sm">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-bold">María Elena Rojas</span>
+<span class="font-body-sm text-body-sm text-secondary">964 887 019 • 8 Personas (Cumpleaños)</span>
+</div>
+<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-tertiary-container/20 text-tertiary">Pendiente</span>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-[18px] text-tertiary">schedule</span>
+<span class="font-label-md text-label-md">02:15 PM • Zona Familiar</span>
+</div>
+<button class="px-2.5 py-1 rounded bg-primary text-xs font-semibold text-on-primary hover:bg-brasa-hover transition-colors">Confirmar</button>
+</div>
+</div>
+<!-- Reserva 3 -->
+<div class="p-4 rounded-xl bg-surface-container-low flex flex-col justify-between gap-3 shadow-sm">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-bold">Dr. Fernando Gutarra</span>
+<span class="font-body-sm text-body-sm text-secondary">945 009 211 • 2 Personas</span>
+</div>
+<span class="px-2.5 py-1 rounded-full text-xs font-bold bg-secondary-container text-on-secondary-container">Sentada</span>
+</div>
+<div class="flex items-center justify-between pt-2">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-[18px] text-secondary">table_restaurant</span>
+<span class="font-label-md text-label-md">Mesa 12 • En Atención</span>
+</div>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-xs font-semibold text-on-surface hover:bg-surface-variant transition-colors">Ver Comanda</button>
+</div>
+</div>
+</div>
+</div>
+<!-- VIEW 3: Comandas de Delivery WhatsApp -->
+<div class="hidden flex-col p-space-lg" id="view-delivery">
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-6">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Comandas WhatsApp &amp; Central Delivery</h3>
+<p class="font-body-sm text-body-sm text-secondary">Integración con bot y atención directa al número central 939 399 946</p>
+</div>
+<span class="px-3 py-1.5 rounded-lg bg-surface-container text-primary font-label-md text-label-md font-bold">8 En Cocina / Despacho</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Ticket 1 -->
+<div class="p-4 rounded-xl bg-surface-container flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-primary">#ORD-9024</span>
+<span class="font-label-sm text-label-sm text-secondary">Hace 6 min</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface">1x Pollo Entero a la Brasa</span>
+<span class="font-body-sm text-body-sm text-secondary">Extra ají y vinagreta • Jr. Puno 340</span>
+</div>
+<div class="flex items-center justify-between pt-2">
+<span class="font-headline-md text-headline-md text-on-surface">S/ 43.60</span>
+<span class="px-2 py-1 rounded bg-primary-container text-on-primary-container text-xs font-bold">En Horno</span>
+</div>
+</div>
+<!-- Ticket 2 -->
+<div class="p-4 rounded-xl bg-surface-container flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-primary">#ORD-9025</span>
+<span class="font-label-sm text-label-sm text-secondary">Hace 12 min</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface">2x 1/4 Pollo + 1L Chicha</span>
+<span class="font-body-sm text-body-sm text-secondary">Pago Yape • Av. Ferrocarril 880</span>
+</div>
+<div class="flex items-center justify-between pt-2">
+<span class="font-headline-md text-headline-md text-on-surface">S/ 30.80</span>
+<span class="px-2 py-1 rounded bg-surface-tint text-on-primary text-xs font-bold">En Camino</span>
+</div>
+</div>
+<!-- Ticket 3 -->
+<div class="p-4 rounded-xl bg-surface-container flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-primary">#ORD-9026</span>
+<span class="font-label-sm text-label-sm text-secondary">Hace 18 min</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface">1x Anticuchos de Corazón</span>
+<span class="font-body-sm text-body-sm text-secondary">Término 3/4 • Calle Real 412</span>
+</div>
+<div class="flex items-center justify-between pt-2">
+<span class="font-headline-md text-headline-md text-on-surface">S/ 21.90</span>
+<span class="px-2 py-1 rounded bg-secondary-container text-on-secondary-container text-xs font-bold">Despachado</span>
+</div>
+</div>
+<!-- Ticket 4 -->
+<div class="p-4 rounded-xl bg-surface-container flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md font-bold text-primary">#ORD-9027</span>
+<span class="font-label-sm text-label-sm text-secondary">Hace 2 min</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-md text-label-md text-on-surface">1x Combo Familiar Martes</span>
+<span class="font-body-sm text-body-sm text-secondary">Pago Efectivo • San Carlos 105</span>
+</div>
+<div class="flex items-center justify-between pt-2">
+<span class="font-headline-md text-headline-md text-on-surface">S/ 46.90</span>
+<span class="px-2 py-1 rounded bg-primary text-on-primary text-xs font-bold">Nuevo</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Operational Bottom Alert: Logs de Horno y Almacén -->
+<div class="p-space-md rounded-xl bg-surface-container flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container-lowest text-primary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">inventory</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Alerta de Insumos Críticos</span>
+<span class="font-body-sm text-body-sm text-secondary">Papas nativas: 180 kg restantes en cámara frigorífica • Carbón de algarrobo: 45 sacos listos</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest hover:bg-surface-variant font-label-sm text-label-sm text-on-surface transition-colors">Ver Kardex</button>
+<button class="px-3 py-1.5 rounded-lg bg-primary text-on-primary font-label-sm text-label-sm font-semibold hover:bg-brasa-hover transition-colors">Solicitar Reabastecimiento</button>
+</div>
+</div>
+</div>
+<script>
+  // Tab Switching
+  function switchMainTab(tab) {
+    const tabs = ['menu', 'reservas', 'delivery'];
+    tabs.forEach(t => {
+      const btn = document.getElementById('tab-' + t);
+      const view = document.getElementById('view-' + t);
+      if (t === tab) {
+        btn.className = 'px-4 py-2.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md flex items-center gap-2 transition-colors';
+        view.classList.remove('hidden');
+        view.classList.add('flex');
+      } else {
+        btn.className = 'px-4 py-2.5 rounded-lg bg-surface-container text-on-surface font-label-md text-label-md hover:bg-surface-variant/40 flex items-center gap-2 transition-colors';
+        view.classList.add('hidden');
+        view.classList.remove('flex');
+      }
+    });
+  }
+
+  // Toggle Create / Edit Dish Form
+  function toggleDishForm() {
+    const container = document.getElementById('dish-form-container');
+    const isHidden = container.classList.contains('hidden');
+    if (isHidden) {
+      container.classList.remove('hidden');
+      document.getElementById('dish-form-title').innerText = 'Agregar Nuevo Plato a la Carta';
+      document.getElementById('edit-dish-id').value = '';
+      document.getElementById('dish-form').reset();
+    } else {
+      container.classList.add('hidden');
+    }
+  }
+
+  // Edit Dish: Populate Form & Show
+  function editDish(id, name, cat, price, stock) {
+    const container = document.getElementById('dish-form-container');
+    container.classList.remove('hidden');
+    document.getElementById('dish-form-title').innerText = 'Editar Plato: ' + name;
+    document.getElementById('edit-dish-id').value = id;
+    document.getElementById('form-name').value = name;
+    document.getElementById('form-category').value = cat;
+    document.getElementById('form-price').value = price;
+    document.getElementById('form-stock').value = stock;
+    container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // Delete Dish (CRUD - Delete)
+  function deleteDish(id) {
+    const row = document.getElementById('row-' + id);
+    if (row && confirm('¿Seguro que deseas eliminar este plato de la carta de El Mesón?')) {
+      row.style.opacity = '0';
+      setTimeout(() => {
+        row.remove();
+      }, 200);
+    }
+  }
+
+  // Toggle Stock Status (Activo <-> Agotado)
+  function toggleStockStatus(id) {
+    const row = document.getElementById('row-' + id);
+    if (!row) return;
+    const badge = row.querySelector('.stock-badge');
+    if (!badge) return;
+
+    if (badge.innerText.includes('Activo')) {
+      badge.className = 'stock-badge inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-error/10 text-error';
+      badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-error"></span> Agotado';
+    } else {
+      badge.className = 'stock-badge inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary';
+      badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-primary"></span> Activo';
+    }
+  }
+
+  // Handle Create / Update Submit
+  function handleDishSubmit(e) {
+    e.preventDefault();
+    const editId = document.getElementById('edit-dish-id').value;
+    const name = document.getElementById('form-name').value;
+    const cat = document.getElementById('form-category').value;
+    const price = parseFloat(document.getElementById('form-price').value).toFixed(2);
+    const stock = document.getElementById('form-stock').value;
+
+    if (editId) {
+      // Update existing
+      const row = document.getElementById('row-' + editId);
+      if (row) {
+        row.querySelector('.dish-title').innerText = name;
+        row.querySelector('.dish-cat').innerText = cat;
+        row.querySelector('.dish-price').innerText = 'S/ ' + price;
+        const badge = row.querySelector('.stock-badge');
+        if (stock === 'Activo') {
+          badge.className = 'stock-badge inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary';
+          badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-primary"></span> Activo';
+        } else if (stock === 'Bajo') {
+          badge.className = 'stock-badge inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-tertiary-container/10 text-tertiary';
+          badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-tertiary-container"></span> Bajo';
+        } else {
+          badge.className = 'stock-badge inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-error/10 text-error';
+          badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-error"></span> Agotado';
+        }
+      }
+    } else {
+      // Create new row
+      const newId = Date.now();
+      const tbody = document.getElementById('dishes-tbody');
+      const tr = document.createElement('tr');
+      tr.id = 'row-' + newId;
+      tr.className = 'dish-row bg-surface-container-lowest hover:bg-surface-container-low transition-colors';
+      tr.innerHTML = `
+        <td class="py-3.5 px-4">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-lg bg-surface-variant flex-shrink-0 overflow-hidden relative shadow-xs flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined text-[24px]">lunch_dining</span>
+            </div>
+            <div class="flex flex-col min-w-0">
+              <span class="font-label-md text-label-md text-on-surface font-semibold truncate dish-title">${name}</span>
+              <span class="font-body-sm text-body-sm text-secondary truncate">Receta especial de la casa</span>
+            </div>
+          </div>
+        </td>
+        <td class="py-3.5 px-4">
+          <span class="dish-cat inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-surface-container text-on-surface">${cat}</span>
+        </td>
+        <td class="py-3.5 px-4">
+          <span class="font-headline-md text-headline-md text-on-surface dish-price">S/ ${price}</span>
+        </td>
+        <td class="py-3.5 px-4">
+          <span class="stock-badge inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary">
+            <span class="w-2 h-2 rounded-full bg-primary"></span> Activo
+          </span>
+        </td>
+        <td class="py-3.5 px-4 text-center">
+          <span class="font-label-md text-label-md text-on-surface font-bold">0</span>
+          <span class="text-xs text-secondary block">nuevo</span>
+        </td>
+        <td class="py-3.5 px-4 text-right">
+          <div class="inline-flex items-center gap-1.5">
+            <button onclick="editDish(${newId}, '${name}', '${cat}', ${price}, 'Activo')" title="Editar" class="w-8 h-8 rounded-lg bg-surface-container text-on-surface hover:bg-surface-variant flex items-center justify-center transition-colors">
+              <span class="material-symbols-outlined text-[16px]">edit</span>
+            </button>
+            <button onclick="toggleStockStatus(${newId})" title="Alternar" class="w-8 h-8 rounded-lg bg-surface-container text-on-surface hover:bg-surface-variant flex items-center justify-center transition-colors">
+              <span class="material-symbols-outlined text-[16px]">sync_alt</span>
+            </button>
+            <button onclick="deleteDish(${newId})" title="Eliminar" class="w-8 h-8 rounded-lg bg-error-container text-on-error-container hover:bg-error/20 flex items-center justify-center transition-colors">
+              <span class="material-symbols-outlined text-[16px]">delete</span>
+            </button>
+          </div>
+        </td>
+      `;
+      tbody.prepend(tr);
+    }
+    toggleDishForm();
+  }
+
+  // Filter Dishes by Name / Search Input
+  function filterPlatos() {
+    const val = document.getElementById('search-input').value.toLowerCase();
+    const rows = document.querySelectorAll('.dish-row');
+    rows.forEach(r => {
+      const text = r.querySelector('.dish-title').innerText.toLowerCase();
+      r.style.display = text.includes(val) ? '' : 'none';
+    });
+  }
+
+  // Filter Dishes by Category Pills
+  function setCategoryFilter(cat, btn) {
+    document.querySelectorAll('.cat-pill').forEach(p => {
+      p.className = 'cat-pill px-3 py-1.5 rounded-md font-label-sm text-label-sm text-secondary hover:text-on-surface';
+    });
+    btn.className = 'cat-pill px-3 py-1.5 rounded-md font-label-sm text-label-sm bg-surface-container-lowest text-on-surface font-semibold shadow-xs';
+
+    const rows = document.querySelectorAll('.dish-row');
+    rows.forEach(r => {
+      const rowCat = r.querySelector('.dish-cat').innerText.trim();
+      if (cat === 'todas' || rowCat.toLowerCase() === cat.toLowerCase()) {
+        r.style.display = '';
+      } else {
+        r.style.display = 'none';
+      }
+    });
+  }
+</script></main></div></body></html>
