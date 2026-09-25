@@ -9,11 +9,6 @@
       "collectionGroup": "reservas",
       "queryScope": "COLLECTION",
       "fields": [{ "fieldPath": "fecha", "order": "ASCENDING" }, { "fieldPath": "hora", "order": "ASCENDING" }]
-    },
-    {
-      "collectionGroup": "pedidos",
-      "queryScope": "COLLECTION",
-      "fields": [{ "fieldPath": "createdAt", "order": "DESCENDING" }]
     }
   ],
   "fieldOverrides": []
