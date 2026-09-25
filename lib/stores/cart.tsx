@@ -37,17 +37,17 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   });
   const [toast, setToast] = useState<string | null>(null);
 
-  // sincroniza si otra pestaña modifica localStorage
+  // sincroniza si otra pestaña/iframe modifica localStorage
   useEffect(() => {
-    const onStorage = (e: StorageEvent) => {
-      if (e.key === KEY && e.newValue) {
-        try {
-          setItems(JSON.parse(e.newValue));
-        } catch {}
-      }
-    };
+    const sync = () => { try{ const raw=localStorage.getItem(KEY); if(raw) setItems(JSON.parse(raw)); }catch{} };
+    const onStorage = (e: StorageEvent) => { if (e.key === KEY && e.newValue) { try { setItems(JSON.parse(e.newValue)); } catch {} } };
+    const onMessage = (e: MessageEvent) => { if(e.data?.type==="cart:update") sync(); };
+    const onFocus = () => sync();
     window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
+    window.addEventListener("message", onMessage);
+    window.addEventListener("focus", onFocus);
+    const id = setInterval(sync, 1000);
+    return () => { window.removeEventListener("storage", onStorage); window.removeEventListener("message", onMessage); window.removeEventListener("focus", onFocus); clearInterval(id); };
   }, []);
 
   const persist = useCallback((next: CartItem[]) => {
