@@ -1,8 +1,10 @@
 "use client";
 import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import AddToCartButton from "@/components/AddToCartButton";
 import { subscribePlatos } from "@/lib/services/platos.service";
 import { subscribeOfertas, type OfertaDoc } from "@/lib/services/ofertas.service";
 import { useCart } from "@/lib/stores/cart";
@@ -20,8 +22,8 @@ export default function CartaPage() {
   const [platos, setPlatos] = useState<Plato[]>([]);
   const [ofertas, setOfertas] = useState<OfertaDoc[]>([]);
   const [cat, setCat] = useState("todos");
-  const [q, setQ] = useState("");
-  const { agregar, items, total, soles } = useCart();
+  const [busqueda, setBusqueda] = useState("");
+  const { items, total, soles } = useCart();
 
   useEffect(() => {
     const u1 = subscribePlatos(setPlatos);
@@ -30,13 +32,16 @@ export default function CartaPage() {
   }, []);
 
   const filtrados = useMemo(() => {
-    return platos.filter(p => {
-      const okCat = cat==="todos" || p.cat===cat;
-      const okQ = !q || p.nombre.toLowerCase().includes(q.toLowerCase()) || p.desc.toLowerCase().includes(q.toLowerCase());
-      const activo = p.activo!==false;
-      return okCat && okQ && activo;
+    return platos.filter((plato) => {
+      const okCat = cat === "todos" || plato.cat === cat;
+      const okBusqueda =
+        !busqueda ||
+        plato.nombre.toLowerCase().includes(busqueda.toLowerCase()) ||
+        plato.desc.toLowerCase().includes(busqueda.toLowerCase());
+      const activo = plato.activo !== false;
+      return okCat && okBusqueda && activo;
     });
-  }, [platos, cat, q]);
+  }, [platos, cat, busqueda]);
 
   const falta = Math.max(0, ENVIO_GRATIS_DESDE - total);
 
@@ -80,7 +85,7 @@ export default function CartaPage() {
           </div>
           <div className="relative w-full lg:w-72 shrink-0">
             <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">search</span>
-            <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Buscar pollo, anticuchos, bife..." className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white ring-1 ring-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-600"/>
+            <input value={busqueda} onChange={(e) => setBusqueda(e.target.value)} placeholder="Buscar pollo, anticuchos, bife..." className="w-full pl-10 pr-4 py-2.5 rounded-lg bg-white ring-1 ring-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-brand-600" />
           </div>
         </div>
 
@@ -96,14 +101,14 @@ export default function CartaPage() {
                 <span className="material-symbols-outlined text-5xl text-slate-300">search_off</span>
                 <p className="font-bold mt-2">Sin resultados</p>
                 <p className="text-sm text-slate-500">Prueba con &quot;pollo&quot;, &quot;chicha&quot; o cambia de categoría</p>
-                <button onClick={()=>{setQ(""); setCat("todos");}} className="mt-4 px-4 py-2 bg-ink text-white rounded-lg text-sm">Ver toda la carta</button>
+                <button onClick={() => { setBusqueda(""); setCat("todos"); }} className="mt-4 px-4 py-2 bg-ink text-white rounded-lg text-sm">Ver toda la carta</button>
               </div>
             ) : (
               <div className="grid md:grid-cols-2 2xl:grid-cols-3 gap-6">
                 {filtrados.map(p=>(
                   <div key={p.id} className="bg-white rounded-xl shadow-sm ring-1 ring-slate-900/5 overflow-hidden flex flex-col hover:shadow-md transition">
-                    <div className="relative h-48 bg-slate-100">
-                      <img src={p.img} alt={p.nombre} className="w-full h-full object-cover"/>
+                    <div className="relative h-48 bg-slate-100 overflow-hidden">
+                      <Image src={p.img} alt={p.nombre} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
                       {p.tag && <span className="absolute top-3 left-3 bg-amber-400 text-ink px-2.5 py-1 rounded-full text-xs font-bold">{p.tag}</span>}
                     </div>
                     <div className="p-5 flex flex-col gap-2 flex-1">
@@ -113,7 +118,7 @@ export default function CartaPage() {
                     </div>
                     <div className="px-5 pb-5 flex items-center justify-between">
                       <div><div className="text-xs text-slate-500 uppercase font-semibold">Precio</div><div className="font-bold text-brand-600 text-lg">S/ {p.precio.toFixed(2)}</div></div>
-                      <button onClick={()=>agregar(p.nombre, p.precio)} className="h-10 px-4 bg-brand-600 hover:bg-brand-700 text-white rounded-lg text-sm font-semibold flex items-center gap-1.5"><span className="material-symbols-outlined text-[18px]">add_shopping_cart</span>Agregar</button>
+                      <AddToCartButton nombre={p.nombre} precio={p.precio} compact className="h-10 px-4 flex items-center gap-1.5 rounded-lg"><span className="material-symbols-outlined text-[18px]">add_shopping_cart</span>Agregar</AddToCartButton>
                     </div>
                   </div>
                 ))}

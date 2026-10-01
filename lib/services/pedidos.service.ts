@@ -1,41 +1,61 @@
-import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, serverTimestamp, updateDoc } from "firebase/firestore";
-import { db } from "@/lib/firebase/client";
+import {
+  pedidosRepo,
+  type EstadoPedido,
+  type PedidoRow,
+  type PedidoWithId,
+} from "@/lib/repositories/pedidos.repo";
 import type { CartItem } from "@/lib/stores/cart";
+import { parseOrThrow } from "@/lib/schemas/parse";
+import { pedidoSchema } from "@/lib/schemas/pedido.schema";
 
-export type EstadoPedido = "pendiente" | "enHorno" | "enCamino" | "entregado" | "cancelado";
+export type { EstadoPedido };
+export type PedidoDoc = PedidoRow & { id: string; createdAt?: unknown };
 
-export interface PedidoDoc {
-  id: string;
-  items: CartItem[];
-  subtotal?: number;
-  delivery?: number;
-  total: number;
-  cliente?: { nombre?: string; tel?: string; direccion?: string };
-  estado: EstadoPedido;
-  createdAt?: unknown;
+function toDoc(p: PedidoWithId): PedidoDoc {
+  return { ...p };
 }
 
-export async function crearPedido(items: CartItem[], total: number, cliente?: PedidoDoc["cliente"]) {
-  if (!items.length) throw new Error("El carrito está vacío");
-  return addDoc(collection(db, "pedidos"), {
-    items, total, cliente: cliente || null, estado: "pendiente" as EstadoPedido, createdAt: serverTimestamp(),
+export async function crearPedido(items: CartItem[], total: number, cliente?: PedidoRow["cliente"]) {
+  const data = parseOrThrow(pedidoSchema, { items, total, cliente });
+
+  // NOTA: esto corre en el navegador; es un soft-check disuasorio, NO una
+  // validación server-side. Un cliente manipulado puede enviar otro `total`.
+  // Mejora futura: Cloud Function que recalcule el total desde `platos`.
+  const subtotalCalc = data.items.reduce((a, i) => a + i.precio * i.cant, 0);
+  if (Math.abs(subtotalCalc - data.total) > 20 && data.total < subtotalCalc) {
+    throw new Error("Total no coincide con items (posible manipulación)");
+  }
+
+  return pedidosRepo.create({
+    items: data.items,
+    total: data.total,
+    cliente: data.cliente
+      ? {
+          nombre: data.cliente.nombre ?? "",
+          tel: data.cliente.tel ?? "",
+          direccion: data.cliente.direccion ?? "",
+        }
+      : null,
+    estado: "pendiente",
   });
 }
 
 export function subscribePedidos(cb: (data: PedidoDoc[]) => void) {
-  try {
-    return onSnapshot(query(collection(db, "pedidos"), orderBy("createdAt", "desc")), (snap) => {
-      cb(snap.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<PedidoDoc, "id">) })));
-    }, () => cb([]));
-  } catch { cb([]); return () => {}; }
+  return pedidosRepo.listen(
+    (rows) => cb(rows.map(toDoc)),
+    () => cb([])
+  );
 }
 
 export async function getPedidos(): Promise<PedidoDoc[]> {
-  const snap = await getDocs(query(collection(db, "pedidos"), orderBy("createdAt", "desc")));
-  return snap.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<PedidoDoc, "id">) }));
+  const rows = await pedidosRepo.list();
+  return rows.map(toDoc);
 }
 
 export async function updateEstadoPedido(id: string, estado: EstadoPedido) {
-  return updateDoc(doc(db, "pedidos", id), { estado });
+  return pedidosRepo.updateEstado(id, estado);
 }
-export async function deletePedido(id: string) { return deleteDoc(doc(db, "pedidos", id)); }
+
+export async function deletePedido(id: string) {
+  return pedidosRepo.remove(id);
+}

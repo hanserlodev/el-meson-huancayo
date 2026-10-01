@@ -1,57 +1,57 @@
-import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, query, updateDoc, where } from "firebase/firestore";
-import { db } from "@/lib/firebase/client";
+import { platosRepo } from "@/lib/repositories/platos.repo";
+import { uploadPlatoFoto } from "@/lib/repositories/storage.repo";
 import { PLATOS as PLATOS_LOCAL, type Plato } from "@/lib/data";
+import { parseOrThrow } from "@/lib/schemas/parse";
+import { platoCreateSchema, platoUpdateSchema } from "@/lib/schemas/plato.schema";
 
 // Fallback local (BaaS aún sin datos) -> si Firestore vacío, usa PLATOS_LOCAL
-// Cuando migres datos a Firestore colección "platos", este servicio ya funciona sin tocar UI
+const localFiltered = (cat?: string) =>
+  PLATOS_LOCAL.filter((p) => !cat || cat === "todos" || p.cat === cat);
+
 export async function getPlatos(): Promise<Plato[]> {
   try {
-    const snap = await getDocs(collection(db, "platos"));
-    if (snap.empty) return PLATOS_LOCAL;
-    return snap.docs.map((d) => d.data() as Plato);
+    const rows = await platosRepo.list();
+    return rows.length ? (rows as Plato[]) : PLATOS_LOCAL;
   } catch {
     return PLATOS_LOCAL;
   }
 }
 
 export function subscribePlatos(cb: (platos: Plato[]) => void, cat?: string) {
-  try {
-    const ref = collection(db, "platos");
-    const q = cat && cat !== "todos" ? query(ref, where("cat", "==", cat)) : query(ref);
-    return onSnapshot(
-      q,
-      (snap) => {
-        if (snap.empty) cb(PLATOS_LOCAL.filter((p) => !cat || cat === "todos" || p.cat === cat));
-        else cb(snap.docs.map((d) => d.data() as Plato));
-      },
-      () => cb(PLATOS_LOCAL.filter((p) => !cat || cat === "todos" || p.cat === cat))
-    );
-  } catch {
-    cb(PLATOS_LOCAL);
-    return () => {};
-  }
+  return platosRepo.listen(
+    (rows) => cb(rows.length ? (rows as Plato[]) : localFiltered(cat)),
+    cat,
+    () => cb(localFiltered(cat))
+  );
 }
 
 export async function createPlato(plato: Plato) {
-  return addDoc(collection(db, "platos"), { ...plato, createdAt: new Date().toISOString() });
+  const p = parseOrThrow(platoCreateSchema, plato);
+  return platosRepo.create({
+    id: p.id ?? `plato-${Date.now()}`,
+    nombre: p.nombre,
+    precio: p.precio,
+    cat: p.cat,
+    desc: p.desc,
+    img: p.img,
+    tag: p.tag,
+    rating: p.rating,
+    votos: p.votos,
+    activo: p.activo,
+  });
 }
 
 export async function updatePlato(id: string, data: Partial<Plato>) {
-  return updateDoc(doc(db, "platos", id), data as Record<string, unknown>);
+  const safe = parseOrThrow(platoUpdateSchema, data);
+  return platosRepo.update(id, safe);
 }
 
 export async function deletePlato(id: string) {
-  return deleteDoc(doc(db, "platos", id));
+  return platosRepo.remove(id);
 }
 
 export async function toggleActivoPlato(id: string, activo: boolean) {
-  return updateDoc(doc(db, "platos", id), { activo });
+  return platosRepo.toggleActivo(id, activo);
 }
 
-export async function uploadPlatoFoto(file: File, platoId: string) {
-  const { ref, uploadBytes, getDownloadURL } = await import("firebase/storage");
-  const { storage } = await import("@/lib/firebase/client");
-  const r = ref(storage, `platos/${platoId}/${file.name}`);
-  await uploadBytes(r, file);
-  return getDownloadURL(r);
-}
+export { uploadPlatoFoto };

@@ -3,19 +3,27 @@ import { getFirestore } from "firebase-admin/firestore";
 
 // Solo para Server Actions / Functions cuando se configuren credenciales
 // Requiere FIREBASE_ADMIN_* en .env
-const adminApp =
-  getApps().length === 0
-    ? initializeApp(
-        process.env.FIREBASE_ADMIN_PRIVATE_KEY
-          ? {
-              credential: cert({
-                projectId: process.env.FIREBASE_ADMIN_PROJECT_ID!,
-                clientEmail: process.env.FIREBASE_ADMIN_CLIENT_EMAIL!,
-                privateKey: process.env.FIREBASE_ADMIN_PRIVATE_KEY!.replace(/\\n/g, "\n"),
-              }),
-            }
-          : undefined
-      )
-    : getApps()[0];
+let adminApp;
+try {
+  adminApp =
+    getApps().length === 0
+      ? initializeApp(
+          process.env.FIREBASE_ADMIN_PRIVATE_KEY
+            ? {
+                credential: cert({
+                  projectId: process.env.FIREBASE_ADMIN_PROJECT_ID!,
+                  clientEmail: process.env.FIREBASE_ADMIN_CLIENT_EMAIL!,
+                  privateKey: process.env.FIREBASE_ADMIN_PRIVATE_KEY!.replace(/\\n/g, "\n"),
+                }),
+              }
+            : undefined
+        )
+      : getApps()[0];
+} catch (e) {
+  console.warn("[admin] Firebase Admin no inicializado (falta FIREBASE_ADMIN_*):", (e as Error).message);
+  adminApp = getApps()[0] ?? null;
+}
 
-export const adminDb = adminApp ? getFirestore(adminApp) : null;
+export const adminDb = (() => {
+  try { return adminApp ? getFirestore(adminApp) : null; } catch { return null; }
+})();

@@ -9,6 +9,17 @@ export interface CartItem {
   cant: number;
 }
 
+/** Datos del checkout (no viven en el carrito) para armar el mensaje de WhatsApp. */
+export interface WhatsAppCheckout {
+  subtotal: number;
+  deliveryFee: number;
+  total: number;
+  modo: "delivery" | "pickup";
+  cliente?: { nombre?: string; tel?: string; direccion?: string };
+  pago?: string;
+  notas?: string;
+}
+
 interface CartContextType {
   items: CartItem[];
   total: number;
@@ -18,8 +29,7 @@ interface CartContextType {
   cambiar: (pos: number, delta: number) => void;
   eliminar: (pos: number) => void;
   vaciar: () => void;
-  finalizar: () => void;
-  pedirPorWhatsApp: () => void;
+  pedirPorWhatsApp: (checkout?: WhatsAppCheckout) => void;
 }
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -37,45 +47,39 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   });
   const [toast, setToast] = useState<string | null>(null);
 
-  // sincroniza si otra pestaña/iframe modifica localStorage
+  // sincroniza si otra pestaña modifica localStorage
   useEffect(() => {
-    const sync = () => { try{ const raw=localStorage.getItem(KEY); if(raw) setItems(JSON.parse(raw)); }catch{} };
-    const onStorage = (e: StorageEvent) => { if (e.key === KEY && e.newValue) { try { setItems(JSON.parse(e.newValue)); } catch {} } };
-    const onMessage = (e: MessageEvent) => { if(e.data?.type==="cart:update") sync(); };
+    const sync = () => { try { const raw = localStorage.getItem(KEY); if (raw) setItems(JSON.parse(raw) as CartItem[]); } catch {} };
+    const onStorage = (e: StorageEvent) => { if (e.key === KEY && e.newValue) { try { setItems(JSON.parse(e.newValue) as CartItem[]); } catch {} } };
     const onFocus = () => sync();
     window.addEventListener("storage", onStorage);
-    window.addEventListener("message", onMessage);
     window.addEventListener("focus", onFocus);
-    const id = setInterval(sync, 1000);
-    return () => { window.removeEventListener("storage", onStorage); window.removeEventListener("message", onMessage); window.removeEventListener("focus", onFocus); clearInterval(id); };
+    return () => { window.removeEventListener("storage", onStorage); window.removeEventListener("focus", onFocus); };
   }, []);
 
   const persist = useCallback((next: CartItem[]) => {
     setItems(next);
-    localStorage.setItem(KEY, JSON.stringify(next));
+    try { localStorage.setItem(KEY, JSON.stringify(next)); } catch (e) { console.error("[cart] persist quota", e); }
   }, []);
 
-  const soles = (n: number) => n.toFixed(2);
+  const soles = (n: number) => Number.isFinite(n) ? n.toFixed(2) : "0.00";
   const total = items.reduce((a, i) => a + i.precio * i.cant, 0);
   const unidades = items.reduce((a, i) => a + i.cant, 0);
 
   const showToast = (msg: string) => {
     setToast(msg);
     setTimeout(() => setToast(null), 2200);
-    // compat con window.Toast legacy si existe
-    if (typeof window !== "undefined" && (window as unknown as { Toast?: (m: string) => void }).Toast) {
-      (window as unknown as { Toast: (m: string) => void }).Toast(msg);
-    }
   };
 
   const agregar = (nombre: string, precio: number) => {
     const p = Number(precio);
+    if (!nombre.trim() || !Number.isFinite(p) || p <= 0) { showToast("Precio inválido"); return; }
     const idx = items.findIndex((i) => i.nombre === nombre);
     let next: CartItem[];
     if (idx >= 0) {
       next = items.map((it, i) => (i === idx ? { ...it, cant: it.cant + 1 } : it));
     } else {
-      next = [...items, { nombre, precio: p, cant: 1 }];
+      next = [...items, { nombre: nombre.trim().slice(0,120), precio: p, cant: 1 }];
     }
     persist(next);
     showToast(`${nombre} agregado al carrito`);
@@ -83,9 +87,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const cambiar = (pos: number, delta: number) => {
     if (!items[pos]) return;
-    const next = [...items];
-    next[pos].cant += delta;
-    if (next[pos].cant <= 0) next.splice(pos, 1);
+    const next = items.map((it, i) => i === pos ? { ...it, cant: it.cant + delta } : it).filter(it => it.cant > 0);
     persist(next);
   };
 
@@ -103,24 +105,35 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     showToast("Carrito vaciado");
   };
 
-  const finalizar = () => {
-    if (!items.length) return showToast("El carrito está vacío");
-    const t = soles(total);
-    showToast(`Pedido registrado: ${unidades} plato(s) por S/ ${t}`);
-    // se deja alert como legacy para compatibilidad UX anterior
-    alert(`¡Pedido realizado en Pollos y Parrillas El Mesón!\n${unidades} plato(s) · Total: S/ ${t}`);
-    persist([]);
-  };
-
-  const pedirPorWhatsApp = () => {
+  const pedirPorWhatsApp = (checkout?: WhatsAppCheckout) => {
     if (!items.length) return showToast("El carrito está vacío");
     const lineas = items.map((i) => `• ${i.cant}x ${i.nombre} — S/ ${soles(i.precio * i.cant)}`);
-    const msg = `Hola El Mesón, quiero pedir:\n${lineas.join("\n")}\nTotal: S/ ${soles(total)}`;
-    window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
+    let msg: string;
+    if (checkout) {
+      const { subtotal, deliveryFee, total: totalPagar, modo, cliente, pago, notas } = checkout;
+      const entrega = modo === "delivery"
+        ? `Dirección: ${cliente?.direccion || "—"}`
+        : "Modalidad: Recojo en Av. Giráldez 157";
+      msg = [
+        "🍗 *PEDIDO EL MESÓN*",
+        ...lineas,
+        `Subtotal: S/ ${soles(subtotal)}`,
+        `Delivery: ${deliveryFee === 0 ? "GRATIS" : `S/ ${soles(deliveryFee)}`}`,
+        `TOTAL: S/ ${soles(totalPagar)}`,
+        `Cliente: ${cliente?.nombre || "—"}`,
+        `Tel: ${cliente?.tel || "—"}`,
+        entrega,
+        `Pago: ${pago || "—"}`,
+        ...(notas ? [`Notas: ${notas}`] : []),
+      ].join("\n");
+    } else {
+      msg = `Hola El Mesón, quiero pedir:\n${lineas.join("\n")}\nTotal: S/ ${soles(total)}`;
+    }
+    window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
   };
 
   return (
-    <CartContext.Provider value={{ items, total, unidades, soles, agregar, cambiar, eliminar, vaciar, finalizar, pedirPorWhatsApp }}>
+    <CartContext.Provider value={{ items, total, unidades, soles, agregar, cambiar, eliminar, vaciar, pedirPorWhatsApp }}>
       {children}
       {/* Toast global */}
       <div

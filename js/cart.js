@@ -4,8 +4,9 @@ window.Cart = (function () {
   let items = [];
   try { items = JSON.parse(localStorage.getItem(KEY)) || []; } catch { items = []; }
 
-  const soles = (n) => n.toFixed(2);
-  const guardar = () => localStorage.setItem(KEY, JSON.stringify(items));
+  const escapeHTML = (s) => String(s).replace(/[&<>"']/g, m=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[m]));
+  const soles = (n) => Number.isFinite(n) ? n.toFixed(2) : "0.00";
+  const guardar = () => { try{ localStorage.setItem(KEY, JSON.stringify(items)); }catch(e){ console.error("[cart] quota",e);} };
   const total = () => items.reduce((a, i) => a + i.precio * i.cant, 0);
   const unidades = () => items.reduce((a, i) => a + i.cant, 0);
 
@@ -15,11 +16,14 @@ window.Cart = (function () {
   }
 
   function agregar(nombre, precio) {
-    const it = items.find(i => i.nombre === nombre);
+    const p = Number(precio);
+    if (!nombre?.trim() || !Number.isFinite(p) || p<=0) return window.Toast?.("Precio inválido");
+    const safeNombre = String(nombre).trim().slice(0,120);
+    const it = items.find(i => i.nombre === safeNombre);
     if (it) it.cant++;
-    else items.push({ nombre, precio: Number(precio), cant: 1 });
+    else items.push({ nombre: safeNombre, precio: p, cant: 1 });
     guardar(); refreshBadges(); renderActual();
-    window.Toast?.(`${nombre} agregado al carrito`);
+    window.Toast?.(`${safeNombre} agregado al carrito`);
   }
   function cambiar(pos, n) {
     if (!items[pos]) return;
@@ -37,27 +41,19 @@ window.Cart = (function () {
     items = []; guardar(); refreshBadges(); renderActual();
     window.Toast?.("Carrito vaciado");
   }
-  function finalizar() {
-    if (!items.length) return window.Toast?.("El carrito está vacío");
-    const t = soles(total()), n = unidades();
-    window.Toast?.(`Pedido registrado: ${n} plato(s) por S/ ${t}`);
-    alert(`¡Pedido realizado en Pollos y Parrillas El Mesón!\n${n} plato(s) · Total: S/ ${t}`);
-    items = []; guardar(); refreshBadges(); renderActual();
-  }
-
   // Arma el mensaje para pedir por el WhatsApp real del local.
   function pedirPorWhatsApp() {
     if (!items.length) return window.Toast?.("El carrito está vacío");
     const lineas = items.map(i => `• ${i.cant}x ${i.nombre} — S/ ${soles(i.precio * i.cant)}`);
     const msg = `Hola El Mesón, quiero pedir:\n${lineas.join("\n")}\nTotal: S/ ${soles(total())}`;
-    window.open(`https://wa.me/${window.Meson.WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
+    window.open(`https://wa.me/${window.Meson.WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
   }
 
   function fila(item, i) {
     const sub = item.precio * item.cant;
     return `
       <div class="flex flex-wrap justify-between items-center gap-2 bg-white p-3 rounded-xl ring-1 ring-slate-900/5 shadow-sm">
-        <span class="font-medium text-sm md:text-[15px]"><b>${item.nombre}</b> <span class="text-slate-400">· S/ ${soles(item.precio)}</span></span>
+        <span class="font-medium text-sm md:text-[15px]"><b>${escapeHTML(item.nombre)}</b> <span class="text-slate-400">· S/ ${soles(item.precio)}</span></span>
         <div class="flex items-center gap-2">
           <button data-action="dec" data-pos="${i}" aria-label="Quitar uno" class="w-8 h-8 grid place-items-center bg-slate-100 rounded-lg font-bold hover:bg-ink hover:text-white active:scale-95 transition">−</button>
           <b class="w-6 text-center">${item.cant}</b>
@@ -101,10 +97,9 @@ window.Cart = (function () {
 
   document.addEventListener("DOMContentLoaded", () => {
     renderActual(); refreshBadges();
-    document.getElementById("btn-pagar")?.addEventListener("click", finalizar);
     document.getElementById("btn-whatsapp")?.addEventListener("click", pedirPorWhatsApp);
     document.getElementById("btn-vaciar")?.addEventListener("click", vaciar);
   });
 
-  return { agregar, cambiar, eliminar, vaciar, finalizar, pedirPorWhatsApp, renderActual, refreshBadges, total, unidades, soles, get: () => items };
+  return { agregar, cambiar, eliminar, vaciar, pedirPorWhatsApp, renderActual, refreshBadges, total, unidades, soles, get: () => items };
 })();

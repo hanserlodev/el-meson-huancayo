@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { subscribeResenas, crearResena, type ResenaDoc } from "@/lib/services/resenas.service";
 import { PLATOS } from "@/lib/data";
 
@@ -14,7 +15,7 @@ export default function ResenasPage() {
   };
   return (
     <div className="min-h-screen bg-bg-canvas">
-      <header className="h-16 bg-white border-b flex items-center justify-between px-6"><a href="/" className="font-bold text-ink">← El Mesón</a><a href="/admin" className="text-sm text-slate-500">Admin</a></header>
+      <header className="h-16 bg-white border-b flex items-center justify-between px-6"><Link href="/" className="font-bold text-ink">← El Mesón</Link><Link href="/admin" className="text-sm text-slate-500">Admin</Link></header>
       <main className="max-w-5xl mx-auto px-6 py-8 grid lg:grid-cols-2 gap-8">
         <div className="bg-white rounded-xl p-6 shadow-sm">
           <h1 className="text-xl font-bold text-ink">Deja tu reseña ★★★★★</h1><p className="text-sm text-slate-500 mb-4">Cliente C/R — después de pedir, califica tu plato (pendiente → aprobada por admin)</p>

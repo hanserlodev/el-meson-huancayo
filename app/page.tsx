@@ -3,21 +3,20 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Image from "next/image";
+import AddToCartButton from "@/components/AddToCartButton";
 import { subscribePlatos } from "@/lib/services/platos.service";
-import { useCart } from "@/lib/stores/cart";
 import type { Plato } from "@/lib/data";
 
 export default function InicioPage() {
   const [favoritos, setFavoritos] = useState<Plato[]>([]);
-  const { agregar } = useCart();
   useEffect(() => {
-    const u = subscribePlatos((platos) => {
-      // top 3: primero por votos/tag, filtrando activos
-      const activos = platos.filter(p=>p.activo!==false);
-      const top = [...activos].sort((a,b)=> (b.votos||0)-(a.votos||0)).slice(0,3);
-      setFavoritos(top.length? top: activos.slice(0,3));
+    const unsubscribe = subscribePlatos((platos) => {
+      const activos = platos.filter((plato) => plato.activo !== false);
+      const top = [...activos].sort((a, b) => (b.votos || 0) - (a.votos || 0)).slice(0, 3);
+      setFavoritos(top.length ? top : activos.slice(0, 3));
     });
-    return ()=>u();
+    return () => unsubscribe();
   }, []);
 
   return (
@@ -44,7 +43,7 @@ export default function InicioPage() {
           </div>
           <div className="lg:col-span-6 relative">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-slate-200">
-              <img src="/imagenes/cuarto-brasa.png" alt="Pollo a la brasa El Mesón" className="w-full h-[480px] object-cover"/>
+              <Image src="/imagenes/cuarto-brasa.png" alt="Pollo a la brasa El Mesón" width={640} height={480} className="w-full h-[480px] object-cover" priority />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10"></div>
               <div className="absolute top-4 left-4 px-4 py-2 rounded-full bg-white/95 text-ink text-sm font-bold shadow flex items-center gap-2"><span className="w-2.5 h-2.5 rounded-full bg-brand-600 animate-ping"></span>Más pedido · 1/4 a S/ 10.90</div>
               <div className="absolute bottom-4 right-4 px-4 py-2 rounded-full bg-ink/90 text-white text-sm flex items-center gap-2"><span className="material-symbols-outlined text-amber-400 text-[18px]">local_shipping</span>Delivery gratis desde S/ 35</div>
@@ -60,14 +59,14 @@ export default function InicioPage() {
               <Link href="/carta" className="inline-flex items-center gap-1 text-brand-600 font-bold hover:gap-2 transition-all">Ver carta completa <span className="material-symbols-outlined text-[18px]">arrow_forward</span></Link>
             </div>
             <div className="grid md:grid-cols-3 gap-6">
-              {favoritos.map(p=>(
-                <div key={p.id} className="bg-bg-canvas rounded-3xl overflow-hidden ring-1 ring-slate-900/5 shadow-sm hover:shadow-md transition flex flex-col">
-                  <div className="h-56 bg-slate-100 relative"><img src={p.img} alt={p.nombre} className="w-full h-full object-cover"/>{p.tag && <span className="absolute top-3 right-3 px-3 py-1 rounded-full bg-amber-400 text-ink text-xs font-bold">{p.tag||"Top"}</span>}</div>
+              {favoritos.map((plato) => (
+                <div key={plato.id} className="bg-bg-canvas rounded-3xl overflow-hidden ring-1 ring-slate-900/5 shadow-sm hover:shadow-md transition flex flex-col">
+                  <div className="h-56 bg-slate-100 relative overflow-hidden">{plato.img && <Image src={plato.img} alt={plato.nombre} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />}{plato.tag && <span className="absolute top-3 right-3 px-3 py-1 rounded-full bg-amber-400 text-ink text-xs font-bold">{plato.tag || "Top"}</span>}</div>
                   <div className="p-6 flex flex-col flex-1">
-                    <h3 className="font-bold text-ink">{p.nombre}</h3>
-                    <p className="text-sm text-slate-500 line-clamp-2">{p.desc}</p>
-                    <div className="text-xs text-slate-400 mt-1">{p.rating} · {p.votos} votos</div>
-                    <div className="mt-4 flex items-center justify-between"><span className="font-bold text-lg text-ink">S/ {p.precio.toFixed(2)}</span><button onClick={()=>agregar(p.nombre, p.precio)} className="h-10 px-5 rounded-xl bg-brand-600 text-white text-sm font-semibold flex items-center gap-1.5 hover:bg-brand-700"><span>Agregar</span><span className="material-symbols-outlined text-[18px]">add</span></button></div>
+                    <h3 className="font-bold text-ink">{plato.nombre}</h3>
+                    <p className="text-sm text-slate-500 line-clamp-2">{plato.desc}</p>
+                    <div className="text-xs text-slate-400 mt-1">{plato.rating} · {plato.votos} votos</div>
+                    <div className="mt-4 flex items-center justify-between"><span className="font-bold text-lg text-ink">S/ {plato.precio.toFixed(2)}</span><AddToCartButton nombre={plato.nombre} precio={plato.precio} compact className="h-10 px-5 flex items-center gap-1.5 rounded-xl"><span>Agregar</span><span className="material-symbols-outlined text-[18px]">add</span></AddToCartButton></div>
                   </div>
                 </div>
               ))}

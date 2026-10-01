@@ -5,7 +5,9 @@
   if (!form) return;
   const msg = document.getElementById("mensaje-reserva");
   const fecha = document.getElementById("fecha");
-  fecha?.setAttribute("min", new Date().toISOString().split("T")[0]);
+  // FIX timezone: usa fecha local no UTC
+  const todayLocal = (()=>{ const d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().split("T")[0]; })();
+  fecha?.setAttribute("min", todayLocal);
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -15,10 +17,12 @@
     const hor = document.getElementById("hora").value;
 
     if (nom.length < 2) return window.Toast?.("Ingresa tu nombre");
-    if (!fec) return window.Toast?.("Elige la fecha");
-    if (!hor) return window.Toast?.("Elige la hora");
+    if (!fec || !/^\d{4}-\d{2}-\d{2}$/.test(fec)) return window.Toast?.("Fecha inválida");
+    if (!hor || !/^\d{2}:\d{2}$/.test(hor)) return window.Toast?.("Hora inválida");
+    const parts = fec.split("-").map(Number);
+    const fecLocal = new Date(parts[0], parts[1]-1, parts[2]);
     const hoy = new Date(); hoy.setHours(0, 0, 0, 0);
-    if (new Date(fec + "T00:00:00") < hoy) return window.Toast?.("La fecha no puede ser pasada");
+    if (fecLocal < hoy) return window.Toast?.("La fecha no puede ser pasada");
     if (hor < "11:00" || hor > "23:00") return window.Toast?.("Atendemos de 11:00 a 23:00");
 
     msg.textContent = `Reserva confirmada para ${nom}: ${per} persona(s) · ${fec} · ${hor} en El Mesón (Giráldez 157). ¡Te esperamos!`;

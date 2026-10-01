@@ -1,34 +1,57 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    function isAdmin() { return request.auth != null && request.auth.token.admin == true; }
+    function isSignedIn() { return request.auth != null; }
+
+    // Platos, categorias, ofertas: lectura publica, escritura solo admin
     match /platos/{id} {
       allow read: if true;
-      allow write: if true; // demo sin auth; en prod: request.auth.token.admin==true
+      allow write: if isAdmin();
     }
     match /categorias/{id} {
       allow read: if true;
-      allow write: if true;
+      allow write: if isAdmin();
     }
     match /ofertas/{id} {
       allow read: if true;
-      allow write: if true;
+      allow write: if isAdmin();
     }
+    // Resenas: lectura publica (aprobadas filtradas en cliente), create validado, update/delete solo admin
     match /resenas/{id} {
       allow read: if true;
-      allow create: if request.resource.data.nombre is string && request.resource.data.rating is int;
-      allow update, delete: if true;
+      allow create: if request.resource.data.nombre is string && request.resource.data.nombre.size() >= 2
+        && request.resource.data.rating is int && request.resource.data.rating >= 1 && request.resource.data.rating <= 5
+        && request.resource.data.comentario is string && request.resource.data.comentario.size() >= 5
+        && request.resource.data.platoId is string;
+      allow update, delete: if isAdmin();
     }
+    // Reservas: create validado estricto, read/update/delete solo admin
     match /reservas/{id} {
       allow create: if request.resource.data.nombre is string && request.resource.data.nombre.size() >= 2
         && request.resource.data.personas is int && request.resource.data.personas >= 1 && request.resource.data.personas <= 20
         && request.resource.data.hora is string && request.resource.data.hora >= "11:00" && request.resource.data.hora <= "23:00"
-        && request.resource.data.fecha is string;
-      allow read, update, delete: if true;
+        && request.resource.data.fecha is string && request.resource.data.fecha.size() == 10
+        && request.resource.data.estado == "confirmada";
+      allow read, update, delete: if isAdmin();
     }
+    // Espejo de reservas SIN datos personales: lectura publica para calcular aforo
+    // (soft-check best-effort en cliente), escritura validada al crear reserva.
+    match /reservas_aforo/{id} {
+      allow read: if true;
+      allow create: if request.resource.data.fecha is string && request.resource.data.fecha.size() == 10
+        && request.resource.data.sede is string
+        && request.resource.data.personas is int && request.resource.data.personas >= 1 && request.resource.data.personas <= 20
+        && request.resource.data.estado == "confirmada";
+      allow update, delete: if isAdmin();
+    }
+    // Pedidos: create validado (items list + total number), resto solo admin
     match /pedidos/{id} {
-      allow create: if request.resource.data.items is list;
-      allow read, update, delete: if true;
+      allow create: if request.resource.data.items is list && request.resource.data.items.size() >= 1
+        && request.resource.data.total is number && request.resource.data.total > 0
+        && request.resource.data.estado == "pendiente";
+      allow read, update, delete: if isAdmin();
     }
-    match /users/{uid} { allow read, write: if true; }
+    match /users/{uid} { allow read, write: if isAdmin() || (isSignedIn() && request.auth.uid == uid); }
   }
 }

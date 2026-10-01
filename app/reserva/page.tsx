@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { crearReserva, type Sede } from "@/lib/services/reservas.service";
@@ -16,21 +17,24 @@ export default function ReservaPage() {
   const [nota, setNota] = useState("");
   const [msg, setMsg] = useState<string|null>(null);
   const [ok, setOk] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const horasAlmuerzo = ["12:30","13:00","13:30","14:15","15:00"];
   const horasCena = ["19:00","19:30","20:15","21:00","21:45"];
   const horas = sede==="Giráldez" ? [...horasAlmuerzo, ...horasCena] : horasAlmuerzo;
 
   const submit = async (e: React.FormEvent) => {
-    e.preventDefault(); setMsg(null); setOk(false);
+    e.preventDefault(); if(submitting) return; setMsg(null); setOk(false); setSubmitting(true);
     try{
       await crearReserva({ nombre, tel, personas, fecha, hora, sede, zona });
       setOk(true); setMsg("¡Reserva confirmada! Te llamamos para validar.");
       setNombre(""); setTel(""); setNota("");
-    }catch(err){ setMsg(err instanceof Error? err.message:"Error"); }
+    }catch(err){ setOk(false); setMsg(err instanceof Error? err.message:"Error"); }
+    finally{ setSubmitting(false); }
   };
 
-  const today = new Date().toISOString().slice(0,10);
+  // FIX timezone: usa fecha local YYYY-MM-DD no UTC
+  const today = (()=>{ const d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,10); })();
 
   return (
     <div className="min-h-screen bg-bg-canvas">
@@ -91,14 +95,14 @@ export default function ReservaPage() {
             </div>
           </div>
 
-          <button type="submit" className="w-full h-12 bg-brand-600 hover:bg-brand-700 text-white rounded-xl font-bold flex items-center justify-center gap-2">Confirmar Reserva <span className="material-symbols-outlined">check</span></button>
+          <button type="submit" disabled={submitting} className="w-full h-12 bg-brand-600 hover:bg-brand-700 disabled:opacity-60 disabled:cursor-not-allowed text-white rounded-xl font-bold flex items-center justify-center gap-2">{submitting ? "Enviando..." : "Confirmar Reserva"} <span className="material-symbols-outlined">check</span></button>
           {msg && <div className={`p-3 rounded-lg text-sm ${ok?"bg-emerald-50 text-emerald-700":"bg-red-50 text-red-700"}`}>{msg}</div>}
           <p className="text-xs text-center text-slate-500">Te llega confirmación por WhatsApp · Tolerancia 15 min · <Link href="/carta" className="text-brand-600 font-semibold">Ver carta</Link></p>
         </form>
 
         <div className="lg:col-span-5 flex flex-col gap-6">
           <div className="bg-white rounded-xl shadow-md ring-1 ring-slate-900/5 overflow-hidden">
-            <div className="h-48 relative"><img src="/imagenes/cuarto-brasa.png" alt="Sede Giráldez" className="w-full h-full object-cover"/><div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div><div className="absolute bottom-4 left-4 text-white"><h3 className="font-bold text-lg">Sede {sede}</h3><p className="text-sm flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">location_on</span>{sede==="Giráldez"?"Av. Giráldez 157":"Calle Real 919"}</p></div></div>
+            <div className="h-48 relative"><Image src="/imagenes/cuarto-brasa.png" alt="Sede Giráldez" fill className="object-cover" sizes="40vw" /><div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div><div className="absolute bottom-4 left-4 text-white"><h3 className="font-bold text-lg">Sede {sede}</h3><p className="text-sm flex items-center gap-1"><span className="material-symbols-outlined text-[16px]">location_on</span>{sede==="Giráldez"?"Av. Giráldez 157":"Calle Real 919"}</p></div></div>
             <div className="p-6 flex flex-col gap-3 text-sm">
               <div className="flex gap-3 p-3 bg-slate-50 rounded-lg"><span className="material-symbols-outlined text-brand-600">schedule</span><div><b>Horarios Salón</b><div className="text-slate-600">Lun-Dom 11:00-23:00 · Feriados continuo</div></div></div>
               <div className="flex gap-3 p-3 bg-slate-50 rounded-lg"><span className="material-symbols-outlined text-brand-600">headset_mic</span><div><b>Teléfonos</b><div className="text-slate-600">939 399 946 · 932 619 097</div></div></div>

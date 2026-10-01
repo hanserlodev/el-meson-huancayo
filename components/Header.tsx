@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useCart } from "@/lib/stores/cart";
@@ -31,9 +32,11 @@ export default function Header() {
       <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
           <Link href="/" className="flex items-center gap-2.5">
-            <img
+            <Image
               src="/imagenes/logo.jpg"
               alt="Logo Pollos y Parrillas El Mesón"
+              width={36}
+              height={36}
               className="w-9 h-9 rounded-xl object-cover ring-1 ring-slate-900/10 shadow-card"
             />
             <span className="leading-tight">

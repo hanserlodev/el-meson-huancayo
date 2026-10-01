@@ -1,13 +1,8 @@
-import { addDoc, collection, deleteDoc, doc, getDocs, onSnapshot, orderBy, query, updateDoc } from "firebase/firestore";
-import { db } from "@/lib/firebase/client";
+import { categoriasRepo, type CategoriaRow } from "@/lib/repositories/categorias.repo";
+import { parseOrThrow } from "@/lib/schemas/parse";
+import { categoriaSchema, categoriaUpdateSchema } from "@/lib/schemas/categoria.schema";
 
-export interface CategoriaDoc {
-  id: string;
-  nombre: string;
-  slug: string;
-  orden: number;
-  activo: boolean;
-}
+export type CategoriaDoc = CategoriaRow & { id: string };
 
 export const CATEGORIAS_LOCAL: CategoriaDoc[] = [
   { id: "cat-1", nombre: "Brasas", slug: "brasa", orden: 1, activo: true },
@@ -18,26 +13,34 @@ export const CATEGORIAS_LOCAL: CategoriaDoc[] = [
 
 export async function getCategorias(): Promise<CategoriaDoc[]> {
   try {
-    const snap = await getDocs(query(collection(db, "categorias"), orderBy("orden")));
-    if (snap.empty) return CATEGORIAS_LOCAL;
-    return snap.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<CategoriaDoc, "id">) }));
-  } catch { return CATEGORIAS_LOCAL; }
+    const rows = await categoriasRepo.list();
+    return rows.length ? rows : CATEGORIAS_LOCAL;
+  } catch {
+    return CATEGORIAS_LOCAL;
+  }
 }
 
 export function subscribeCategorias(cb: (data: CategoriaDoc[]) => void) {
-  try {
-    return onSnapshot(query(collection(db, "categorias"), orderBy("orden")), (snap) => {
-      if (snap.empty) cb(CATEGORIAS_LOCAL);
-      else cb(snap.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<CategoriaDoc, "id">) })));
-    }, () => cb(CATEGORIAS_LOCAL));
-  } catch { cb(CATEGORIAS_LOCAL); return () => {}; }
+  return categoriasRepo.listen(
+    (rows) => cb(rows.length ? rows : CATEGORIAS_LOCAL),
+    () => cb(CATEGORIAS_LOCAL)
+  );
 }
 
 export async function createCategoria(data: Omit<CategoriaDoc, "id">) {
-  return addDoc(collection(db, "categorias"), { ...data, createdAt: new Date().toISOString() });
+  const safe = parseOrThrow(categoriaSchema, data);
+  return categoriasRepo.create(safe);
 }
+
 export async function updateCategoria(id: string, data: Partial<CategoriaDoc>) {
-  return updateDoc(doc(db, "categorias", id), data as Record<string, unknown>);
+  const safe = parseOrThrow(categoriaUpdateSchema, data);
+  return categoriasRepo.update(id, safe);
 }
-export async function deleteCategoria(id: string) { return deleteDoc(doc(db, "categorias", id)); }
-export async function toggleActivoCategoria(id: string, activo: boolean) { return updateDoc(doc(db, "categorias", id), { activo }); }
+
+export async function deleteCategoria(id: string) {
+  return categoriasRepo.remove(id);
+}
+
+export async function toggleActivoCategoria(id: string, activo: boolean) {
+  return categoriasRepo.toggleActivo(id, activo);
+}

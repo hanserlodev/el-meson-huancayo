@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { MAPS_URL } from "@/lib/data";
 
 export default function Footer() {
@@ -7,9 +8,11 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-4 py-10 grid gap-8 sm:grid-cols-2 md:grid-cols-4 text-sm">
         <div>
           <p className="flex items-center gap-2.5">
-            <img
+            <Image
               src="/imagenes/logo.jpg"
               alt="Logo Pollos y Parrillas El Mesón"
+              width={40}
+              height={40}
               className="w-10 h-10 rounded-lg object-cover ring-1 ring-white/15"
             />
             <span className="font-display text-lg font-bold text-white">El Mesón</span>

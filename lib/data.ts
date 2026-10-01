@@ -117,6 +117,15 @@ export const PLATOS: Plato[] = [
 
 export const DELIVERY = 5;
 export const ENVIO_GRATIS_DESDE = 35;
+
+/**
+ * Capacidad de comensales por sede para el chequeo de aforo al reservar.
+ * Ajustable. El chequeo es best-effort en cliente (ver reservas.service.ts).
+ */
+export const AFORO_POR_SEDE: Record<"Giráldez" | "Real", number> = {
+  "Giráldez": 60,
+  "Real": 40,
+};
 export const WHATSAPP = "51939399946";
 export const DIRECCION = "Av. Giráldez 157, Huancayo";
 export const MAPS_URL =
