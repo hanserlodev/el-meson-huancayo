@@ -10,6 +10,8 @@ import { MAPS_URL } from "@/lib/data";
 const links = [
   { href: "/", label: "Inicio", id: "inicio" },
   { href: "/carta", label: "Carta", id: "carta" },
+  { href: "/ofertas", label: "Ofertas", id: "ofertas" },
+  { href: "/resenas", label: "Reseñas", id: "resenas" },
   { href: "/carrito", label: "Carrito", id: "carrito" },
   { href: "/reserva", label: "Reserva", id: "reserva" },
 ];

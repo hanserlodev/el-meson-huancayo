@@ -35,6 +35,16 @@ export default function Footer() {
               </Link>
             </li>
             <li>
+              <Link className="footer-link" href="/ofertas">
+                Ofertas
+              </Link>
+            </li>
+            <li>
+              <Link className="footer-link" href="/resenas">
+                Reseñas
+              </Link>
+            </li>
+            <li>
               <Link className="footer-link" href="/carrito">
                 Carrito
               </Link>
