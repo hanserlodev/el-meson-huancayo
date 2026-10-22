@@ -44,7 +44,7 @@ export default function Header() {
             />
             <span className="leading-tight">
               <span className="block font-display font-bold text-ink">El Mesón</span>
-              <span className="block text-[11px] text-slate-500 tracking-wide">POLLOS Y PARRILLAS · DESDE 1985</span>
+              <span className="hidden sm:block text-[11px] text-slate-500 tracking-wide">POLLOS Y PARRILLAS · DESDE 1985</span>
             </span>
           </Link>
 
@@ -62,6 +62,19 @@ export default function Header() {
           </div>
 
           <div className="flex items-center gap-2">
+            <Link
+              href="/pedidos"
+              aria-label="Mis pedidos"
+              title="Mis pedidos"
+              aria-current={isActive("/pedidos") ? "page" : undefined}
+              className={`w-10 h-10 grid place-items-center rounded-full ring-1 transition-colors ${
+                isActive("/pedidos")
+                  ? "bg-brand-50 ring-brand-200 text-brand-700"
+                  : "ring-slate-200 text-slate-700 hover:bg-slate-50"
+              }`}
+            >
+              <span className="material-symbols-outlined text-[20px]">receipt_long</span>
+            </Link>
             <Link
               href="/carrito"
               className="inline-flex items-center gap-2 bg-ink text-white pl-4 pr-3 py-2 rounded-full text-sm font-semibold hover:bg-brand-700 transition-colors"

@@ -263,25 +263,39 @@ export default function MisPedidosPage() {
                             <div className="grid grid-cols-4 gap-1">
                               {PASOS.map((paso, i) => {
                                 const hecho = i <= idx;
+                                const entregadoPaso =
+                                  pedido.estado === "entregado" && i === PASOS.length - 1;
                                 return (
                                   <div
                                     key={paso.id}
                                     className="flex flex-col items-center gap-1 text-center"
                                   >
-                                    <div
-                                      className={`w-9 h-9 rounded-full grid place-items-center transition-colors ${
-                                        hecho
-                                          ? "bg-brand-600 text-white"
-                                          : "bg-slate-100 text-slate-400"
-                                      }`}
-                                    >
-                                      <span className="material-symbols-outlined text-[18px]">
-                                        {paso.icon}
-                                      </span>
+                                    <div className="relative">
+                                      {entregadoPaso && (
+                                        <span
+                                          className="absolute inset-0 rounded-full bg-emerald-400/50 animate-ping"
+                                          aria-hidden="true"
+                                        />
+                                      )}
+                                      <div
+                                        className={`relative w-9 h-9 rounded-full grid place-items-center transition-colors ${
+                                          hecho
+                                            ? "bg-brand-600 text-white"
+                                            : "bg-slate-100 text-slate-400"
+                                        } ${entregadoPaso ? "animate-entrega" : ""}`}
+                                      >
+                                        <span className="material-symbols-outlined text-[18px]">
+                                          {paso.icon}
+                                        </span>
+                                      </div>
                                     </div>
                                     <span
                                       className={`text-[10px] sm:text-xs font-semibold leading-tight ${
-                                        hecho ? "text-ink" : "text-slate-400"
+                                        entregadoPaso
+                                          ? "text-brand-700"
+                                          : hecho
+                                            ? "text-ink"
+                                            : "text-slate-400"
                                       }`}
                                     >
                                       {paso.label}
@@ -289,6 +303,15 @@ export default function MisPedidosPage() {
                                   </div>
                                 );
                               })}
+                            </div>
+                          )}
+
+                          {pedido.estado === "entregado" && (
+                            <div className="flex items-center gap-2 p-3 rounded-xl bg-emerald-50 text-emerald-700 text-sm font-semibold ring-1 ring-emerald-200 animate-[aparecer_0.4s_ease_both]">
+                              <span className="material-symbols-outlined text-[20px] animate-check-pop">
+                                check_circle
+                              </span>
+                              ¡Entregado! Buen provecho.
                             </div>
                           )}
 
