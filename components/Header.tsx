@@ -13,6 +13,7 @@ const links = [
   { href: "/ofertas", label: "Ofertas", id: "ofertas" },
   { href: "/resenas", label: "Reseñas", id: "resenas" },
   { href: "/carrito", label: "Carrito", id: "carrito" },
+  { href: "/pedidos", label: "Mis pedidos", id: "pedidos" },
   { href: "/reserva", label: "Reserva", id: "reserva" },
 ];
 
@@ -47,7 +48,7 @@ export default function Header() {
             </span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-7">
+          <div className="hidden lg:flex items-center gap-5 xl:gap-7">
             {links.map((l) => (
               <Link
                 key={l.href}
@@ -85,7 +86,7 @@ export default function Header() {
             <button
               id="menu-btn"
               onClick={() => setOpen(!open)}
-              className="md:hidden w-10 h-10 grid place-items-center rounded-lg ring-1 ring-slate-200 text-xl"
+              className="lg:hidden w-10 h-10 grid place-items-center rounded-lg ring-1 ring-slate-200 text-xl"
               aria-label="Abrir menú"
               aria-expanded={open}
             >
@@ -96,7 +97,7 @@ export default function Header() {
 
         <div
           id="menu-movil"
-          className={`${open ? "flex" : "hidden"} md:hidden border-t border-slate-100 px-4 py-3 gap-5 bg-white`}
+          className={`${open ? "flex" : "hidden"} lg:hidden border-t border-slate-100 px-4 py-3 flex-wrap items-center gap-x-5 gap-y-2 bg-white`}
         >
           {links.map((l) => (
             <Link

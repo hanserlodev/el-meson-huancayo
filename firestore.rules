@@ -49,8 +49,22 @@ service cloud.firestore {
     match /pedidos/{id} {
       allow create: if request.resource.data.items is list && request.resource.data.items.size() >= 1
         && request.resource.data.total is number && request.resource.data.total > 0
+        && request.resource.data.codigo is string && request.resource.data.codigo.size() >= 8
         && request.resource.data.estado == "pendiente";
       allow read, update, delete: if isAdmin();
+    }
+    // Espejo público de seguimiento SIN datos personales. El ID es el código
+    // del pedido: solo `get` por código exacto, nunca `list` (no enumerable).
+    match /pedidos_seguimiento/{codigo} {
+      allow get: if true;
+      allow list: if isAdmin();
+      allow create: if request.resource.data.codigo is string
+        && request.resource.data.codigo.size() >= 8
+        && request.resource.data.estado == "pendiente"
+        && request.resource.data.total is number && request.resource.data.total > 0
+        && request.resource.data.total <= 5000
+        && request.resource.data.items is list && request.resource.data.items.size() <= 50;
+      allow update, delete: if isAdmin();
     }
     match /users/{uid} { allow read, write: if isAdmin() || (isSignedIn() && request.auth.uid == uid); }
   }

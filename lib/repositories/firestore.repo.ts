@@ -8,10 +8,12 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   onSnapshot,
   query,
   serverTimestamp,
+  setDoc,
   updateDoc,
   type DocumentData,
   type QueryConstraint,
@@ -73,6 +75,44 @@ export function listenDocs<T>(
   return onSnapshot(
     query(collection(db, colName), ...constraints),
     (snap) => cb(snap.docs.map((d) => ({ ...(d.data() as T), id: d.id }))),
+    (err) => onError?.(err)
+  );
+}
+
+/**
+ * Crea/reemplaza un documento con un ID elegido por la aplicación.
+ * Útil para espejos públicos donde el ID es el propio código de consulta.
+ */
+export async function setDocById<T extends DocumentData>(
+  colName: string,
+  id: string,
+  data: T,
+  opts: { timestamps?: boolean } = {}
+): Promise<void> {
+  const payload = opts.timestamps === false ? data : { ...data, createdAt: serverTimestamp() };
+  await setDoc(doc(db, colName, id), payload);
+}
+
+/** Lee un documento por ID. Devuelve `null` si no existe. */
+export async function getDocById<T>(
+  colName: string,
+  id: string
+): Promise<WithId<T> | null> {
+  const snap = await getDoc(doc(db, colName, id));
+  if (!snap.exists()) return null;
+  return { ...(snap.data() as T), id: snap.id };
+}
+
+/** Suscripción en tiempo real a un documento por ID. */
+export function listenDocById<T>(
+  colName: string,
+  id: string,
+  cb: (row: WithId<T> | null) => void,
+  onError?: (error: unknown) => void
+): () => void {
+  return onSnapshot(
+    doc(db, colName, id),
+    (snap) => cb(snap.exists() ? { ...(snap.data() as T), id: snap.id } : null),
     (err) => onError?.(err)
   );
 }

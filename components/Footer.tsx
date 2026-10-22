@@ -50,6 +50,11 @@ export default function Footer() {
               </Link>
             </li>
             <li>
+              <Link className="footer-link" href="/pedidos">
+                Mis pedidos
+              </Link>
+            </li>
+            <li>
               <Link className="footer-link" href="/reserva">
                 Reservar mesa
               </Link>

@@ -181,18 +181,18 @@ export default function AdminPanel({ email }: { email?: string | null }) {
   // --- Pedidos ---
   const [pedidos, setPedidos] = useState<PedidoDoc[]>([]);
   useEffect(() => { const u = subscribePedidos(setPedidos); return () => u(); }, []);
-  const cambiarEstadoPedido = async (id: string, estado: EstadoPedido) => {
+  const cambiarEstadoPedido = async (id: string, estado: EstadoPedido, codigo?: string) => {
     try {
-      await updateEstadoPedido(id, estado);
+      await updateEstadoPedido(id, estado, codigo);
       setPedidos((p) => p.map((x) => x.id === id ? { ...x, estado } : x));
     } catch (err) {
       setActionError(message(err));
     }
   };
-  const borrarPedido = async (id: string) => {
+  const borrarPedido = async (id: string, codigo?: string) => {
     if (!confirm("¿Borrar pedido?")) return;
     try {
-      await deletePedido(id);
+      await deletePedido(id, codigo);
       setPedidos((p) => p.filter((x) => x.id !== id));
     } catch (err) {
       setActionError(message(err));
@@ -380,12 +380,12 @@ export default function AdminPanel({ email }: { email?: string | null }) {
                   <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
                     {pedidos.map((o) => (
                       <div key={o.id} className="p-4 rounded-xl bg-slate-50 border flex flex-col gap-3">
-                        <div className="flex justify-between"><span className="font-bold text-brand-600 text-xs">#{o.id.slice(0, 6)}</span><span className="text-xs text-slate-500">{o.cliente?.tel || "—"}</span></div>
+                        <div className="flex justify-between"><span className="font-bold text-brand-600 text-xs font-mono">#{o.codigo ?? o.id.slice(0, 6)}</span><span className="text-xs text-slate-500">{o.cliente?.tel || "—"} · {o.modo === "pickup" ? "Recojo" : "Delivery"}</span></div>
                         <div className="text-sm">{o.items?.map((it) => `${it.cant}x ${it.nombre}`).join(", ") || "—"}<div className="font-bold text-ink">S/ {Number(o.total || 0).toFixed(2)}</div></div>
-                        <select value={o.estado} onChange={(e) => cambiarEstadoPedido(o.id, e.target.value as EstadoPedido)} className="h-8 px-2 rounded-lg border text-xs font-semibold">
+                        <select value={o.estado} onChange={(e) => cambiarEstadoPedido(o.id, e.target.value as EstadoPedido, o.codigo)} className="h-8 px-2 rounded-lg border text-xs font-semibold">
                           <option value="pendiente">pendiente</option><option value="enHorno">enHorno</option><option value="enCamino">enCamino</option><option value="entregado">entregado</option><option value="cancelado">cancelado</option>
                         </select>
-                        <button onClick={() => borrarPedido(o.id)} className="h-8 bg-red-50 text-red-600 rounded-lg text-xs">Borrar</button>
+                        <button onClick={() => borrarPedido(o.id, o.codigo)} className="h-8 bg-red-50 text-red-600 rounded-lg text-xs">Borrar</button>
                       </div>
                     ))}
                     {!pedidos.length && <div className="col-span-4 text-center py-8 text-slate-400">Sin pedidos — agrega al carrito y pide en /carrito</div>}
