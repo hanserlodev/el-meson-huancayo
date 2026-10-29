@@ -1,0 +1,482 @@
+[
+  {
+    "archivo": "cuarto.jpg",
+    "producto": "1/4 Pollo a la Brasa",
+    "titulo": "Un cuarto de Pollo a la Brasa.JPG",
+    "autor": "Dtarazona",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Un_cuarto_de_Pollo_a_la_Brasa.JPG"
+  },
+  {
+    "archivo": "medio.jpg",
+    "producto": "1/2 Pollo a la Brasa",
+    "titulo": "Pollo a la brasa pierna con papas.JPG",
+    "autor": "Dtarazona",
+    "licencia": "Public domain",
+    "url": "https://commons.wikimedia.org/wiki/File:Pollo_a_la_brasa_pierna_con_papas.JPG"
+  },
+  {
+    "archivo": "entero.jpg",
+    "producto": "Pollo Entero a la Brasa",
+    "titulo": "RotisserieChicken.jpg",
+    "autor": "Joe Schneid, Louisville, KY",
+    "licencia": "CC BY 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:RotisserieChicken.jpg"
+  },
+  {
+    "archivo": "personal.jpg",
+    "producto": "Pollo Personal a la Brasa",
+    "titulo": "Un cuarto de Pollo a la Brasa (pecho).JPG",
+    "autor": "Dtarazona",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Un_cuarto_de_Pollo_a_la_Brasa_(pecho).JPG"
+  },
+  {
+    "archivo": "pecho.jpg",
+    "producto": "Pecho a la Brasa",
+    "titulo": "Un cuarto de Pollo a la Brasa (pecho).JPG",
+    "autor": "Dtarazona",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Un_cuarto_de_Pollo_a_la_Brasa_(pecho).JPG"
+  },
+  {
+    "archivo": "pierna.jpg",
+    "producto": "Pierna a la Brasa",
+    "titulo": "Pollo a la brasa pierna con papas.JPG",
+    "autor": "Dtarazona",
+    "licencia": "Public domain",
+    "url": "https://commons.wikimedia.org/wiki/File:Pollo_a_la_brasa_pierna_con_papas.JPG"
+  },
+  {
+    "archivo": "alitas.jpg",
+    "producto": "Alitas a la Brasa (6 uds)",
+    "titulo": "Alitas de pollo en madrid.jpg",
+    "autor": "Krista",
+    "licencia": "CC BY 2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Alitas_de_pollo_en_madrid.jpg"
+  },
+  {
+    "archivo": "combo-cuarto.jpg",
+    "producto": "Combo 1/4 + Papas + Chicha",
+    "titulo": "Pollo a la brasa con arroz.jpg",
+    "autor": "User:MiguelAlanCS",
+    "licencia": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Pollo_a_la_brasa_con_arroz.jpg"
+  },
+  {
+    "archivo": "combo-medio.jpg",
+    "producto": "Combo 1/2 + Papas + Chicha 1 L",
+    "titulo": "Pollo a la brasa para llevar.JPG",
+    "autor": "Marcomogollon",
+    "licencia": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Pollo_a_la_brasa_para_llevar.JPG"
+  },
+  {
+    "archivo": "combo-entero.jpg",
+    "producto": "Combo Entero + Papas + Chicha 1.5 L",
+    "titulo": "Pollo a la brasa peruano.jpg",
+    "autor": "Manuel González Olaechea",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Pollo_a_la_brasa_peruano.jpg"
+  },
+  {
+    "archivo": "combo-familiar.jpg",
+    "producto": "Combo Familiar El Mesón",
+    "titulo": "Rotisserie chicken (26894427426).jpg",
+    "autor": "T.Tseng",
+    "licencia": "CC BY 2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Rotisserie_chicken_(26894427426).jpg"
+  },
+  {
+    "archivo": "pollo-papas.jpg",
+    "producto": "Pollo a la Brasa + Papas Grandes",
+    "titulo": "Benny&Co Chicken Leg with Fries Meal.jpg",
+    "autor": "Andrepoiy",
+    "licencia": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Benny%26Co_Chicken_Leg_with_Fries_Meal.jpg"
+  },
+  {
+    "archivo": "pollo-ensalada.jpg",
+    "producto": "Pollo a la Brasa + Ensalada Familiar",
+    "titulo": "Pollo Asado Con Bollo Aliñado y Ensalada.JPG",
+    "autor": "jonathan de Almeida",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Pollo_Asado_Con_Bollo_Ali%C3%B1ado_y_Ensalada.JPG"
+  },
+  {
+    "archivo": "pollo-noche.jpg",
+    "producto": "Pollo Nocturno (1/4 + Papas + Gaseosa)",
+    "titulo": "Un cuarto de Pollo a la Brasa (pecho).JPG",
+    "autor": "Dtarazona",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Un_cuarto_de_Pollo_a_la_Brasa_(pecho).JPG"
+  },
+  {
+    "archivo": "pollo-parrilla.jpg",
+    "producto": "Pollo a la Parrilla",
+    "titulo": "Pollo asado a la parrilla con leña.jpg",
+    "autor": "Horacio Cambeiro",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Pollo_asado_a_la_parrilla_con_le%C3%B1a.jpg"
+  },
+  {
+    "archivo": "mixto.jpg",
+    "producto": "Mixto a la Parrilla",
+    "titulo": "Parrilla Mixta.JPG",
+    "autor": "jonathan de Almeida",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Parrilla_Mixta.JPG"
+  },
+  {
+    "archivo": "brocheta.jpg",
+    "producto": "Brocheta de Pollo",
+    "titulo": "Brochetas de pollo-Marinadas.JPG",
+    "autor": "Tamorlan",
+    "licencia": "CC BY 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Brochetas_de_pollo-Marinadas.JPG"
+  },
+  {
+    "archivo": "anticuchos.jpg",
+    "producto": "Anticuchos de Corazón",
+    "titulo": "Anticuchos peruanos.jpg",
+    "autor": "Jimena Bernal",
+    "licencia": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Anticuchos_peruanos.jpg"
+  },
+  {
+    "archivo": "bife.jpg",
+    "producto": "Bife a la Parrilla",
+    "titulo": "Bife de Lomo (5383969209).jpg",
+    "autor": "Diego Torres Silvestre from Sao Paulo, Brazil",
+    "licencia": "CC BY 2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Bife_de_Lomo_(5383969209).jpg"
+  },
+  {
+    "archivo": "lomo-saltado.jpg",
+    "producto": "Lomo Saltado",
+    "titulo": "Lomo saltado 13012008.JPG",
+    "autor": "Dtarazona",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Lomo_saltado_13012008.JPG"
+  },
+  {
+    "archivo": "churrasco.jpg",
+    "producto": "Churrasco a la Parrilla",
+    "titulo": "Churrasco Galiza.jpg",
+    "autor": "L.Miguel Bugallo Sánchez (http://commons.wikimedia.org/wiki/User:Lmbuga)",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Churrasco_Galiza.jpg"
+  },
+  {
+    "archivo": "costillas.jpg",
+    "producto": "Costillas BBQ",
+    "titulo": "BBQ RIBS pork side ribs.jpg",
+    "autor": "WorldwrestlingfederationVKM",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:BBQ_RIBS_pork_side_ribs.jpg"
+  },
+  {
+    "archivo": "chuleta.jpg",
+    "producto": "Chuleta de Cerdo",
+    "titulo": "Chuleta de cerdo cocinada a la parrilla, gastronomía de España.jpg",
+    "autor": "Juan Emilio Prades Bel",
+    "licencia": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Chuleta_de_cerdo_cocinada_a_la_parrilla,_gastronom%C3%ADa_de_Espa%C3%B1a.jpg"
+  },
+  {
+    "archivo": "picanha.jpg",
+    "producto": "Picaña a la Parrilla",
+    "titulo": "Picanha.jpg",
+    "autor": "\"Alexandre M. Plácido\"",
+    "licencia": "Public domain",
+    "url": "https://commons.wikimedia.org/wiki/File:Picanha.jpg"
+  },
+  {
+    "archivo": "entrana.jpg",
+    "producto": "Entraña Fina",
+    "titulo": "Skirt steak grilled arrachera style.jpg",
+    "autor": "Wikiuser100",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Skirt_steak_grilled_arrachera_style.jpg"
+  },
+  {
+    "archivo": "chancho.jpg",
+    "producto": "Chancho al Cilindro",
+    "titulo": "Filipino (Visayan) lechon, with white rice 01.jpg",
+    "autor": "Obsidian Soul",
+    "licencia": "CC0",
+    "url": "https://commons.wikimedia.org/wiki/File:Filipino_(Visayan)_lechon,_with_white_rice_01.jpg"
+  },
+  {
+    "archivo": "parrilla-mixta.jpg",
+    "producto": "Parrilla Mixta para 2",
+    "titulo": "Plato de parrillada argentina con costilla de carne, chorizo, costilla de cerdo y guarniciones.jpg",
+    "autor": "Horacio Cambeiro",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Plato_de_parrillada_argentina_con_costilla_de_carne,_chorizo,_costilla_de_cerdo_y_guarniciones.jpg"
+  },
+  {
+    "archivo": "parrilla-familiar.jpg",
+    "producto": "Parrilla Familiar",
+    "titulo": "Secreto de cerdo ibérico, carne a la parrilla con salsa.jpg",
+    "autor": "Juan Emilio Prades Bel",
+    "licencia": "CC BY 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Secreto_de_cerdo_ib%C3%A9rico,_carne_a_la_parrilla_con_salsa.jpg"
+  },
+  {
+    "archivo": "alitas-bbq.jpg",
+    "producto": "Alitas BBQ",
+    "titulo": "Alitas de pollo al ajillo con patatas a lo pobre.jpg",
+    "autor": "Avicentegil",
+    "licencia": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Alitas_de_pollo_al_ajillo_con_patatas_a_lo_pobre.jpg"
+  },
+  {
+    "archivo": "hamburguesa.jpg",
+    "producto": "Hamburguesa El Mesón",
+    "titulo": "Hamburger sandwich.jpg",
+    "autor": "Ericd (talk · contribs)",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Hamburger_sandwich.jpg"
+  },
+  {
+    "archivo": "chorizo.jpg",
+    "producto": "Chorizo Parrillero",
+    "titulo": "Chorizo argentino cocido y cortado en rodajas sobre tabla de madera.jpg",
+    "autor": "Horacio Cambeiro",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Chorizo_argentino_cocido_y_cortado_en_rodajas_sobre_tabla_de_madera.jpg"
+  },
+  {
+    "archivo": "tacu-tacu.jpg",
+    "producto": "Tacu Tacu con Bife",
+    "titulo": "Tacu tacu bañado en sala de mariscos.JPG",
+    "autor": "Dtarazona",
+    "licencia": "Public domain",
+    "url": "https://commons.wikimedia.org/wiki/File:Tacu_tacu_ba%C3%B1ado_en_sala_de_mariscos.JPG"
+  },
+  {
+    "archivo": "papas-fritas.jpg",
+    "producto": "Papas Fritas",
+    "titulo": "Papas fritas en un restaurante de Argentina.jpg",
+    "autor": "Horacio Cambeiro",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Papas_fritas_en_un_restaurante_de_Argentina.jpg"
+  },
+  {
+    "archivo": "papas-nativas.jpg",
+    "producto": "Papas Nativas",
+    "titulo": "Roasted potatoes in bowl.jpg",
+    "autor": "Punker1999",
+    "licencia": "CC0",
+    "url": "https://commons.wikimedia.org/wiki/File:Roasted_potatoes_in_bowl.jpg"
+  },
+  {
+    "archivo": "ensalada.jpg",
+    "producto": "Ensalada Dulce de la Casa",
+    "titulo": "Ensalada mixta - skaredy kat.jpg",
+    "autor": "Krista",
+    "licencia": "CC BY 2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Ensalada_mixta_-_skaredy_kat.jpg"
+  },
+  {
+    "archivo": "chaufa.jpg",
+    "producto": "Chaufa Personal",
+    "titulo": "Arroz chaufa simple.JPG",
+    "autor": "Dtarazona",
+    "licencia": "Public domain",
+    "url": "https://commons.wikimedia.org/wiki/File:Arroz_chaufa_simple.JPG"
+  },
+  {
+    "archivo": "arroz-blanco.jpg",
+    "producto": "Arroz Blanco",
+    "titulo": "Cooked white rice.jpg",
+    "autor": "Calgary Reviews from Calgary, Canada",
+    "licencia": "CC BY 2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Cooked_white_rice.jpg"
+  },
+  {
+    "archivo": "choclo.jpg",
+    "producto": "Choclo con Queso",
+    "titulo": "Corn on the cob - Massachusetts.jpg",
+    "autor": "Daderot",
+    "licencia": "CC0",
+    "url": "https://commons.wikimedia.org/wiki/File:Corn_on_the_cob_-_Massachusetts.jpg"
+  },
+  {
+    "archivo": "camote.jpg",
+    "producto": "Camote Frito",
+    "titulo": "A tray of sweet potato fries.jpg",
+    "autor": "JamesTheLaptop",
+    "licencia": "CC0",
+    "url": "https://commons.wikimedia.org/wiki/File:A_tray_of_sweet_potato_fries.jpg"
+  },
+  {
+    "archivo": "platano.jpg",
+    "producto": "Plátano Frito",
+    "titulo": "Platano frito.JPG",
+    "autor": "Dtarazona",
+    "licencia": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Platano_frito.JPG"
+  },
+  {
+    "archivo": "cremas.jpg",
+    "producto": "Cremas de la Casa",
+    "titulo": "Cremas del Pollo a la Brasa (Peru).JPG",
+    "autor": "Dtarazona",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Cremas_del_Pollo_a_la_Brasa_(Peru).JPG"
+  },
+  {
+    "archivo": "aji.jpg",
+    "producto": "Ají de la Casa",
+    "titulo": "Crema de aji (Asapampa, Junin).JPG",
+    "autor": "Dtarazona",
+    "licencia": "Public domain",
+    "url": "https://commons.wikimedia.org/wiki/File:Crema_de_aji_(Asapampa,_Junin).JPG"
+  },
+  {
+    "archivo": "causa.jpg",
+    "producto": "Causa Limeña",
+    "titulo": "Causa limeña.JPG",
+    "autor": "No machine-readable author provided. Manuel González Olaechea assumed (based on copyright claims).",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Causa_lime%C3%B1a.JPG"
+  },
+  {
+    "archivo": "papa-huancaina.jpg",
+    "producto": "Papa a la Huancaína",
+    "titulo": "Cuisine Perú Papa a la Huancaína.jpg",
+    "autor": "AgainErick",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Cuisine_Per%C3%BA_Papa_a_la_Huanca%C3%ADna.jpg"
+  },
+  {
+    "archivo": "ocopa.jpg",
+    "producto": "Ocopa Arequipeña",
+    "titulo": "Peru Ocopa.jpg",
+    "autor": "Desconocido",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Peru_Ocopa.jpg"
+  },
+  {
+    "archivo": "solterito.jpg",
+    "producto": "Solterito de Queso",
+    "titulo": "Solterito.jpg",
+    "autor": "MiguelAlanCS",
+    "licencia": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Solterito.jpg"
+  },
+  {
+    "archivo": "ceviche.jpg",
+    "producto": "Ceviche de Pescado",
+    "titulo": "Ceviche del Perú.jpg",
+    "autor": "No machine-readable author provided. Manuel González Olaechea assumed (based on copyright claims).",
+    "licencia": "CC BY 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Ceviche_del_Per%C3%BA.jpg"
+  },
+  {
+    "archivo": "tamal.jpg",
+    "producto": "Tamal Criollo",
+    "titulo": "Tamal peruano envuelto.jpg",
+    "autor": "Miguel Alan Córdova Silva",
+    "licencia": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Tamal_peruano_envuelto.jpg"
+  },
+  {
+    "archivo": "humitas.jpg",
+    "producto": "Humitas Dulces",
+    "titulo": "Humitas.jpg",
+    "autor": "Desconocido",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Humitas.jpg"
+  },
+  {
+    "archivo": "chicha.jpg",
+    "producto": "Chicha Morada 1 L",
+    "titulo": "Chicha Morada 2017.jpg",
+    "autor": "young shanahan from Bogotá, Colombia",
+    "licencia": "CC BY 2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Chicha_Morada_2017.jpg"
+  },
+  {
+    "archivo": "limonada.jpg",
+    "producto": "Limonada Frozen",
+    "titulo": "Lemonade - 27682817724.jpg",
+    "autor": "HarshLight",
+    "licencia": "CC BY 2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Lemonade_-_27682817724.jpg"
+  },
+  {
+    "archivo": "jugo.jpg",
+    "producto": "Jugo de Naranja",
+    "titulo": "Orange juice 1 edit1.jpg",
+    "autor": "Agency of the United States Department of Agriculture Edited Version by: Arad",
+    "licencia": "Public domain",
+    "url": "https://commons.wikimedia.org/wiki/File:Orange_juice_1_edit1.jpg"
+  },
+  {
+    "archivo": "gaseosa.jpg",
+    "producto": "Inka Kola / Coca-Cola 1.5 L",
+    "titulo": "Un vaso de gaseosa.JPG",
+    "autor": "JuanDPerez",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Un_vaso_de_gaseosa.JPG"
+  },
+  {
+    "archivo": "agua.jpg",
+    "producto": "Agua Mineral 600 ml",
+    "titulo": "Botella de agua.jpg",
+    "autor": "Prácticas Intraescolares",
+    "licencia": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Botella_de_agua.jpg"
+  },
+  {
+    "archivo": "te.jpg",
+    "producto": "Té / Anís",
+    "titulo": "Cup of black tea.JPG",
+    "autor": "AntanO",
+    "licencia": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Cup_of_black_tea.JPG"
+  },
+  {
+    "archivo": "cafe.jpg",
+    "producto": "Café Pasado",
+    "titulo": "A small cup of coffee.JPG",
+    "autor": "Julius Schorzman",
+    "licencia": "CC BY-SA 2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:A_small_cup_of_coffee.JPG"
+  },
+  {
+    "archivo": "mazamorra.jpg",
+    "producto": "Mazamorra Morada",
+    "titulo": "Mazamorra morada.JPG",
+    "autor": "Dtarazona",
+    "licencia": "Public domain",
+    "url": "https://commons.wikimedia.org/wiki/File:Mazamorra_morada.JPG"
+  },
+  {
+    "archivo": "arroz-leche.jpg",
+    "producto": "Arroz con Leche",
+    "titulo": "Arroz con leche estilo peruano.jpg",
+    "autor": "Francesc Fort",
+    "licencia": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Arroz_con_leche_estilo_peruano.jpg"
+  },
+  {
+    "archivo": "picarones.jpg",
+    "producto": "Picarones",
+    "titulo": "Peru Picarones.jpg",
+    "autor": "Desconocido",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Peru_Picarones.jpg"
+  },
+  {
+    "archivo": "suspiro.jpg",
+    "producto": "Suspiro a la Limeña",
+    "titulo": "Suspiro de limeña.JPG",
+    "autor": "No machine-readable author provided. Manuel González Olaechea assumed (based on copyright claims).",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Suspiro_de_lime%C3%B1a.JPG"
+  }
+]

@@ -83,6 +83,10 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <p className="max-w-6xl mx-auto px-4 py-4 text-center text-xs text-slate-500">
           © 2026 Pollos y Parrillas El Mesón — Proyecto de Práctica Web · Precios referenciales, confírmalos por WhatsApp
+          {" · "}
+          <a className="footer-link" href="/imagenes/platos/CREDITOS.txt" target="_blank" rel="noopener">
+            Créditos de imágenes
+          </a>
         </p>
       </div>
     </footer>

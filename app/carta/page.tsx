@@ -15,7 +15,7 @@ const CATS = [
   { id: "todos", label: "Todos" },
   { id: "brasa", label: "A la brasa" },
   { id: "parrilla", label: "Parrillas y cortes" },
-  { id: "extra", label: "Guarniciones y bebidas" },
+  { id: "extra", label: "Entradas, guarniciones y bebidas" },
 ];
 
 export default function CartaPage() {
