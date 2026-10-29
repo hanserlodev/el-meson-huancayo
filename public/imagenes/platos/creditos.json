@@ -336,60 +336,12 @@
     "url": "https://commons.wikimedia.org/wiki/File:Crema_de_aji_(Asapampa,_Junin).JPG"
   },
   {
-    "archivo": "causa.jpg",
-    "producto": "Causa Limeña",
-    "titulo": "Causa limeña.JPG",
-    "autor": "No machine-readable author provided. Manuel González Olaechea assumed (based on copyright claims).",
-    "licencia": "CC BY-SA 3.0",
-    "url": "https://commons.wikimedia.org/wiki/File:Causa_lime%C3%B1a.JPG"
-  },
-  {
     "archivo": "papa-huancaina.jpg",
     "producto": "Papa a la Huancaína",
     "titulo": "Cuisine Perú Papa a la Huancaína.jpg",
     "autor": "AgainErick",
     "licencia": "CC BY-SA 3.0",
     "url": "https://commons.wikimedia.org/wiki/File:Cuisine_Per%C3%BA_Papa_a_la_Huanca%C3%ADna.jpg"
-  },
-  {
-    "archivo": "ocopa.jpg",
-    "producto": "Ocopa Arequipeña",
-    "titulo": "Peru Ocopa.jpg",
-    "autor": "Desconocido",
-    "licencia": "CC BY-SA 3.0",
-    "url": "https://commons.wikimedia.org/wiki/File:Peru_Ocopa.jpg"
-  },
-  {
-    "archivo": "solterito.jpg",
-    "producto": "Solterito de Queso",
-    "titulo": "Solterito.jpg",
-    "autor": "MiguelAlanCS",
-    "licencia": "CC BY-SA 4.0",
-    "url": "https://commons.wikimedia.org/wiki/File:Solterito.jpg"
-  },
-  {
-    "archivo": "ceviche.jpg",
-    "producto": "Ceviche de Pescado",
-    "titulo": "Ceviche del Perú.jpg",
-    "autor": "No machine-readable author provided. Manuel González Olaechea assumed (based on copyright claims).",
-    "licencia": "CC BY 3.0",
-    "url": "https://commons.wikimedia.org/wiki/File:Ceviche_del_Per%C3%BA.jpg"
-  },
-  {
-    "archivo": "tamal.jpg",
-    "producto": "Tamal Criollo",
-    "titulo": "Tamal peruano envuelto.jpg",
-    "autor": "Miguel Alan Córdova Silva",
-    "licencia": "CC BY-SA 4.0",
-    "url": "https://commons.wikimedia.org/wiki/File:Tamal_peruano_envuelto.jpg"
-  },
-  {
-    "archivo": "humitas.jpg",
-    "producto": "Humitas Dulces",
-    "titulo": "Humitas.jpg",
-    "autor": "Desconocido",
-    "licencia": "CC BY-SA 3.0",
-    "url": "https://commons.wikimedia.org/wiki/File:Humitas.jpg"
   },
   {
     "archivo": "chicha.jpg",
@@ -478,5 +430,53 @@
     "autor": "No machine-readable author provided. Manuel González Olaechea assumed (based on copyright claims).",
     "licencia": "CC BY-SA 3.0",
     "url": "https://commons.wikimedia.org/wiki/File:Suspiro_de_lime%C3%B1a.JPG"
+  },
+  {
+    "archivo": "salchipapa.jpg",
+    "producto": "Salchipapa Clásica",
+    "titulo": "Salchipapa Costeña.jpg",
+    "autor": "PapiPijuan",
+    "licencia": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Salchipapa_Coste%C3%B1a.jpg"
+  },
+  {
+    "archivo": "nuggets.jpg",
+    "producto": "Nuggets de Pollo (8 uds)",
+    "titulo": "Nuggets de pollo sobre papel madera.jpg",
+    "autor": "Horacio Cambeiro",
+    "licencia": "CC BY-SA 3.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Nuggets_de_pollo_sobre_papel_madera.jpg"
+  },
+  {
+    "archivo": "ensalada-rusa.jpg",
+    "producto": "Ensalada Rusa",
+    "titulo": "2023 Sałatka jarzynowa (1).jpg",
+    "autor": "Jacek Halicki",
+    "licencia": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:2023_Sa%C5%82atka_jarzynowa_(1).jpg"
+  },
+  {
+    "archivo": "helado.jpg",
+    "producto": "Helado de Vainilla",
+    "titulo": "Vanilla Ice Cream Cone at Camp Manitoulin.jpg",
+    "autor": "Steven Depolo",
+    "licencia": "CC BY 2.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Vanilla_Ice_Cream_Cone_at_Camp_Manitoulin.jpg"
+  },
+  {
+    "archivo": "torta-chocolate.jpg",
+    "producto": "Torta de Chocolate",
+    "titulo": "Piece of chocolate cake on a white plate decorated with chocolate sauce.jpg",
+    "autor": "Daria YakovlevaMinor edits made by Subsidiary account",
+    "licencia": "CC0",
+    "url": "https://commons.wikimedia.org/wiki/File:Piece_of_chocolate_cake_on_a_white_plate_decorated_with_chocolate_sauce.jpg"
+  },
+  {
+    "archivo": "flan.jpg",
+    "producto": "Flan Casero",
+    "titulo": "Flan casero.jpg",
+    "autor": "Juan Emilio Prades Bel",
+    "licencia": "CC BY-SA 4.0",
+    "url": "https://commons.wikimedia.org/wiki/File:Flan_casero.jpg"
   }
 ]

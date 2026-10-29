@@ -8,10 +8,17 @@ import { platoCreateSchema, platoUpdateSchema } from "@/lib/schemas/plato.schema
 const localFiltered = (cat?: string) =>
   PLATOS_LOCAL.filter((p) => !cat || cat === "todos" || p.cat === cat);
 
+// Firestore devuelve los documentos por id; reordenamos según la carta curada.
+const POSICION = new Map(PLATOS_LOCAL.map((p, i) => [p.id, i]));
+const ordenar = (rows: Plato[]) =>
+  [...rows].sort(
+    (a, b) => (POSICION.get(a.id) ?? Number.MAX_SAFE_INTEGER) - (POSICION.get(b.id) ?? Number.MAX_SAFE_INTEGER)
+  );
+
 export async function getPlatos(): Promise<Plato[]> {
   try {
     const rows = await platosRepo.list();
-    return rows.length ? (rows as Plato[]) : PLATOS_LOCAL;
+    return rows.length ? ordenar(rows as Plato[]) : PLATOS_LOCAL;
   } catch {
     return PLATOS_LOCAL;
   }
@@ -19,7 +26,7 @@ export async function getPlatos(): Promise<Plato[]> {
 
 export function subscribePlatos(cb: (platos: Plato[]) => void, cat?: string) {
   return platosRepo.listen(
-    (rows) => cb(rows.length ? (rows as Plato[]) : localFiltered(cat)),
+    (rows) => cb(rows.length ? ordenar(rows as Plato[]) : localFiltered(cat)),
     cat,
     () => cb(localFiltered(cat))
   );

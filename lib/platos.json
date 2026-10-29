@@ -396,6 +396,30 @@
     "activo": true
   },
   {
+    "id": "salchipapa",
+    "nombre": "Salchipapa Clásica",
+    "precio": 9.9,
+    "cat": "extra",
+    "desc": "Papas fritas crocantes con rodajas de hot dog y nuestras salsas de la casa.",
+    "img": "/imagenes/platos/salchipapa.jpg",
+    "tag": "Más pedido",
+    "rating": "★★★★★",
+    "votos": 163,
+    "activo": true
+  },
+  {
+    "id": "nuggets",
+    "nombre": "Nuggets de Pollo (8 uds)",
+    "precio": 12.9,
+    "cat": "extra",
+    "desc": "Ocho nuggets de pechuga empanizados, con papas fritas y cremas.",
+    "img": "/imagenes/platos/nuggets.jpg",
+    "tag": "",
+    "rating": "★★★★☆",
+    "votos": 84,
+    "activo": true
+  },
+  {
     "id": "papas-nativas",
     "nombre": "Papas Nativas",
     "precio": 9.9,
@@ -405,54 +429,6 @@
     "tag": "",
     "rating": "★★★★☆",
     "votos": 62,
-    "activo": true
-  },
-  {
-    "id": "ensalada",
-    "nombre": "Ensalada Dulce de la Casa",
-    "precio": 6.9,
-    "cat": "extra",
-    "desc": "La receta de siempre: lechuga, fruta de estación y aderezo dulce.",
-    "img": "/imagenes/platos/ensalada.jpg",
-    "tag": "Recomendado",
-    "rating": "★★★★★",
-    "votos": 196,
-    "activo": true
-  },
-  {
-    "id": "chaufa",
-    "nombre": "Chaufa Personal",
-    "precio": 9.9,
-    "cat": "extra",
-    "desc": "Arroz chaufa al wok con pollo, huevo y cebollita china.",
-    "img": "/imagenes/platos/chaufa.jpg",
-    "tag": "",
-    "rating": "★★★★☆",
-    "votos": 119,
-    "activo": true
-  },
-  {
-    "id": "arroz-blanco",
-    "nombre": "Arroz Blanco",
-    "precio": 4.9,
-    "cat": "extra",
-    "desc": "Porción de arroz blanco cocido al vapor.",
-    "img": "/imagenes/platos/arroz-blanco.jpg",
-    "tag": "",
-    "rating": "★★★★☆",
-    "votos": 31,
-    "activo": true
-  },
-  {
-    "id": "choclo",
-    "nombre": "Choclo con Queso",
-    "precio": 7.9,
-    "cat": "extra",
-    "desc": "Choclo peruano cocido con queso fresco andino.",
-    "img": "/imagenes/platos/choclo.jpg",
-    "tag": "",
-    "rating": "★★★★☆",
-    "votos": 57,
     "activo": true
   },
   {
@@ -480,6 +456,66 @@
     "activo": true
   },
   {
+    "id": "choclo",
+    "nombre": "Choclo con Queso",
+    "precio": 7.9,
+    "cat": "extra",
+    "desc": "Choclo peruano cocido con queso fresco andino.",
+    "img": "/imagenes/platos/choclo.jpg",
+    "tag": "",
+    "rating": "★★★★☆",
+    "votos": 57,
+    "activo": true
+  },
+  {
+    "id": "arroz-blanco",
+    "nombre": "Arroz Blanco",
+    "precio": 4.9,
+    "cat": "extra",
+    "desc": "Porción de arroz blanco cocido al vapor.",
+    "img": "/imagenes/platos/arroz-blanco.jpg",
+    "tag": "",
+    "rating": "★★★★☆",
+    "votos": 31,
+    "activo": true
+  },
+  {
+    "id": "chaufa",
+    "nombre": "Chaufa Personal",
+    "precio": 9.9,
+    "cat": "extra",
+    "desc": "Arroz chaufa al wok con pollo, huevo y cebollita china.",
+    "img": "/imagenes/platos/chaufa.jpg",
+    "tag": "",
+    "rating": "★★★★☆",
+    "votos": 119,
+    "activo": true
+  },
+  {
+    "id": "ensalada",
+    "nombre": "Ensalada Dulce de la Casa",
+    "precio": 6.9,
+    "cat": "extra",
+    "desc": "La receta de siempre: lechuga, fruta de estación y aderezo dulce.",
+    "img": "/imagenes/platos/ensalada.jpg",
+    "tag": "Recomendado",
+    "rating": "★★★★★",
+    "votos": 196,
+    "activo": true
+  },
+  {
+    "id": "ensalada-rusa",
+    "nombre": "Ensalada Rusa",
+    "precio": 6.9,
+    "cat": "extra",
+    "desc": "Papa, zanahoria y arvejas con mayonesa de la casa.",
+    "img": "/imagenes/platos/ensalada-rusa.jpg",
+    "tag": "",
+    "rating": "★★★★☆",
+    "votos": 61,
+    "activo": true
+  },
+  {
     "id": "cremas",
     "nombre": "Cremas de la Casa",
     "precio": 3.9,
@@ -504,18 +540,6 @@
     "activo": true
   },
   {
-    "id": "causa",
-    "nombre": "Causa Limeña",
-    "precio": 12.9,
-    "cat": "extra",
-    "desc": "Papa amarilla con ají, pollo desmenuzado y huevo. Entrada clásica.",
-    "img": "/imagenes/platos/causa.jpg",
-    "tag": "",
-    "rating": "★★★★★",
-    "votos": 134,
-    "activo": true
-  },
-  {
     "id": "papa-huancaina",
     "nombre": "Papa a la Huancaína",
     "precio": 11.9,
@@ -525,66 +549,6 @@
     "tag": "Tradicional",
     "rating": "★★★★★",
     "votos": 178,
-    "activo": true
-  },
-  {
-    "id": "ocopa",
-    "nombre": "Ocopa Arequipeña",
-    "precio": 12.9,
-    "cat": "extra",
-    "desc": "Papa con crema de ají mirasol, huacatay y maní tostado.",
-    "img": "/imagenes/platos/ocopa.jpg",
-    "tag": "",
-    "rating": "★★★★☆",
-    "votos": 72,
-    "activo": true
-  },
-  {
-    "id": "solterito",
-    "nombre": "Solterito de Queso",
-    "precio": 11.9,
-    "cat": "extra",
-    "desc": "Habitas, choclo, queso, tomate y cebolla con vinagreta de la casa.",
-    "img": "/imagenes/platos/solterito.jpg",
-    "tag": "",
-    "rating": "★★★★☆",
-    "votos": 49,
-    "activo": true
-  },
-  {
-    "id": "ceviche",
-    "nombre": "Ceviche de Pescado",
-    "precio": 18.9,
-    "cat": "extra",
-    "desc": "Pescado fresco en leche de tigre, con camote, choclo y cancha.",
-    "img": "/imagenes/platos/ceviche.jpg",
-    "tag": "",
-    "rating": "★★★★★",
-    "votos": 141,
-    "activo": true
-  },
-  {
-    "id": "tamal",
-    "nombre": "Tamal Criollo",
-    "precio": 8.9,
-    "cat": "extra",
-    "desc": "Tamal de maíz con chancho, envuelto en hoja de plátano.",
-    "img": "/imagenes/platos/tamal.jpg",
-    "tag": "",
-    "rating": "★★★★☆",
-    "votos": 53,
-    "activo": true
-  },
-  {
-    "id": "humitas",
-    "nombre": "Humitas Dulces",
-    "precio": 7.9,
-    "cat": "extra",
-    "desc": "Humita de choclo tierno con queso y canela.",
-    "img": "/imagenes/platos/humitas.jpg",
-    "tag": "",
-    "rating": "★★★★☆",
-    "votos": 38,
     "activo": true
   },
   {
@@ -717,6 +681,42 @@
     "tag": "",
     "rating": "★★★★☆",
     "votos": 69,
+    "activo": true
+  },
+  {
+    "id": "helado",
+    "nombre": "Helado de Vainilla",
+    "precio": 6.9,
+    "cat": "extra",
+    "desc": "Dos bolas de helado de vainilla con salsa de chocolate.",
+    "img": "/imagenes/platos/helado.jpg",
+    "tag": "",
+    "rating": "★★★★★",
+    "votos": 92,
+    "activo": true
+  },
+  {
+    "id": "torta-chocolate",
+    "nombre": "Torta de Chocolate",
+    "precio": 8.9,
+    "cat": "extra",
+    "desc": "Porción de torta húmeda de chocolate rellena de manjar.",
+    "img": "/imagenes/platos/torta-chocolate.jpg",
+    "tag": "",
+    "rating": "★★★★★",
+    "votos": 107,
+    "activo": true
+  },
+  {
+    "id": "flan",
+    "nombre": "Flan Casero",
+    "precio": 6.9,
+    "cat": "extra",
+    "desc": "Flan de caramelo hecho en casa, con crema batida.",
+    "img": "/imagenes/platos/flan.jpg",
+    "tag": "",
+    "rating": "★★★★☆",
+    "votos": 73,
     "activo": true
   }
 ]

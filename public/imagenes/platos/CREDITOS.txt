@@ -254,47 +254,11 @@ Ají de la Casa (aji.jpg)
   Licencia: Public domain
   Fuente: https://commons.wikimedia.org/wiki/File:Crema_de_aji_(Asapampa,_Junin).JPG
 
-Causa Limeña (causa.jpg)
-  Original: Causa limeña.JPG
-  Autor: No machine-readable author provided. Manuel González Olaechea assumed (based on copyright claims).
-  Licencia: CC BY-SA 3.0
-  Fuente: https://commons.wikimedia.org/wiki/File:Causa_lime%C3%B1a.JPG
-
 Papa a la Huancaína (papa-huancaina.jpg)
   Original: Cuisine Perú Papa a la Huancaína.jpg
   Autor: AgainErick
   Licencia: CC BY-SA 3.0
   Fuente: https://commons.wikimedia.org/wiki/File:Cuisine_Per%C3%BA_Papa_a_la_Huanca%C3%ADna.jpg
-
-Ocopa Arequipeña (ocopa.jpg)
-  Original: Peru Ocopa.jpg
-  Autor: Desconocido
-  Licencia: CC BY-SA 3.0
-  Fuente: https://commons.wikimedia.org/wiki/File:Peru_Ocopa.jpg
-
-Solterito de Queso (solterito.jpg)
-  Original: Solterito.jpg
-  Autor: MiguelAlanCS
-  Licencia: CC BY-SA 4.0
-  Fuente: https://commons.wikimedia.org/wiki/File:Solterito.jpg
-
-Ceviche de Pescado (ceviche.jpg)
-  Original: Ceviche del Perú.jpg
-  Autor: No machine-readable author provided. Manuel González Olaechea assumed (based on copyright claims).
-  Licencia: CC BY 3.0
-  Fuente: https://commons.wikimedia.org/wiki/File:Ceviche_del_Per%C3%BA.jpg
-
-Tamal Criollo (tamal.jpg)
-  Original: Tamal peruano envuelto.jpg
-  Autor: Miguel Alan Córdova Silva
-  Licencia: CC BY-SA 4.0
-  Fuente: https://commons.wikimedia.org/wiki/File:Tamal_peruano_envuelto.jpg
-
-Humitas Dulces (humitas.jpg)
-  Original: Humitas.jpg
-  Autor: Desconocido
-  Licencia: CC BY-SA 3.0
-  Fuente: https://commons.wikimedia.org/wiki/File:Humitas.jpg
 
 Chicha Morada 1 L (chicha.jpg)
   Original: Chicha Morada 2017.jpg
@@ -361,4 +325,40 @@ Suspiro a la Limeña (suspiro.jpg)
   Autor: No machine-readable author provided. Manuel González Olaechea assumed (based on copyright claims).
   Licencia: CC BY-SA 3.0
   Fuente: https://commons.wikimedia.org/wiki/File:Suspiro_de_lime%C3%B1a.JPG
+
+Salchipapa Clásica (salchipapa.jpg)
+  Original: Salchipapa Costeña.jpg
+  Autor: PapiPijuan
+  Licencia: CC BY-SA 4.0
+  Fuente: https://commons.wikimedia.org/wiki/File:Salchipapa_Coste%C3%B1a.jpg
+
+Nuggets de Pollo (8 uds) (nuggets.jpg)
+  Original: Nuggets de pollo sobre papel madera.jpg
+  Autor: Horacio Cambeiro
+  Licencia: CC BY-SA 3.0
+  Fuente: https://commons.wikimedia.org/wiki/File:Nuggets_de_pollo_sobre_papel_madera.jpg
+
+Ensalada Rusa (ensalada-rusa.jpg)
+  Original: 2023 Sałatka jarzynowa (1).jpg
+  Autor: Jacek Halicki
+  Licencia: CC BY-SA 4.0
+  Fuente: https://commons.wikimedia.org/wiki/File:2023_Sa%C5%82atka_jarzynowa_(1).jpg
+
+Helado de Vainilla (helado.jpg)
+  Original: Vanilla Ice Cream Cone at Camp Manitoulin.jpg
+  Autor: Steven Depolo
+  Licencia: CC BY 2.0
+  Fuente: https://commons.wikimedia.org/wiki/File:Vanilla_Ice_Cream_Cone_at_Camp_Manitoulin.jpg
+
+Torta de Chocolate (torta-chocolate.jpg)
+  Original: Piece of chocolate cake on a white plate decorated with chocolate sauce.jpg
+  Autor: Daria YakovlevaMinor edits made by Subsidiary account
+  Licencia: CC0
+  Fuente: https://commons.wikimedia.org/wiki/File:Piece_of_chocolate_cake_on_a_white_plate_decorated_with_chocolate_sauce.jpg
+
+Flan Casero (flan.jpg)
+  Original: Flan casero.jpg
+  Autor: Juan Emilio Prades Bel
+  Licencia: CC BY-SA 4.0
+  Fuente: https://commons.wikimedia.org/wiki/File:Flan_casero.jpg
 
