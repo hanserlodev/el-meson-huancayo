@@ -5,18 +5,39 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import AddToCartButton from "@/components/AddToCartButton";
-import { subscribePlatos } from "@/lib/services/platos.service";
-import type { Plato } from "@/lib/data";
+import PlatoImage from "@/components/PlatoImage";
+import { PLATOS, type Plato } from "@/lib/data";
+import { scheduleIdle } from "@/lib/idle";
+
+// Favoritos iniciales: se pintan en el HTML sin esperar a Firestore.
+const FAVORITOS_LOCAL = [...PLATOS]
+  .filter((p) => p.activo !== false)
+  .sort((a, b) => (b.votos || 0) - (a.votos || 0))
+  .slice(0, 3);
 
 export default function InicioPage() {
-  const [favoritos, setFavoritos] = useState<Plato[]>([]);
+  const [favoritos, setFavoritos] = useState<Plato[]>(FAVORITOS_LOCAL);
   useEffect(() => {
-    const unsubscribe = subscribePlatos((platos) => {
-      const activos = platos.filter((plato) => plato.activo !== false);
-      const top = [...activos].sort((a, b) => (b.votos || 0) - (a.votos || 0)).slice(0, 3);
-      setFavoritos(top.length ? top : activos.slice(0, 3));
+    // Los favoritos ya vienen pintados; Firestore se sincroniza después.
+    let cancelado = false;
+    let unsubscribe: (() => void) | undefined;
+
+    const cancelarInicio = scheduleIdle(() => {
+      import("@/lib/services/platos.service").then(({ subscribePlatos }) => {
+        if (cancelado) return;
+        unsubscribe = subscribePlatos((platos) => {
+          const activos = platos.filter((plato) => plato.activo !== false);
+          const top = [...activos].sort((a, b) => (b.votos || 0) - (a.votos || 0)).slice(0, 3);
+          setFavoritos(top.length ? top : activos.slice(0, 3));
+        });
+      });
     });
-    return () => unsubscribe();
+
+    return () => {
+      cancelado = true;
+      cancelarInicio();
+      unsubscribe?.();
+    };
   }, []);
 
   return (
@@ -43,7 +64,7 @@ export default function InicioPage() {
           </div>
           <div className="lg:col-span-6 relative">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-slate-200">
-              <Image src="/imagenes/cuarto-brasa.png" alt="Pollo a la brasa El Mesón" width={640} height={480} className="w-full h-[480px] object-cover" priority />
+              <Image src="/imagenes/cuarto-brasa.webp" alt="Pollo a la brasa El Mesón" width={640} height={480} className="w-full h-[480px] object-cover" priority fetchPriority="high" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10"></div>
               <div className="absolute top-4 left-4 px-4 py-2 rounded-full bg-white/95 text-ink text-sm font-bold shadow flex items-center gap-2"><span className="w-2.5 h-2.5 rounded-full bg-brand-600 animate-ping"></span>Más pedido · 1/4 a S/ 10.90</div>
               <div className="absolute bottom-4 right-4 px-4 py-2 rounded-full bg-ink/90 text-white text-sm flex items-center gap-2"><span className="material-symbols-outlined text-amber-400 text-[18px]">local_shipping</span>Delivery gratis desde S/ 35</div>
@@ -61,7 +82,7 @@ export default function InicioPage() {
             <div className="grid md:grid-cols-3 gap-6">
               {favoritos.map((plato) => (
                 <div key={plato.id} className="bg-bg-canvas rounded-3xl overflow-hidden ring-1 ring-slate-900/5 shadow-sm hover:shadow-md transition flex flex-col">
-                  <div className="h-56 bg-slate-100 relative overflow-hidden">{plato.img && <Image src={plato.img} alt={plato.nombre} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />}{plato.tag && <span className="absolute top-3 right-3 px-3 py-1 rounded-full bg-amber-400 text-ink text-xs font-bold">{plato.tag || "Top"}</span>}</div>
+                  <div className="h-56 bg-slate-100 relative overflow-hidden">{plato.img && <PlatoImage src={plato.img} alt={plato.nombre} sizes="(max-width: 768px) 100vw, 33vw" />}{plato.tag && <span className="absolute top-3 right-3 px-3 py-1 rounded-full bg-amber-400 text-ink text-xs font-bold">{plato.tag || "Top"}</span>}</div>
                   <div className="p-6 flex flex-col flex-1">
                     <h3 className="font-bold text-ink">{plato.nombre}</h3>
                     <p className="text-sm text-slate-500 line-clamp-2">{plato.desc}</p>

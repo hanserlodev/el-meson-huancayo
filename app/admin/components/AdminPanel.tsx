@@ -56,7 +56,7 @@ export default function AdminPanel({ email }: { email?: string | null }) {
         return;
       }
     } else {
-      const np: Plato = { id: `plato-${Date.now()}`, nombre: form.nombre, precio, cat, desc: form.desc || "Receta especial de la casa", img: "/imagenes/cuarto-brasa.png", tag: form.stock === "Agotado" ? "Agotado" : "", rating: "★★★★★", votos: 0, activo: form.stock !== "Agotado" };
+      const np: Plato = { id: `plato-${Date.now()}`, nombre: form.nombre, precio, cat, desc: form.desc || "Receta especial de la casa", img: "/imagenes/cuarto-brasa.webp", tag: form.stock === "Agotado" ? "Agotado" : "", rating: "★★★★★", votos: 0, activo: form.stock !== "Agotado" };
       try {
         await createPlato(np);
         setPlatos((prev) => [{ ...np, stock: form.stock } as AdminPlato, ...prev]);

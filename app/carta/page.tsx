@@ -1,14 +1,15 @@
 "use client";
 import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AddToCartButton from "@/components/AddToCartButton";
-import { subscribePlatos } from "@/lib/services/platos.service";
-import { subscribeOfertas, type OfertaDoc } from "@/lib/services/ofertas.service";
+import PlatoImage from "@/components/PlatoImage";
+import type { OfertaDoc } from "@/lib/services/ofertas.service";
+import { OFERTAS_LOCAL } from "@/lib/ofertas-local";
 import { useCart } from "@/lib/stores/cart";
-import type { Plato } from "@/lib/data";
+import { PLATOS, type Plato } from "@/lib/data";
+import { scheduleIdle } from "@/lib/idle";
 import { DELIVERY, ENVIO_GRATIS_DESDE } from "@/lib/data";
 
 const CATS = [
@@ -19,16 +20,35 @@ const CATS = [
 ];
 
 export default function CartaPage() {
-  const [platos, setPlatos] = useState<Plato[]>([]);
-  const [ofertas, setOfertas] = useState<OfertaDoc[]>([]);
+  // Arrancamos con el catálogo local para pintar la carta en el HTML inicial
+  // (sin esperar a Firestore) y evitar el salto de layout.
+  const [platos, setPlatos] = useState<Plato[]>(PLATOS);
+  const [ofertas, setOfertas] = useState<OfertaDoc[]>(OFERTAS_LOCAL.filter((o) => o.activo));
   const [cat, setCat] = useState("todos");
   const [busqueda, setBusqueda] = useState("");
   const { items, total, soles } = useCart();
 
   useEffect(() => {
-    const u1 = subscribePlatos(setPlatos);
-    const u2 = subscribeOfertas(setOfertas, true);
-    return () => { u1(); u2(); };
+    // Firebase se carga después del primer pintado: la carta ya está en el HTML.
+    let cancelado = false;
+    let u1: (() => void) | undefined;
+    let u2: (() => void) | undefined;
+
+    const cancelarInicio = scheduleIdle(() => {
+      import("@/lib/services/platos.service").then(({ subscribePlatos: sub }) => {
+        if (!cancelado) u1 = sub(setPlatos);
+      });
+      import("@/lib/services/ofertas.service").then(({ subscribeOfertas }) => {
+        if (!cancelado) u2 = subscribeOfertas(setOfertas, true);
+      });
+    });
+
+    return () => {
+      cancelado = true;
+      cancelarInicio();
+      u1?.();
+      u2?.();
+    };
   }, []);
 
   const filtrados = useMemo(() => {
@@ -105,10 +125,10 @@ export default function CartaPage() {
               </div>
             ) : (
               <div className="grid md:grid-cols-2 2xl:grid-cols-3 gap-6">
-                {filtrados.map(p=>(
+                {filtrados.map((p, i)=>(
                   <div key={p.id} className="bg-white rounded-xl shadow-sm ring-1 ring-slate-900/5 overflow-hidden flex flex-col hover:shadow-md transition">
                     <div className="relative h-48 bg-slate-100 overflow-hidden">
-                      <Image src={p.img} alt={p.nombre} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+                      <PlatoImage src={p.img} alt={p.nombre} priority={i < 2} />
                       {p.tag && <span className="absolute top-3 left-3 bg-amber-400 text-ink px-2.5 py-1 rounded-full text-xs font-bold">{p.tag}</span>}
                     </div>
                     <div className="p-5 flex flex-col gap-2 flex-1">

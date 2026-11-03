@@ -1,15 +1,12 @@
 import { ofertasRepo, type OfertaRow, type TipoOferta } from "@/lib/repositories/ofertas.repo";
 import { parseOrThrow } from "@/lib/schemas/parse";
 import { ofertaCreateSchema, ofertaUpdateSchema } from "@/lib/schemas/oferta.schema";
+import { OFERTAS_LOCAL as OFERTAS_BASE } from "@/lib/ofertas-local";
 
 export type { TipoOferta };
 export type OfertaDoc = OfertaRow & { id: string };
 
-export const OFERTAS_LOCAL: OfertaDoc[] = [
-  { id: "of-1", titulo: "Martes de Pollo — S/ 13.90", descripcion: "1/4 pollo + papas + ensalada todos los martes", tipo: "martes", precioOferta: 13.9, activo: true },
-  { id: "of-2", titulo: "Combo Familiar S/ 46.90", descripcion: "Pollo entero + gaseosa 1.5L + papas familiares", tipo: "combo", precioOferta: 46.9, activo: true },
-  { id: "of-3", titulo: "Delivery Gratis", descripcion: "En pedidos mayores a S/ 35 por Huancayo centro", tipo: "delivery", activo: true },
-];
+export const OFERTAS_LOCAL: OfertaDoc[] = OFERTAS_BASE;
 
 export async function getOfertas(): Promise<OfertaDoc[]> {
   try {

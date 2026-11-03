@@ -56,8 +56,8 @@ export default function ResenasPage() {
           <p className="text-slate-600 max-w-2xl mt-2">
             Después de pedir, cuenta tu experiencia. Revisamos cada reseña antes de publicarla.
           </p>
-          {promedio && (
-            <div className="flex flex-wrap items-center gap-4 mt-6">
+          <div className="mt-6 min-h-[76px] flex flex-wrap items-center gap-4">
+            {promedio && (
               <div className="inline-flex items-center gap-3 px-4 py-3 rounded-2xl bg-white ring-1 ring-slate-200 shadow-sm">
                 <span className="text-3xl font-display font-bold text-ink leading-none">{promedio}</span>
                 <div>
@@ -65,8 +65,8 @@ export default function ResenasPage() {
                   <div className="text-xs text-slate-500 mt-1">{resenas.length} {resenas.length === 1 ? "reseña aprobada" : "reseñas aprobadas"}</div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </section>
 

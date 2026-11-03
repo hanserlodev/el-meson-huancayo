@@ -25,11 +25,30 @@ export async function getPlatos(): Promise<Plato[]> {
 }
 
 export function subscribePlatos(cb: (platos: Plato[]) => void, cat?: string) {
-  return platosRepo.listen(
-    (rows) => cb(rows.length ? ordenar(rows as Plato[]) : localFiltered(cat)),
+  // Si Firestore tarda o está bloqueado, mostramos el catálogo local sin dejar la carta vacía.
+  let entregado = false;
+  const respaldo = setTimeout(() => {
+    if (!entregado) cb(localFiltered(cat));
+  }, 3500);
+
+  const unsub = platosRepo.listen(
+    (rows) => {
+      entregado = true;
+      clearTimeout(respaldo);
+      cb(rows.length ? ordenar(rows as Plato[]) : localFiltered(cat));
+    },
     cat,
-    () => cb(localFiltered(cat))
+    () => {
+      entregado = true;
+      clearTimeout(respaldo);
+      cb(localFiltered(cat));
+    }
   );
+
+  return () => {
+    clearTimeout(respaldo);
+    unsub();
+  };
 }
 
 export async function createPlato(plato: Plato) {

@@ -272,3 +272,32 @@ input:focus-visible {
   color: #fff !important;
   border-color: #0f172a !important;
 }
+
+/* Íconos: fuente propia recortada a los 60 íconos usados (6 KB en vez de 4 MB)
+   y caja fija para que la ligadura no deforme el layout (evita CLS). */
+@font-face {
+  font-family: "Material Symbols Outlined";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("/fonts/material-symbols.woff2") format("woff2");
+}
+
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
+  vertical-align: -0.125em;
+}
