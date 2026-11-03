@@ -1,30 +1,83 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useCart } from "@/lib/stores/cart";
+import { useAuth } from "@/components/AuthProvider";
 import { crearPedido } from "@/lib/services/pedidos.service";
+import { obtenerPerfil } from "@/lib/services/usuarios.service";
+import { buscarCupon, type CuponDoc } from "@/lib/services/cupones.service";
+import { calcularDescuento } from "@/lib/schemas/cupon.schema";
 import { guardarCodigo } from "@/lib/stores/misPedidos";
 import { DELIVERY, ENVIO_GRATIS_DESDE } from "@/lib/data";
 
 export default function CarritoPage() {
   const { items, total, soles, cambiar, eliminar, vaciar, pedirPorWhatsApp } = useCart();
+  const { user } = useAuth();
   const [modo, setModo] = useState<"delivery"|"pickup">("delivery");
-  const [nombre, setNombre] = useState("Rodrigo Vilchez");
-  const [tel, setTel] = useState("964 123 456");
-  const [dir, setDir] = useState("Jr. Puno 450, Int 2B");
+  const [nombre, setNombre] = useState("");
+  const [tel, setTel] = useState("");
+  const [dir, setDir] = useState("");
   const [pago, setPago] = useState("Yape / Plin");
   const [notas, setNotas] = useState("");
   const [cupon, setCupon] = useState("");
+  const [cuponDoc, setCuponDoc] = useState<CuponDoc | null>(null);
+  const [validandoCupon, setValidandoCupon] = useState(false);
   const [msg, setMsg] = useState<string|null>(null);
   const [confirmando, setConfirmando] = useState(false);
   const [confirmado, setConfirmado] = useState<{ codigo: string; total: number } | null>(null);
 
+  // Si hay sesión, precarga los datos y la dirección principal del cliente.
+  useEffect(() => {
+    if (!user) return;
+    let cancelado = false;
+    obtenerPerfil(user.uid)
+      .then((perfil) => {
+        if (cancelado || !perfil) return;
+        setNombre((v) => v || perfil.nombre || "");
+        setTel((v) => v || perfil.telefono || "");
+        const principal = perfil.direcciones?.find((d) => d.principal) ?? perfil.direcciones?.[0];
+        if (principal) setDir((v) => v || principal.direccion);
+      })
+      .catch(() => {});
+    return () => { cancelado = true; };
+  }, [user]);
+
   const subtotal = total;
   const deliveryFee = modo==="pickup" || subtotal>=ENVIO_GRATIS_DESDE ? 0 : DELIVERY;
-  const totalPagar = subtotal + deliveryFee;
+  const descuento = useMemo(
+    () => (cuponDoc ? calcularDescuento(cuponDoc, subtotal) : 0),
+    [cuponDoc, subtotal]
+  );
+  const totalPagar = Math.max(0, subtotal - descuento) + deliveryFee;
   const falta = Math.max(0, ENVIO_GRATIS_DESDE - subtotal);
+
+  const aplicarCupon = async () => {
+    const codigo = cupon.trim().toUpperCase();
+    if (!codigo) return setMsg("Ingresa un código de cupón");
+    setValidandoCupon(true);
+    setMsg(null);
+    try {
+      const doc = await buscarCupon(codigo);
+      if (!doc || !doc.activo) return setMsg("Cupón no válido o inactivo");
+      const valor = calcularDescuento(doc, subtotal);
+      if (!valor) {
+        return setMsg(
+          doc.minimo > 0
+            ? `Este cupón aplica desde S/ ${doc.minimo.toFixed(2)}`
+            : "Cupón vencido"
+        );
+      }
+      setCuponDoc(doc);
+      setCupon(doc.codigo);
+      setMsg(`Cupón ${doc.codigo} aplicado: -S/ ${valor.toFixed(2)}`);
+    } catch {
+      setMsg("No se pudo validar el cupón. Intenta de nuevo.");
+    } finally {
+      setValidandoCupon(false);
+    }
+  };
 
   const confirmar = async () => {
     if(confirmando) return;
@@ -37,7 +90,7 @@ export default function CarritoPage() {
         items,
         totalPagar,
         { nombre, tel, direccion: dir },
-        { modo, subtotal, delivery: deliveryFee, pago, notas }
+        { modo, subtotal, delivery: deliveryFee, pago, notas, cupon: cuponDoc?.codigo, descuento }
       );
       guardarCodigo(codigo);
       setConfirmado({ codigo, total: totalPagar });
@@ -46,7 +99,7 @@ export default function CarritoPage() {
     finally{ setConfirmando(false); }
   };
 
-  const preview = items.length ? `🍗 *PEDIDO EL MESÓN*\n${items.map(i=>`${i.cant}x ${i.nombre} — S/ ${soles(i.precio*i.cant)}`).join("\n")}\nSubtotal S/ ${soles(subtotal)}\nDelivery ${deliveryFee===0?"GRATIS":`S/ ${soles(deliveryFee)}`}\nTOTAL S/ ${soles(totalPagar)}\nCliente: ${nombre}\nTel: ${tel}\n${modo==="delivery"?`Dir: ${dir}\n`:"Recojo: Giráldez 157\n"}Pago: ${pago}${notas?`\nNotas: ${notas}`:""}` : "Carrito vacío";
+  const preview = items.length ? `🍗 *PEDIDO EL MESÓN*\n${items.map(i=>`${i.cant}x ${i.nombre} — S/ ${soles(i.precio*i.cant)}`).join("\n")}\nSubtotal S/ ${soles(subtotal)}\n${descuento>0?`Descuento (${cuponDoc?.codigo}) -S/ ${soles(descuento)}\n`:""}Delivery ${deliveryFee===0?"GRATIS":`S/ ${soles(deliveryFee)}`}\nTOTAL S/ ${soles(totalPagar)}\nCliente: ${nombre}\nTel: ${tel}\n${modo==="delivery"?`Dir: ${dir}\n`:"Recojo: Giráldez 157\n"}Pago: ${pago}${notas?`\nNotas: ${notas}`:""}` : "Carrito vacío";
 
   return (
     <div className="min-h-screen bg-bg-canvas">
@@ -110,7 +163,24 @@ export default function CarritoPage() {
               </div>
               <div className="bg-white p-5 rounded-xl shadow-sm ring-1 ring-slate-900/5">
                 <div className="flex items-center gap-2 mb-2"><span className="material-symbols-outlined text-amber-600">sell</span><span className="font-bold text-sm">Cupón</span></div>
-                <div className="flex gap-2"><input value={cupon} onChange={e=>setCupon(e.target.value.toUpperCase())} placeholder="MESON10" className="flex-1 bg-slate-100 px-3 py-2.5 rounded-lg text-sm uppercase focus:outline-none"/><button onClick={()=>setMsg(cupon==="MESON10"?"Cupón 10% aplicado (demo)":"Cupón no válido")} className="px-4 py-2.5 rounded-lg bg-ink text-white text-sm font-semibold">Aplicar</button></div>
+                {cuponDoc && descuento > 0 ? (
+                  <div className="flex items-center justify-between gap-2 bg-emerald-50 text-emerald-800 rounded-lg px-3 py-2.5 text-sm">
+                    <span className="font-semibold">{cuponDoc.codigo} · -S/ {soles(descuento)}</span>
+                    <button
+                      onClick={() => { setCuponDoc(null); setCupon(""); setMsg(null); }}
+                      className="text-emerald-700 hover:text-red-600"
+                      aria-label="Quitar cupón"
+                    >
+                      <span className="material-symbols-outlined text-[18px]">close</span>
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex gap-2">
+                    <input value={cupon} onChange={e=>setCupon(e.target.value.toUpperCase())} placeholder="MESON10" className="flex-1 bg-slate-100 px-3 py-2.5 rounded-lg text-sm uppercase focus:outline-none"/>
+                    <button onClick={aplicarCupon} disabled={validandoCupon} className="px-4 py-2.5 rounded-lg bg-ink text-white text-sm font-semibold disabled:opacity-60">{validandoCupon ? "…" : "Aplicar"}</button>
+                  </div>
+                )}
+                <p className="text-[11px] text-slate-500 mt-2">Los cupones se validan al confirmar el pedido.</p>
               </div>
             </div>
           </section>
@@ -137,6 +207,9 @@ export default function CarritoPage() {
 
               <div className="bg-slate-50 p-4 rounded-xl flex flex-col gap-2">
                 <div className="flex justify-between text-sm"><span className="text-slate-500">Subtotal</span><span className="font-semibold">S/ {soles(subtotal)}</span></div>
+                {descuento > 0 && (
+                  <div className="flex justify-between text-sm"><span className="text-emerald-700">Descuento ({cuponDoc?.codigo})</span><span className="font-bold text-emerald-700">-S/ {soles(descuento)}</span></div>
+                )}
                 <div className="flex justify-between text-sm"><span className="text-slate-500">Delivery</span><span className={`font-bold ${deliveryFee===0?"text-emerald-600":"text-ink"}`}>{deliveryFee===0?"S/ 0.00":`S/ ${soles(deliveryFee)}`}</span></div>
                 {modo==="delivery" && falta>0 && subtotal>0 && <div className="text-xs text-amber-700 bg-amber-50 p-2 rounded">Te falta S/ {soles(falta)} para delivery gratis</div>}
                 {(deliveryFee===0 && subtotal>0) && <div className="bg-emerald-50 text-emerald-700 p-2.5 rounded-lg flex gap-2 text-xs font-semibold"><span className="material-symbols-outlined text-[18px]">check_circle</span>{modo==="pickup"?"Recojo sin costo":"¡Delivery Gratis por superar S/ 35!"}</div>}

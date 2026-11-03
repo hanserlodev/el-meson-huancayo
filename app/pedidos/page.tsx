@@ -7,9 +7,12 @@ import {
   buscarPedido,
   normalizarCodigo,
   subscribePedido,
+  subscribePedidosUsuario,
   type EstadoPedido,
+  type PedidoDoc,
   type SeguimientoDoc,
 } from "@/lib/services/pedidos.service";
+import { useAuth } from "@/components/AuthProvider";
 import { CODIGO_PEDIDO_RE } from "@/lib/schemas/pedido.schema";
 import {
   guardarCodigo,
@@ -40,7 +43,26 @@ function formatoFecha(iso: string): string {
   });
 }
 
+const ESTADOS: Record<EstadoPedido, { label: string; clase: string }> = {
+  pendiente: { label: "Recibido", clase: "bg-amber-100 text-amber-800" },
+  enHorno: { label: "En el horno", clase: "bg-orange-100 text-orange-800" },
+  enCamino: { label: "En camino", clase: "bg-sky-100 text-sky-800" },
+  entregado: { label: "Entregado", clase: "bg-emerald-100 text-emerald-800" },
+  cancelado: { label: "Cancelado", clase: "bg-red-100 text-red-800" },
+};
+
+function fechaPedido(valor: unknown): string {
+  if (!valor) return "";
+  if (typeof valor === "string") return formatoFecha(valor);
+  if (typeof valor === "object" && valor !== null && "toDate" in valor) {
+    return formatoFecha((valor as { toDate: () => Date }).toDate().toISOString());
+  }
+  return "";
+}
+
 export default function MisPedidosPage() {
+  const { user } = useAuth();
+  const [pedidosCuenta, setPedidosCuenta] = useState<PedidoDoc[]>([]);
   const guardados = useSyncExternalStore(
     suscribirMisPedidos,
     misPedidosSnapshot,
@@ -68,6 +90,18 @@ export default function MisPedidosPage() {
     );
     return () => unsubs.forEach((u) => u());
   }, [guardados]);
+
+  // Pedidos asociados a la cuenta con sesión iniciada.
+  useEffect(() => {
+    if (!user) return;
+    return subscribePedidosUsuario(user.uid, setPedidosCuenta);
+  }, [user]);
+
+  // Evita duplicar en la lista local los pedidos que ya están en la cuenta.
+  const codigosCuenta = new Set(pedidosCuenta.map((p) => p.codigo).filter(Boolean));
+  const guardadosVisibles = user
+    ? guardados.filter((g) => !codigosCuenta.has(g.codigo))
+    : guardados;
 
   const buscar = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -176,18 +210,74 @@ export default function MisPedidosPage() {
           )}
         </form>
 
+        {user && (
+          <section className="mt-8">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="font-display font-bold text-ink text-lg">Pedidos de tu cuenta</h2>
+              <Link href="/cuenta" className="text-sm font-semibold text-brand-600 hover:underline">
+                Mi cuenta
+              </Link>
+            </div>
+
+            {pedidosCuenta.length === 0 ? (
+              <div className="bg-white rounded-2xl p-6 ring-1 ring-slate-200 text-sm text-slate-500">
+                Aún no hay pedidos asociados a {user.email}. Los pedidos que hagas con esta sesión
+                iniciada aparecerán aquí.
+              </div>
+            ) : (
+              <div className="flex flex-col gap-3">
+                {pedidosCuenta.map((p) => {
+                  const estado = ESTADOS[p.estado] ?? ESTADOS.pendiente;
+                  const unidades = p.items.reduce((a, i) => a + i.cant, 0);
+                  return (
+                    <article
+                      key={p.id}
+                      className="bg-white rounded-2xl p-5 ring-1 ring-slate-900/5 shadow-sm flex flex-wrap items-start justify-between gap-3"
+                    >
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="material-symbols-outlined text-brand-600 text-[20px]">
+                            receipt_long
+                          </span>
+                          <span className="font-mono font-bold text-ink tracking-wider">
+                            {p.codigo ?? "—"}
+                          </span>
+                        </div>
+                        <p className="text-xs text-slate-500 mt-1">
+                          {fechaPedido(p.createdAt) || "Pedido reciente"} · {unidades}{" "}
+                          {unidades === 1 ? "ítem" : "ítems"} ·{" "}
+                          {p.modo === "pickup" ? "Recojo en tienda" : "Delivery"}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        <div className="font-bold text-ink">
+                          S/ {Number(p.total || 0).toFixed(2)}
+                        </div>
+                        <span className={`inline-block mt-1 text-[11px] font-bold px-2 py-0.5 rounded-full ${estado.clase}`}>
+                          {estado.label}
+                        </span>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            )}
+          </section>
+        )}
+
         {/* LISTA */}
+        {(!user || guardadosVisibles.length > 0) && (
         <div className="mt-8">
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-display font-bold text-ink text-lg">Tus pedidos</h2>
-            {guardados.length > 0 && (
+            {guardadosVisibles.length > 0 && (
               <span className="text-sm text-slate-500">
-                {guardados.length} {guardados.length === 1 ? "pedido" : "pedidos"}
+                {guardadosVisibles.length} {guardadosVisibles.length === 1 ? "pedido" : "pedidos"}
               </span>
             )}
           </div>
 
-          {guardados.length === 0 ? (
+          {guardadosVisibles.length === 0 ? (
             <div className="bg-white rounded-2xl p-12 text-center ring-1 ring-slate-200 flex flex-col items-center gap-3">
               <span className="material-symbols-outlined text-5xl text-slate-300">receipt_long</span>
               <p className="font-bold text-ink">Todavía no tienes pedidos guardados</p>
@@ -203,7 +293,7 @@ export default function MisPedidosPage() {
             </div>
           ) : (
             <div className="flex flex-col gap-5">
-              {guardados.map((g) => {
+              {guardadosVisibles.map((g) => {
                 const pedido = seguimientos[g.codigo];
                 const idx = pedido ? PASOS.findIndex((p) => p.id === pedido.estado) : -1;
 
@@ -355,6 +445,7 @@ export default function MisPedidosPage() {
             </div>
           )}
         </div>
+        )}
       </main>
 
       <Footer />

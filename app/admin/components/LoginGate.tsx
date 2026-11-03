@@ -35,6 +35,9 @@ export default function LoginGate() {
           </div>
         </div>
         <p className="text-sm text-slate-500">Acceso restringido al personal autorizado.</p>
+        <Link href="/cuenta/recuperar" className="text-xs text-brand-600 font-semibold hover:underline -mt-2">
+          ¿Olvidaste tu contraseña?
+        </Link>
         <label className="text-xs font-semibold text-slate-600 flex flex-col gap-1.5">
           Correo
           <input

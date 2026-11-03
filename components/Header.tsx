@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useCart } from "@/lib/stores/cart";
+import { useAuth } from "@/components/AuthProvider";
 import { MAPS_URL } from "@/lib/data";
 
 const links = [
@@ -20,6 +21,7 @@ const links = [
 export default function Header() {
   const pathname = usePathname();
   const { unidades } = useCart();
+  const { user } = useAuth();
   const [open, setOpen] = useState(false);
 
   const isActive = (href: string) => {
@@ -62,6 +64,22 @@ export default function Header() {
           </div>
 
           <div className="flex items-center gap-2">
+            <Link
+              href="/cuenta"
+              aria-label={user ? "Mi cuenta" : "Ingresar"}
+              title={user ? "Mi cuenta" : "Ingresar"}
+              aria-current={isActive("/cuenta") ? "page" : undefined}
+              className={`relative w-10 h-10 grid place-items-center rounded-full ring-1 transition-colors ${
+                isActive("/cuenta")
+                  ? "bg-brand-50 ring-brand-200 text-brand-700"
+                  : "ring-slate-200 text-slate-700 hover:bg-slate-50"
+              }`}
+            >
+              <span className="material-symbols-outlined text-[20px]">person</span>
+              {user && (
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-white" />
+              )}
+            </Link>
             <Link
               href="/pedidos"
               aria-label="Mis pedidos"
@@ -123,6 +141,14 @@ export default function Header() {
               {l.label}
             </Link>
           ))}
+          <Link
+            href="/cuenta"
+            aria-current={isActive("/cuenta") ? "page" : undefined}
+            className="nav-link text-sm font-semibold text-slate-700 hover:text-brand-700 transition-colors"
+            onClick={() => setOpen(false)}
+          >
+            {user ? "Mi cuenta" : "Ingresar"}
+          </Link>
         </div>
       </nav>
       {/* preload maps url for SEO parity with legacy layout.js:65 */}

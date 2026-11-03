@@ -1,4 +1,4 @@
-import { collection, doc, orderBy, serverTimestamp, writeBatch } from "firebase/firestore";
+import { collection, doc, orderBy, serverTimestamp, where, writeBatch } from "firebase/firestore";
 import { db } from "@/lib/firebase/client";
 import {
   createDoc,
@@ -17,6 +17,10 @@ export type ModoEntrega = "delivery" | "pickup";
 export interface PedidoRow {
   /** Código público de seguimiento (los pedidos antiguos no lo tienen). */
   codigo?: string;
+  /** UID de la cuenta que hizo el pedido (opcional: también hay pedidos de invitado). */
+  uid?: string;
+  cupon?: string;
+  descuento?: number;
   items: { nombre: string; precio: number; cant: number }[];
   subtotal?: number;
   delivery?: number;
@@ -55,6 +59,17 @@ export const pedidosRepo = {
   },
   listen(cb: (rows: PedidoWithId[]) => void, onError?: (e: unknown) => void): () => void {
     return listenDocs<PedidoRow>(COL, cb, { constraints: ORDER, onError });
+  },
+  /** Pedidos de una cuenta. Se ordenan en el cliente para no requerir índice compuesto. */
+  listByUid(uid: string): Promise<PedidoWithId[]> {
+    return listDocs<PedidoRow>(COL, [where("uid", "==", uid)]);
+  },
+  listenByUid(
+    uid: string,
+    cb: (rows: PedidoWithId[]) => void,
+    onError?: (e: unknown) => void
+  ): () => void {
+    return listenDocs<PedidoRow>(COL, cb, { constraints: [where("uid", "==", uid)], onError });
   },
   create(data: PedidoRow): Promise<string> {
     return createDoc<PedidoRow>(COL, data);

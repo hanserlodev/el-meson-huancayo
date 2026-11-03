@@ -11,15 +11,18 @@ import { subscribeReservas, updateEstadoReserva, deleteReserva, type ReservaDoc,
 import { subscribeResenas, updateEstadoResena, deleteResena, type ResenaDoc } from "@/lib/services/resenas.service";
 import { signOutAdmin } from "@/lib/firebase/auth";
 import PlatosTab from "./PlatosTab";
+import ResumenTab from "./ResumenTab";
+import UsuariosTab from "./UsuariosTab";
+import CuponesTab from "./CuponesTab";
 
-type Tab = "platos" | "categorias" | "ofertas" | "pedidos" | "reservas" | "resenas";
+type Tab = "resumen" | "platos" | "categorias" | "ofertas" | "cupones" | "pedidos" | "reservas" | "resenas" | "usuarios";
 type Stock = "Activo" | "Bajo" | "Agotado";
 interface AdminPlato extends Plato { activo: boolean; stock: Stock; }
 
 const stockDePlato = (p: Plato): Stock => (p.activo === false || p.tag === "Agotado" ? "Agotado" : "Activo");
 
 export default function AdminPanel({ email }: { email?: string | null }) {
-  const [tab, setTab] = useState<Tab>("platos");
+  const [tab, setTab] = useState<Tab>("resumen");
   const [actionError, setActionError] = useState<string | null>(null);
 
   const message = (err: unknown) => (err instanceof Error ? err.message : "No se pudo guardar el cambio");
@@ -242,12 +245,15 @@ export default function AdminPanel({ email }: { email?: string | null }) {
   };
 
   const tabs: { id: Tab; label: string; icon: string; count?: number }[] = [
+    { id: "resumen", label: "Resumen", icon: "analytics" },
     { id: "platos", label: "Platos", icon: "restaurant_menu", count: platos.length },
     { id: "categorias", label: "Categorías", icon: "category", count: categorias.length },
     { id: "ofertas", label: "Ofertas", icon: "local_offer", count: ofertas.length },
+    { id: "cupones", label: "Cupones", icon: "sell" },
     { id: "pedidos", label: "Pedidos", icon: "receipt_long", count: pedidos.length },
     { id: "reservas", label: "Reservas", icon: "event_seat", count: reservas.length },
     { id: "resenas", label: "Reseñas", icon: "star", count: resenas.length },
+    { id: "usuarios", label: "Usuarios", icon: "group" },
   ];
 
   return (
@@ -260,11 +266,11 @@ export default function AdminPanel({ email }: { email?: string | null }) {
               <div className="flex flex-col"><span className="font-bold text-surface">El Mesón</span><span className="text-xs text-primary-fixed uppercase tracking-wider">Panel de Control</span></div>
             </div>
             <div className="p-4">
-              <p className="px-3 mb-2 text-xs uppercase tracking-wider text-white/50">Gestión Operativa — 6 CRUDs</p>
+              <p className="px-3 mb-2 text-xs uppercase tracking-wider text-white/50">Gestión Operativa — 9 secciones</p>
               <nav className="flex flex-col gap-1">
                 {tabs.map((t) => (
                   <button key={t.id} onClick={() => setTab(t.id)} className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-left ${tab === t.id ? "bg-primary text-on-primary font-semibold" : "text-white/60 hover:text-white hover:bg-white/10"}`}>
-                    <span className="material-symbols-outlined text-[20px]">{t.icon}</span>{t.label} <span className="ml-auto text-xs opacity-60">{t.count ?? 0}</span>
+                    <span className="material-symbols-outlined text-[20px]">{t.icon}</span>{t.label} {t.count !== undefined && <span className="ml-auto text-xs opacity-60">{t.count}</span>}
                   </button>
                 ))}
               </nav>
@@ -290,18 +296,24 @@ export default function AdminPanel({ email }: { email?: string | null }) {
               </div>
             )}
             {/* KPIs */}
+            {tab !== "resumen" && (
             <div className="grid grid-cols-2 xl:grid-cols-6 gap-4 mb-6">
               {[["Platos", platos.length, "restaurant_menu"], ["Categorías", categorias.length, "category"], ["Ofertas", ofertas.length, "local_offer"], ["Pedidos", pedidos.length, "receipt_long"], ["Reservas", reservas.length, "event_seat"], ["Reseñas", resenas.filter((r) => r.estado === "pendiente").length + " pend.", "star"]].map(([label, val, icon]) => (
                 <div key={String(label)} className="bg-white p-4 rounded-xl shadow-sm flex items-center justify-between"><div><span className="text-xs uppercase tracking-wider text-slate-500">{String(label)}</span><div className="text-2xl font-bold text-ink">{String(val)}</div></div><span className="material-symbols-outlined text-2xl text-brand-600">{String(icon)}</span></div>
               ))}
             </div>
+            )}
 
             {/* Mobile tabs */}
             <div className="flex lg:hidden gap-2 overflow-x-auto pb-4">
-              {tabs.map((t) => <button key={t.id} onClick={() => setTab(t.id)} className={`px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap ${tab === t.id ? "bg-ink text-white" : "bg-white border"}`}>{t.label} ({t.count})</button>)}
+              {tabs.map((t) => <button key={t.id} onClick={() => setTab(t.id)} className={`px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap ${tab === t.id ? "bg-ink text-white" : "bg-white border"}`}>{t.label}{t.count !== undefined ? ` (${t.count})` : ""}</button>)}
             </div>
 
             <div className="bg-white rounded-xl shadow-sm overflow-hidden">
+              {tab === "resumen" && <ResumenTab pedidos={pedidos} reservas={reservas} resenas={resenas} />}
+              {tab === "cupones" && <CuponesTab />}
+              {tab === "usuarios" && <UsuariosTab pedidos={pedidos} emailActual={email} />}
+
               {/* PLATOS — extraído a componente para Clean Code (SRP, CC < 8) */}
               {tab === "platos" && (
                 <PlatosTab

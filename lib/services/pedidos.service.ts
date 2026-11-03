@@ -7,6 +7,7 @@ import {
   type SeguimientoWithId,
 } from "@/lib/repositories/pedidos.repo";
 import type { CartItem } from "@/lib/stores/cart";
+import { auth } from "@/lib/firebase/client";
 import { parseOrThrow } from "@/lib/schemas/parse";
 import { CODIGO_PEDIDO_RE, pedidoSchema } from "@/lib/schemas/pedido.schema";
 
@@ -25,6 +26,8 @@ export interface PedidoExtras {
   delivery?: number;
   pago?: string;
   notas?: string;
+  cupon?: string;
+  descuento?: number;
 }
 
 /** Alfabeto sin caracteres ambiguos (0/O, 1/I/L). */
@@ -70,13 +73,23 @@ export async function crearPedido(
   cliente?: PedidoRow["cliente"],
   extras: PedidoExtras = {}
 ): Promise<CrearPedidoResult> {
-  const data = parseOrThrow(pedidoSchema, { items, total, cliente, ...extras });
+  const data = parseOrThrow(pedidoSchema, {
+    items,
+    total,
+    cliente,
+    uid: auth.currentUser?.uid,
+    ...extras,
+  });
 
   // NOTA: esto corre en el navegador; es un soft-check disuasorio, NO una
   // validación server-side. Un cliente manipulado puede enviar otro `total`.
   // Mejora futura: Cloud Function que recalcule el total desde `platos`.
   const subtotalCalc = data.items.reduce((a, i) => a + i.precio * i.cant, 0);
-  if (Math.abs(subtotalCalc - data.total) > 20 && data.total < subtotalCalc) {
+  const descuento = data.descuento ?? 0;
+  const delivery = data.delivery ?? 0;
+  if (descuento > subtotalCalc) throw new Error("Descuento inválido");
+  const esperado = subtotalCalc - descuento + delivery;
+  if (data.total < esperado - 1) {
     throw new Error("Total no coincide con items (posible manipulación)");
   }
 
@@ -103,6 +116,10 @@ export async function crearPedido(
     estado: "pendiente",
   };
 
+  // Solo se escriben si existen (evita campos undefined en Firestore).
+  if (data.uid) row.uid = data.uid;
+  if (data.cupon) row.cupon = data.cupon;
+  if (descuento > 0) row.descuento = descuento;
   try {
     const id = await pedidosRepo.createWithSeguimiento(row, codigo);
     return { id, codigo };
@@ -119,6 +136,28 @@ export function subscribePedidos(cb: (data: PedidoDoc[]) => void) {
   return pedidosRepo.listen(
     (rows) => cb(rows.map(toDoc)),
     () => cb([])
+  );
+}
+
+function fechaMs(valor: unknown): number {
+  if (!valor) return 0;
+  if (typeof valor === "string") return Date.parse(valor) || 0;
+  if (typeof valor === "object" && valor !== null && "toMillis" in valor) {
+    return (valor as { toMillis: () => number }).toMillis();
+  }
+  return 0;
+}
+
+/** Pedidos de la cuenta, del más reciente al más antiguo. */
+export function subscribePedidosUsuario(
+  uid: string,
+  cb: (data: PedidoDoc[]) => void,
+  onError?: (e: unknown) => void
+) {
+  return pedidosRepo.listenByUid(
+    uid,
+    (rows) => cb(rows.map(toDoc).sort((a, b) => fechaMs(b.createdAt) - fechaMs(a.createdAt))),
+    onError ?? (() => cb([]))
   );
 }
 

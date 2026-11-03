@@ -1,8 +1,17 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    function isAdmin() { return request.auth != null && request.auth.token.admin == true; }
     function isSignedIn() { return request.auth != null; }
+    function tienePerfil() {
+      return exists(/databases/$(database)/documents/usuarios/$(request.auth.uid));
+    }
+    function esAdminPorPerfil() {
+      return tienePerfil()
+        && get(/databases/$(database)/documents/usuarios/$(request.auth.uid)).data.rol == "admin";
+    }
+    function isAdmin() {
+      return isSignedIn() && (request.auth.token.admin == true || esAdminPorPerfil());
+    }
 
     // Platos, categorias, ofertas: lectura publica, escritura solo admin
     match /platos/{id} {
@@ -14,6 +23,11 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
     match /ofertas/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    // Cupones: lectura publica para validarlos en el carrito, escritura solo admin
+    match /cupones/{id} {
       allow read: if true;
       allow write: if isAdmin();
     }
@@ -45,13 +59,17 @@ service cloud.firestore {
         && request.resource.data.estado == "confirmada";
       allow update, delete: if isAdmin();
     }
-    // Pedidos: create validado (items list + total number), resto solo admin
+    // Pedidos: el cliente puede leer los suyos (uid), el admin todos.
     match /pedidos/{id} {
+      allow read: if isAdmin() || (isSignedIn() && resource.data.uid == request.auth.uid);
       allow create: if request.resource.data.items is list && request.resource.data.items.size() >= 1
         && request.resource.data.total is number && request.resource.data.total > 0
         && request.resource.data.codigo is string && request.resource.data.codigo.size() >= 8
-        && request.resource.data.estado == "pendiente";
-      allow read, update, delete: if isAdmin();
+        && request.resource.data.estado == "pendiente"
+        && (request.resource.data.uid == request.auth.uid || !("uid" in request.resource.data))
+        && (!("descuento" in request.resource.data)
+          || (request.resource.data.descuento is number && request.resource.data.descuento >= 0));
+      allow update, delete: if isAdmin();
     }
     // Espejo público de seguimiento SIN datos personales. El ID es el código
     // del pedido: solo `get` por código exacto, nunca `list` (no enumerable).
@@ -65,6 +83,17 @@ service cloud.firestore {
         && request.resource.data.total <= 5000
         && request.resource.data.items is list && request.resource.data.items.size() <= 50;
       allow update, delete: if isAdmin();
+    }
+    // Perfil de cliente: cada usuario lee/edita el suyo sin poder cambiar rol ni correo.
+    match /usuarios/{uid} {
+      allow read: if isAdmin() || (isSignedIn() && request.auth.uid == uid);
+      allow create: if isSignedIn() && request.auth.uid == uid
+        && request.resource.data.rol == "cliente"
+        && request.resource.data.email == request.auth.token.email;
+      allow update: if isAdmin() || (isSignedIn() && request.auth.uid == uid
+        && request.resource.data.rol == resource.data.rol
+        && request.resource.data.email == resource.data.email);
+      allow delete: if isAdmin();
     }
     match /users/{uid} { allow read, write: if isAdmin() || (isSignedIn() && request.auth.uid == uid); }
   }

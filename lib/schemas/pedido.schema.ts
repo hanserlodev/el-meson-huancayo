@@ -12,6 +12,9 @@ export const cartItemSchema = z.object({
 export const pedidoSchema = z.object({
   items: z.array(cartItemSchema).min(1, "El carrito está vacío").max(50, "Demasiados ítems"),
   total: z.number().finite("Total inválido").positive("Total inválido").max(5000, "Total excede límite"),
+  uid: z.string().trim().max(128).optional(),
+  cupon: z.string().trim().max(24).optional(),
+  descuento: z.number().finite("Descuento inválido").nonnegative("Descuento inválido").max(5000).optional(),
   modo: z.enum(["delivery", "pickup"]).optional(),
   subtotal: z.number().finite("Subtotal inválido").nonnegative("Subtotal inválido").max(5000).optional(),
   delivery: z.number().finite("Delivery inválido").nonnegative("Delivery inválido").max(100).optional(),
